@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: whitesmoke;
+}
+.container {
+  width: 400px;
+  background-color: white;
+  color: black;
+  border-radius: 7px;
+  padding: 20px;
+}
+.container h1 {
+  font-size: 40px;
+  text-align: center;
+}
+.username {
+  background-color: whitesmoke;
+  height: 40px;
+  margin: 10px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+.username input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  padding-left: 10px;
+}
+.email {
+  background-color: whitesmoke;
+  height: 40px;
+  margin: 10px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+.email input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  padding-left: 10px;
+}
+.password {
+  background-color: whitesmoke;
+  height: 40px;
+  margin: 10px;
+  border-radius: 7px;
+}
+.password input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  padding-left: 10px;
+}
+.remember {
+  margin-top: 15px;
+  margin-left: 10px;
+  color: gray;
+}
+.bottom-btns {
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bottom-btns a {
+  text-decoration: none;
+  color: gray;
+  margin-left: 5px;
+}
+.bottom-btns button {
+  color: black;
+  margin: 10px;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  border-radius: 7px;
+}
+.bottom-btns button:hover {
+  cursor: pointer;
+}
