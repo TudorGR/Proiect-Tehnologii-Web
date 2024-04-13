@@ -9,12 +9,14 @@
   <body>
     <header>
       <div class="title">
-        <a href="main.html">In&lt;form&gt;atiX</a>
+        <h1><a href="main.html">In&lt;form&gt;atiX</a></h1>
       </div>
       <div class="search">
         <a href="">Arhiva Probleme</a>
-        <input type="text" placeholder="Cauta o problema" />
-        <button type="submit">Go</button>
+        <form>
+          <input type="text" placeholder="Cauta o problema" />
+          <button type="submit">Go</button>
+        </form>
       </div>
       <nav>
         <ul>
@@ -27,15 +29,15 @@
         </ul>
       </nav>
     </header>
-    <div class="wrapper">
+    <main>
       <div class="hero">
         <h1>Probleme de informatica</h1>
         <img src="img.jpg" alt="image" />
       </div>
       <div class="container">
-        <main>
-          <div class="left">
-            <div class="easy">
+        <section class="wrapper">
+          <section class="left">
+            <article class="easy">
               <h2>Easy</h2>
               <ul>
                 <li><a href="">Basic C++</a></li>
@@ -44,8 +46,8 @@
                 <li><a href="">Tablouri Unidimensionale</a></li>
                 <li><a href="">Tablouri Bidimensionale</a></li>
               </ul>
-            </div>
-            <div class="medium">
+            </article>
+            <article class="medium">
               <h2>Medium</h2>
               <ul class="medium">
                 <li><a href="">Functii</a></li>
@@ -54,8 +56,8 @@
                 <li><a href="">Alocare Dinamica</a></li>
                 <li><a href="">Liste Inlantuite</a></li>
               </ul>
-            </div>
-            <div class="hard">
+            </article>
+            <article class="hard">
               <h2>Hard</h2>
               <ul class="hard">
                 <li><a href="">Divide Et Impera</a></li>
@@ -65,9 +67,9 @@
                 <li><a href="">Grafuri Neorientate</a></li>
                 <li><a href="">Grafuri Orientate</a></li>
               </ul>
-            </div>
-          </div>
-          <div class="main">
+            </article>
+          </section>
+          <section class="main">
             <h2>Populare acum</h2>
             <ul>
               <li class="problem">
@@ -179,19 +181,21 @@
                 </p>
               </li>
             </ul>
-          </div>
-        </main>
+          </section>
+        </section>
       </div>
-    </div>
+    </main>
     <footer>
-      <ul>
-        <li>
-          <a href="#">Mergi sus</a>
-        </li>
-        <li>
-          <a href="">Contact us</a>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">Mergi sus</a>
+          </li>
+          <li>
+            <a href="">Contact us</a>
+          </li>
+        </ul>
+      </nav>
     </footer>
   </body>
 </html>

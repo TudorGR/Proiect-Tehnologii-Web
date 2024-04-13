@@ -1,34 +1,48 @@
+/* General reset */
 * {
   box-sizing: border-box;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
 }
+
+/* Body styles */
 body {
   background-color: whitesmoke;
 }
-.wrapper {
+
+/* Main styles */
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+/* Centering styles */
 .centrare {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+/* Problem container styles */
 .problem-container {
   display: flex;
   flex-direction: row;
   height: 100vh;
 }
+
+/* Problem container inner styles */
 .enunt p {
   line-height: 20px;
   padding: 10px;
 }
+
 .enunt ul li {
   padding: 5px;
 }
+
+/* Code styles */
 #cod {
   background-color: white;
   border: none;
@@ -37,6 +51,8 @@ body {
   resize: none;
   margin: 10px;
 }
+
+/* Solution styles */
 .rezolvare button {
   font-size: 20px;
   font-weight: bold;
@@ -45,15 +61,19 @@ body {
   background-color: whitesmoke;
   padding: 10px;
 }
+
 .rezolvare button:hover {
   cursor: pointer;
 }
 
+/* Container styles */
 .container {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
+
+/* Header styles */
 header {
   background-color: white;
   color: whitesmoke;
@@ -67,54 +87,70 @@ header {
   width: 100%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-main {
+
+/* Wrapper styles */
+.wrapper {
   display: flex;
   flex: 1;
 }
 
+/* Title styles */
 .title {
   padding-right: 20px;
-  font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
 }
-.title a {
+
+.title h1 a {
   text-decoration: none;
   color: #333;
 }
+
+/* Navigation styles */
 nav {
   display: flex;
   align-items: center;
 }
+
 nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 nav ul li {
   margin-left: 20px;
   list-style: none;
 }
+
 nav ul li a {
   color: #333;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
 }
+
 nav ul li a:hover {
   transition: 0.1s ease-in-out;
   color: rgb(164, 164, 164);
 }
+
+/* Search styles */
 .search {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.search input {
+
+.search form input {
   background-color: whitesmoke;
   padding: 10px;
   border: none;
   border-radius: 5px;
 }
-.search button {
+
+.search form button {
   background-color: rgb(227, 227, 227);
   position: absolute;
   top: 0;
@@ -123,6 +159,7 @@ nav ul li a:hover {
   border: none;
   border-radius: 5px;
 }
+
 .search a {
   font-size: 14px;
   text-decoration: none;
@@ -130,18 +167,22 @@ nav ul li a:hover {
   font-weight: bold;
   margin-right: 10px;
 }
+
+/* Hero styles */
 .hero {
   align-items: center;
   text-align: center;
   width: 100%;
   height: 300px;
 }
+
 .hero img {
   width: 100%;
   height: 100%;
   margin-top: -50px;
   object-fit: cover;
 }
+
 .hero h1 {
   font-size: 40px;
   transform: rotate(-6deg);
@@ -152,24 +193,33 @@ nav ul li a:hover {
   width: 100%;
   text-shadow: rgb(100, 100, 100) 0 0 25px;
 }
+
+/* Problem wrapper styles */
 .problem-wrapper h1 {
   padding: 15px;
 }
+
+/* Problem container styles */
 .problem-container h2 {
   padding: 15px;
 }
+
 .problem-container ul {
   padding-left: 50px;
 }
+
 .problem-container p {
   padding-left: 15px;
 }
+
+/* Tags styles */
 .taguri {
   width: 100%;
   display: flex;
   flex-direction: row;
   list-style: none;
 }
+
 .taguri li {
   padding: 10px;
   background: rgb(200, 255, 200);
@@ -177,14 +227,17 @@ nav ul li a:hover {
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.242) 0px 2px 8px 0px;
 }
+
 .taguri li a {
   text-decoration: none;
 }
+
 .taguri li:hover {
   transition: 0.1s ease-in-out;
   background: rgb(170, 225, 170);
 }
 
+/* Sidebar styles */
 .left {
   background: whitesmoke;
   flex: 1 1 100px;
@@ -192,57 +245,70 @@ nav ul li a:hover {
   flex-direction: column;
   padding: 10px;
 }
-.left li {
+
+.left ul li {
   text-decoration: none;
   list-style: none;
   padding: 7px;
 }
-.left div ul li a {
+
+.left article ul li a {
   color: black;
   text-decoration: none;
 }
+
 .left h2 {
   margin: 15px;
 }
+
+/* Difficulty levels styles */
 .easy li {
   background: rgb(200, 255, 200);
   border-radius: 7px;
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.242) 0px 2px 8px 0px;
 }
+
 .easy li:hover {
   transition: 0.1s ease-in-out;
   background: rgb(170, 225, 170);
 }
+
 .medium li {
   background: rgb(255, 255, 200);
   border-radius: 7px;
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.242) 0px 2px 8px 0px;
 }
+
 .medium li:hover {
   transition: 0.1s ease-in-out;
   background: rgb(225, 225, 170);
 }
+
 .hard li {
   background: rgb(255, 200, 200);
   border-radius: 7px;
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.242) 0px 2px 8px 0px;
 }
+
 .hard li:hover {
   transition: 0.1s ease-in-out;
   background: rgb(225, 170, 170);
 }
 
+/* Main content styles */
 .main {
   background: whitesmoke;
   padding: 1em 10px 1em 0;
   flex: 5 5 200px;
 }
+
 .main ul {
   list-style: none;
 }
+
 .main ul li {
   background: white;
   color: black;
@@ -251,104 +317,132 @@ nav ul li a:hover {
   border-radius: 7px;
   box-shadow: rgba(114, 114, 114, 0.242) 0px 2px 8px 0px;
 }
+
 .main ul li:hover {
   transition: 0.1s ease-in-out;
   transform: scale(103%);
 }
+
 .main ul li h3 {
   font-size: 30px;
 }
+
 .main ul li a {
   line-height: 21px;
   text-decoration: none;
   color: black;
 }
+
 .main ul li p {
   line-height: 21px;
 }
 
+/* Footer styles */
 footer {
   padding: 20px;
   background: white;
   display: flex;
   justify-content: center;
 }
-footer ul {
+
+footer nav ul {
   display: flex;
   flex-direction: row;
 }
-footer ul li {
+
+footer nav ul li {
   list-style: none;
   padding: 0 10px;
 }
-footer ul li a {
+
+footer nav ul li a {
   color: black;
   text-decoration: none;
 }
-footer ul li a:hover {
+
+footer nav ul li a:hover {
   color: gray;
 }
+
+/* Media queries */
 @media (max-width: 650px) {
-  main {
+  .wrapper {
     flex-direction: column;
   }
+
   .main {
     padding: 5em 0 5em 0;
   }
+
   nav ul li a {
     font-size: 15px;
   }
+
   .left {
     flex-direction: row;
   }
+
   .hero h1 {
     font-size: 25px;
   }
 }
+
 @media (max-width: 1000px) {
   .search a {
     display: none;
   }
 }
+
 @media (max-width: 750px) {
   .problem-container {
     flex-direction: column;
     height: 100%;
   }
+
   .problem-container .rezolvare {
     width: 100%;
   }
+
   .problem-container .rezolvare textarea {
     width: 100%;
   }
+
   .taguri li {
     padding: 5px;
   }
+
   .taguri li a {
     font-size: 13px;
   }
+
   .search {
     display: none;
   }
+
   .hero {
     margin-left: -1px;
   }
+
   #cod {
     width: 90vw;
   }
 }
+
 @media (min-width: 1100px) {
   .container {
     width: 1080px;
   }
+
   .main {
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
   }
+
   .left {
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
   }
+
   .problem-wrapper {
     width: 1080px;
   }
