@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,8 +43,8 @@
           <div class="enunt">
             <h2>Cerinte</h2>
             <p>
-              Se da un numar natural n (n<=5) si 2*n numere naturale cu cel mult
-              3 cifre fiecare reprezentand inaltimile in centimetri a 2*n
+              Se da un numar natural n (n&lt;=5) si 2*n numere naturale cu cel
+              mult 3 cifre fiecare reprezentand inaltimile in centimetri a 2*n
               soldati. Sa se aranjeze soldatii pe doua randuri a cate n soldati
               fiecare astfel incat fiecare soldat inafara de primul de pe rand
               sa aiba in stanga un soldat mai inalt decat el si fiecare soldat
@@ -53,31 +53,34 @@
             <h2>Limitari si Indrumari</h2>
             <ul>
               <li>
-                Avem un număr natural n, unde n este mai mic sau egal cu 5.
+                Avem un numar natural n, unde n este mai mic sau egal cu 5.
               </li>
               <li>
                 Avem 2n numere naturale, fiecare cu cel mult 3 cifre,
-                reprezentând înălțimile în centimetri ale celor 2n soldați.
+                reprezentand inaltimile in centimetri ale celor 2n soldati.
               </li>
               <li>
-                Fiecare soldat, în afară de primul de pe fiecare rând, să aibă
-                în stânga un soldat mai înalt decât el.
+                Fiecare soldat, in afara de primul de pe fiecare rand, sa aiba
+                in stanga un soldat mai inalt decat el.
               </li>
               <li>
-                Fiecare soldat de pe rândul 2 să aibă în față un soldat mai
-                înalt decât el.
+                Fiecare soldat de pe randul 2 sa aiba in fata un soldat mai
+                inalt decat el.
               </li>
             </ul>
           </div>
           <div class="rezolvare">
-            <label for="cod"><h2>Rezolva problema</h2></label>
-            <textarea
-              id="cod"
-              cols="50"
-              rows="20"
-              placeholder="introdu codul aici"
-            ></textarea>
-            <button type="submit">Trimite</button>
+            <form id="formular" class="rezolvare">
+              <label for="cod">Rezolvă problema</label>
+              <textarea
+                id="cod"
+                name="cod"
+                cols="50"
+                rows="20"
+                placeholder="introdu codul aici"
+              ></textarea>
+              <button type="submit">Trimite</button>
+            </form>
           </div>
         </div>
       </div>
