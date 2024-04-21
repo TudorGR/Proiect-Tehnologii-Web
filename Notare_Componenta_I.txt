@@ -23,5 +23,7 @@ Nu vad nici macar una dintre aceste pagini.... ceea ce am gasit sunt niste pagin
 
 Partea de responsive desi exista e facuta prin scalare  (cred) ?! Adica autentificarea aia pare ca ramane undeva inafara paginii, headerul nu mai contine toate meniurile...
 
+AAA... si v-am rugat de nenumarate ori sa nu imi puneti toate fisierele gramada in radacina.... eu zic, eu aud.... faceti un sistem de directoare / fisiere.
+
 -----------
 Concluzii: Mai este mult de lucrat la aceasta faza ca se vada clar ce va iesi din aplicatia asta... deocamdata l-as vedea doar ca un site capabil sa arate niste probleme (dac acestea exista pe undeva) catalogate la nivel de clase. Din pacate pentru voi nu este suficient si voi dori sa revad aceasta componenta din nou.
