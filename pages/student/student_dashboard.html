@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Elev</title>
+    <link rel="stylesheet" href="/css/student/student_dashboard.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Dashboard Elev</h1>
+        <nav>
+          <ul>
+            <li><a href="/pages/problems.html">Probleme</a></li>
+            <li><a href="#solutii">Solutii</a></li>
+            <li><a href="#comentarii">Comentarii</a></li>
+            <li><a href="/pages/#">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <section class="problems" id="probleme">
+          <h2>Probleme</h2>
+          <div class="problem">
+            <h3>Problema 1</h3>
+            <p>Descrierea problemei...</p>
+            <button class="solve-btn" onclick="solveProblem('Problema 1')">
+              Rezolva
+            </button>
+          </div>
+          <div class="problem">
+            <h3>Problema 2</h3>
+            <p>Descrierea problemei...</p>
+            <button class="solve-btn" onclick="solveProblem('Problema 2')">
+              Rezolva
+            </button>
+          </div>
+        </section>
+
+        <section class="solutions" id="solutii">
+          <h2>Solutii</h2>
+          <div class="solution">
+            <h3>Solutia ta pentru Problema 1</h3>
+            <p>Descrierea solutiei...</p>
+            <section class="comment">
+              <h2>Adauga un comentariu</h2>
+              <textarea
+                id="commentBox"
+                rows="4"
+                cols="50"
+                placeholder="Adauga un comentariu..."
+              ></textarea>
+            </section>
+            <section class="mark-stars">
+              <h3>Marcheaza cu stele (dificultate)</h3>
+              <div class="stars">
+                <button class="star" value="1">★</button>
+                <button class="star" value="2">★</button>
+                <button class="star" value="3">★</button>
+                <button class="star" value="4">★</button>
+                <button class="star" value="5">★</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="comments" id="comentarii">
+          <h2>Comentarii</h2>
+          <div class="comment">
+            <h3>Comentariu la Problema 1</h3>
+            <p>Comentariul tau...</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Dashboard Elev. Toate drepturile rezervate.</p>
+      </div>
+    </footer>
+
+    <script src="/javascript/student/student_dashboard.js"></script>
+  </body>
+</html>

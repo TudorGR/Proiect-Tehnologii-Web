@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Profesor</title>
+    <link rel="stylesheet" href="/css/teacher_dashboard.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Dashboard Profesor</h1>
+      <nav>
+        <ul>
+          <li><a href="/pages/problems.html">Probleme</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#clase">Clase</a></li>
+          <li><a href="#recent">Recent</a></li>
+          <li><a href="/pages/#">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="overview">
+        <h2 id="dashboard">Prezentare generala</h2>
+        <canvas id="classChart"></canvas>
+        <form id="addClassForm">
+          <h3 id="clase">Adaugare elevi in clasa</h3>
+          <label for="classId">ID clasa:</label>
+          <input type="text" id="classId" name="classId" required />
+          <label for="studentIds">ID-uri elevi (separate prin virgula):</label>
+          <input type="text" id="studentIds" name="studentIds" required />
+          <button type="submit">Adauga elevi</button>
+        </form>
+        <form id="createClassForm">
+          <h3>Creare clasa</h3>
+          <label for="className">Nume clasa:</label>
+          <input type="text" id="className" name="className" required />
+          <button type="submit">Creaza clasa</button>
+        </form>
+      </section>
+
+      <section class="recent-activity" id="recent">
+        <h2>Activitate recenta</h2>
+        <ul>
+          <li>Clasa X a fost creata</li>
+          <li>Problema #3 a fost atribuita clasei Y</li>
+          <li>Raport nou primit de la elevul Z</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Dashboard Profesor. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script src="/javascript/teacher_dashboard.js"></script>
+  </body>
+</html>

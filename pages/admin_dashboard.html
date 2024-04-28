@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Administrator</title>
+    <link rel="stylesheet" href="/css/admin_dashboard.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Dashboard Administrator</h1>
+      <nav>
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#utilizatori">Utilizatori</a></li>
+          <li><a href="#probleme">Probleme</a></li>
+          <li><a href="#clase">Clase</a></li>
+          <li><a href="/pages/#">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="overview" id="dashboard">
+        <h2>Prezentare generala</h2>
+        <div class="charts">
+          <canvas id="problemChart"></canvas>
+          <canvas id="classReportChart"></canvas>
+        </div>
+      </section>
+
+      <section class="users" id="utilizatori">
+        <h2>Utilizatori</h2>
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>Nume Utilizator</th>
+              <th>Actiuni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Andrei Enache</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>George Filip</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Alex Cucos</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="addUserBtn">Adauga Utilizator</button>
+      </section>
+
+      <section class="problems" id="probleme">
+        <h2>Probleme</h2>
+        <table id="problemTable">
+          <thead>
+            <tr>
+              <th>Nume Problema</th>
+              <th>Actiuni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Problema 1</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Problema 2</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Problema 3</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="addProblemBtn">Adauga Problema</button>
+      </section>
+
+      <section class="classes" id="clase">
+        <h2>Clase</h2>
+        <table id="classTable">
+          <thead>
+            <tr>
+              <th>Nume Clasa</th>
+              <th>Actiuni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Clasa A</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Clasa B</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Clasa C</td>
+              <td>
+                <button class="viewBtn">Vizualizeaza</button>
+                <button class="deleteBtn">Sterge</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="addClassBtn">Adauga Clasa</button>
+      </section>
+
+      <section class="recent-activity">
+        <h2>Activitate recenta</h2>
+        <ul>
+          <li>Problema noua propusa de Profesorul X</li>
+          <li>Clasa Y a fost creata de Administrator</li>
+          <li>Raportul Z a fost evaluat</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Dashboard Administrator. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script src="/javascript/admin_dashboard.js"></script>
+  </body>
+</html>
