@@ -13,7 +13,9 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 nav ul {
@@ -23,6 +25,11 @@ nav ul {
 nav ul li {
   display: inline;
   margin-right: 20px;
+
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 10px;
 }
 
 nav ul li a {
@@ -41,8 +48,89 @@ main {
 
 .problem-list h2 {
   margin-bottom: 10px;
+  font-size: 24px;
 }
 
 .problem-list ul li {
-  padding-top: 15px;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 22px;
+  border: none;
+  background-color: white;
+  border-radius: 7px;
+}
+.problem-list ul {
+  padding: 0;
+}
+.problem-list ul {
+  list-style: none;
+}
+@media all and (max-width: 768px) {
+  header h1 {
+    font-size: 24px;
+  }
+  nav ul li a {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .hero h2 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 360px;
+    margin: 40px auto;
+  }
+  .hero p {
+    width: 360px;
+    margin: auto;
+    font-size: 16px;
+  }
+  nav ul li {
+    padding: 3px;
+  }
+  .problem-list h2 {
+    font-size: 20px;
+  }
+  .problem-list ul li {
+    font-size: 16px;
+  }
+}
+@media all and (max-width: 360px) {
+  header h1 {
+    font-size: 6vw;
+  }
+  nav ul li a {
+    font-size: 3vw;
+    padding: 5px;
+  }
+  nav ul {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .hero h2 {
+    font-size: 5vw;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .hero p {
+    width: 100%;
+    font-size: 4vw;
+  }
+  nav ul li {
+    font-size: 3vw;
+  }
+  .problem-list h2 {
+    font-size: 4vw;
+  }
+  .problem-list ul li {
+    font-size: 4vw;
+    padding: 3vw;
+  }
+  header {
+    padding: 5vw 0;
+  }
+  header h1 {
+    margin-bottom: 5vw;
+  }
 }

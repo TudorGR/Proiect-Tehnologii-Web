@@ -1,8 +1,23 @@
-/* General */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: whitesmoke;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
 }
 
 a {
@@ -12,12 +27,13 @@ a {
 header {
   background-color: #007bff;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 42px;
+  margin-top: 0;
 }
 
 nav ul {
@@ -27,30 +43,31 @@ nav ul {
 
 nav ul li {
   display: inline;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 nav ul li a {
   color: #fff;
-}
-
-main {
-  padding: 20px;
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 10px;
 }
 
 .hero {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .hero h2 {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 20px;
+  color: rgb(98, 119, 202);
 }
 
 .btn {
@@ -58,7 +75,8 @@ main {
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
-  border-radius: 5px;
+  font-size: 20px;
+  border-radius: 7px;
   text-decoration: none;
   transition: background-color 0.3s;
 }
@@ -69,32 +87,169 @@ main {
 
 .features {
   text-align: center;
+  margin: auto;
+  margin-bottom: 30px;
 }
 
-.features h2 {
-  font-size: 24px;
+#features h2 {
+  font-size: 32px;
   margin-bottom: 40px;
+  text-align: center;
+}
+
+.features {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 80vw;
+  border: 2px solid whitesmoke;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 .carousel {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  animation: 30s slide infinite linear;
+}
+.features::before {
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), whitesmoke);
+  content: "";
+  z-index: 2;
+}
+.features::after {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), whitesmoke);
+  content: "";
+  z-index: 2;
 }
 
 .feature {
+  background-color: white;
   width: 400px;
-  margin-bottom: 40px;
-  padding: 10px;
+  height: 200px;
+  margin: 15px;
+  margin-bottom: 30px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
 .feature h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
 .feature p {
   font-size: 16px;
+  line-height: 25px;
+  width: 80%;
+  margin: auto;
+}
+
+@media all and (max-width: 768px) {
+  header h1 {
+    font-size: 28px;
+  }
+  nav ul li a {
+    font-size: 16px;
+  }
+  .hero h2 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 360px;
+    margin: 40px auto;
+  }
+  .hero p {
+    width: 360px;
+    margin: auto;
+    font-size: 16px;
+  }
+  .btn {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  #features h2 {
+    font-size: 28px;
+  }
+  footer p {
+    font-size: 14px;
+  }
+  .feature h3 {
+    font-size: 20px;
+  }
+  .feature p {
+    font-size: 14px;
+  }
+  nav ul li a {
+    padding: 5px;
+  }
+}
+@media all and (max-width: 360px) {
+  header h1 {
+    font-size: 6vw;
+  }
+  nav ul li a {
+    font-size: 3vw;
+    padding: 5px;
+  }
+  nav ul {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .hero h2 {
+    font-size: 5vw;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .hero p {
+    width: 100%;
+    font-size: 4vw;
+  }
+  .btn {
+    font-size: 3vw;
+    margin-top: 30px;
+    padding: 10px;
+  }
+  #features h2 {
+    font-size: 4vw;
+  }
+  .feature {
+    height: 100px;
+  }
+  footer p {
+    font-size: 3vw;
+  }
+  .feature h3 {
+    font-size: 5vw;
+  }
+  .feature p {
+    font-size: 3vw;
+  }
+  nav ul li a {
+    padding: 2vw;
+  }
+  .btn {
+    padding: 2vw;
+  }
 }

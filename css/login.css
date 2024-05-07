@@ -14,11 +14,12 @@ body {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(97, 97, 97, 0.1);
 }
 
 .container h2 {
   margin-top: 0;
+  font-size: 32px;
 }
 
 .form-group {
@@ -28,17 +29,20 @@ body {
 .form-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 
 .form-group input {
-  width: 250px;
-  padding: 8px;
-  border: 1px solid #ccc;
+  width: 450px;
+  padding: 15px;
+  border: 2px solid whitesmoke;
   border-radius: 3px;
+  font-size: 18px;
 }
 .form-group input::placeholder {
   color: rgb(206, 206, 206);
+  font-size: 18px;
 }
 
 button {
@@ -48,8 +52,47 @@ button {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+@media all and (max-width: 768px) {
+  .container h2 {
+    font-size: 24px;
+  }
+  .container label {
+    font-size: 16px;
+  }
+  .form-group input {
+    font-size: 14px;
+    width: 300px;
+  }
+  button {
+    font-size: 16px;
+  }
+  .form-group input::placeholder {
+    font-size: 16px;
+  }
+}
+@media all and (max-width: 360px) {
+  .container h2 {
+    font-size: 5vw;
+  }
+  .container label {
+    font-size: 4vw;
+  }
+  .form-group input {
+    font-size: 4vw;
+    width: 70vw;
+    padding: 4vw;
+  }
+  button {
+    font-size: 3vw;
+  }
+  .form-group input::placeholder {
+    font-size: 4vw;
+  }
 }

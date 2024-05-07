@@ -8,12 +8,13 @@ body {
 header {
   background-color: #007bff;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 32px;
   text-align: center;
+  margin-bottom: 25px;
 }
 
 nav ul {
@@ -30,10 +31,14 @@ nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 10px;
 }
 
 main {
-  padding: 20px;
+  padding: 30px;
 }
 
 footer {
@@ -44,14 +49,31 @@ footer {
   padding: 10px 0;
 }
 
-h2 {
+.comment h2 {
   margin-bottom: 10px;
+  font-size: 32px;
+}
+.comment textarea {
+  font-size: 18px;
 }
 
 .problems,
 .solutions,
 .comments {
   margin-bottom: 30px;
+}
+
+.solutions h2 {
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+.problems h2 {
+  margin-top: 0;
+}
+.comments h2 {
+  margin: 0;
+  margin-bottom: 25px;
 }
 
 .comment textarea {
@@ -62,11 +84,23 @@ h2 {
 }
 
 .problem,
-.solution {
+.solution,
+.comment {
   background-color: #fff;
-  padding: 20px;
+  padding: 40px;
   margin-bottom: 20px;
   border-radius: 5px;
+}
+.problem h3 {
+  font-size: 24px;
+  margin-top: 0px;
+}
+.problem p {
+  font-size: 20px;
+  color: gray;
+}
+.solve-btn {
+  font-size: 20px;
 }
 
 .solve-btn,
@@ -97,10 +131,153 @@ h2 {
 .star {
   font-size: 24px;
   background-color: transparent;
-  border: none;
   cursor: pointer;
+  border: none;
+  margin-right: 5px;
 }
 
 .star.selected {
   color: gold;
+}
+
+.solution h3 {
+  margin-top: 0px;
+  font-size: 24px;
+}
+
+.solution p {
+  font-size: 20px;
+  color: gray;
+}
+
+.comment h3 {
+  font-size: 24px;
+}
+.comment p {
+  color: gray;
+}
+@media all and (max-width: 768px) {
+  header h1 {
+    font-size: 26px;
+  }
+  nav ul li a {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .hero h2 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 360px;
+    margin: 40px auto;
+  }
+  .hero p {
+    width: 360px;
+    margin: auto;
+    font-size: 16px;
+  }
+
+  footer p {
+    font-size: 14px;
+  }
+  .problems h2,
+  .solutions h2,
+  .comments h2 {
+    font-size: 20px;
+  }
+  .problem h3 {
+    font-size: 20px;
+  }
+  .problem p {
+    font-size: 16px;
+  }
+  .solve-btn {
+    font-size: 16px;
+  }
+  .solution h3 {
+    font-size: 20px;
+  }
+  .solution p {
+    font-size: 16px;
+  }
+  .comment textarea {
+    width: 70%;
+  }
+  nav ul li {
+    margin: 2px;
+  }
+}
+@media all and (max-width: 360px) {
+  header h1 {
+    font-size: 6vw;
+  }
+  nav ul li a {
+    font-size: 3vw;
+    padding: 5px;
+  }
+  nav ul {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .hero h2 {
+    font-size: 5vw;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .hero p {
+    width: 100%;
+    font-size: 4vw;
+  }
+
+  footer p {
+    font-size: 3vw;
+  }
+  .problems h2,
+  .solutions h2,
+  .comments h2 {
+    font-size: 4vw;
+  }
+  main {
+    padding: 15px;
+  }
+  .problem,
+  .solution,
+  .comment {
+    padding: 20px;
+  }
+  .problem h3 {
+    font-size: 4vw;
+  }
+  .problem p {
+    font-size: 3vw;
+  }
+  nav ul {
+    padding: 0;
+  }
+  .solve-btn {
+    font-size: 3vw;
+  }
+  .solve-btn {
+    padding: 3vw;
+  }
+  .solution h3 {
+    font-size: 4vw;
+  }
+  .solution p {
+    font-size: 3vw;
+  }
+  .comment textarea {
+    font-size: 3vw;
+  }
+  .star {
+    font-size: 4vw;
+    padding: 2vw;
+  }
+  .comment h3 {
+    font-size: 4vw;
+  }
+  .comment p {
+    font-size: 3vw;
+  }
 }

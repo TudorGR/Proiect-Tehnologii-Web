@@ -12,8 +12,10 @@ header {
 }
 
 header h1 {
-  font-size: 24px;
+  font-size: 32px;
   text-align: center;
+  margin-bottom: 25px;
+  margin-top: 0;
 }
 
 nav ul {
@@ -30,14 +32,22 @@ nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+
+  font-size: 20px;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 10px;
 }
 
 main {
-  padding: 20px;
+  padding: 30px;
 }
 
 .overview {
   margin-bottom: 30px;
+}
+.overview h2 {
+  font-size: 28px;
 }
 
 .stats {
@@ -67,6 +77,11 @@ main {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  font-size: 20px;
+}
+
+.recent-activity h2 {
+  font-size: 24px;
 }
 
 footer {
@@ -77,34 +92,39 @@ footer {
   padding: 10px 0;
 }
 canvas {
-  width: 400px;
-  height: 200px;
+  width: 600px;
+  height: 300px;
   margin: 20px auto;
   display: block;
 }
 #addClassForm {
-  margin-top: 20px;
-  padding: 20px;
+  padding: 40px;
   background-color: #f9f9f9;
   border-radius: 5px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 #addClassForm h3 {
   margin-top: 0;
+  font-size: 24px;
 }
 
 #addClassForm label {
   display: block;
   margin-bottom: 5px;
+  font-size: 20px;
+  color: gray;
 }
 
 #addClassForm input[type="text"] {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 18px;
 }
 
 #addClassForm button {
@@ -114,6 +134,8 @@ canvas {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 #addClassForm button:hover {
@@ -121,28 +143,33 @@ canvas {
 }
 
 #createClassForm {
-  margin-top: 20px;
-  padding: 20px;
+  padding: 40px;
   background-color: #f9f9f9;
   border-radius: 5px;
+  flex: 1;
+  margin-left: 10px;
 }
 
 #createClassForm h3 {
   margin-top: 0;
+  font-size: 24px;
 }
 
 #createClassForm label {
   display: block;
   margin-bottom: 5px;
+  color: gray;
+  font-size: 20px;
 }
 
 #createClassForm input[type="text"] {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 110px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 18px;
 }
 
 #createClassForm button {
@@ -152,8 +179,168 @@ canvas {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 #createClassForm button:hover {
   background-color: #0056b3;
+}
+
+.edit {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 75px;
+}
+nav ul {
+  padding-left: 0;
+}
+@media all and (max-width: 768px) {
+  header h1 {
+    font-size: 26px;
+  }
+  nav ul li a {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .hero h2 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 360px;
+    margin: 40px auto;
+  }
+  .hero p {
+    width: 360px;
+    margin: auto;
+    font-size: 16px;
+  }
+
+  footer p {
+    font-size: 14px;
+  }
+  nav ul li {
+    margin: 0px;
+  }
+  .overview h2 {
+    font-size: 22px;
+  }
+  .recent-activity h2 {
+    font-size: 22px;
+  }
+  .recent-activity ul li {
+    font-size: 16px;
+  }
+  #addClassForm {
+    padding: 20px;
+  }
+  #addClassForm h3 {
+    font-size: 20px;
+  }
+  #addClassForm label {
+    font-size: 16px;
+  }
+  #addClassForm button {
+    font-size: 18px;
+  }
+  #createClassForm {
+    padding: 20px;
+  }
+  #createClassForm h3 {
+    font-size: 20px;
+  }
+  #createClassForm label {
+    font-size: 16px;
+  }
+  #createClassForm button {
+    font-size: 18px;
+  }
+  canvas {
+    width: 300px;
+    height: 150px;
+  }
+  nav ul {
+    padding-left: 0;
+  }
+}
+@media all and (max-width: 360px) {
+  header h1 {
+    font-size: 6vw;
+  }
+  nav ul li a {
+    font-size: 3vw;
+    padding: 5px;
+  }
+  nav ul {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .hero h2 {
+    font-size: 5vw;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  .hero p {
+    width: 100%;
+    font-size: 4vw;
+  }
+
+  footer p {
+    font-size: 3vw;
+  }
+  nav ul {
+    padding-left: 0;
+  }
+  .recent-activity ul li {
+    font-size: 4vw;
+  }
+  canvas {
+    width: 70vw;
+    height: 35vw;
+  }
+  .overview h2 {
+    font-size: 5vw;
+  }
+  .recent-activity h2 {
+    font-size: 5vw;
+  }
+  #addClassForm {
+    padding: 2vw;
+  }
+  #addClassForm h3 {
+    font-size: 5vw;
+  }
+  #addClassForm label {
+    font-size: 4vw;
+  }
+  #addClassForm button {
+    font-size: 4vw;
+    padding: 3vw;
+  }
+  #createClassForm {
+    padding: 2vw;
+  }
+  #createClassForm h3 {
+    font-size: 5vw;
+  }
+  #createClassForm label {
+    font-size: 4vw;
+  }
+  #createClassForm button {
+    font-size: 4vw;
+    padding: 3vw;
+  }
+  #createClassForm input[type="text"] {
+    font-size: 4vw;
+    padding: 2vw;
+  }
+  main {
+    padding: 4vw;
+  }
+  #addClassForm input[type="text"] {
+    font-size: 4vw;
+    padding: 2vw;
+  }
 }

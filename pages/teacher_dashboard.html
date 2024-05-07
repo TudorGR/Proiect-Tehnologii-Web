@@ -24,20 +24,24 @@
       <section class="overview">
         <h2 id="dashboard">Prezentare generala</h2>
         <canvas id="classChart"></canvas>
-        <form id="addClassForm">
-          <h3 id="clase">Adaugare elevi in clasa</h3>
-          <label for="classId">ID clasa:</label>
-          <input type="text" id="classId" name="classId" required />
-          <label for="studentIds">ID-uri elevi (separate prin virgula):</label>
-          <input type="text" id="studentIds" name="studentIds" required />
-          <button type="submit">Adauga elevi</button>
-        </form>
-        <form id="createClassForm">
-          <h3>Creare clasa</h3>
-          <label for="className">Nume clasa:</label>
-          <input type="text" id="className" name="className" required />
-          <button type="submit">Creaza clasa</button>
-        </form>
+        <div class="edit">
+          <form id="addClassForm">
+            <h3 id="clase">Adaugare elevi in clasa</h3>
+            <label for="classId">ID clasa:</label>
+            <input type="text" id="classId" name="classId" required />
+            <label for="studentIds"
+              >ID-uri elevi (separate prin virgula):</label
+            >
+            <input type="text" id="studentIds" name="studentIds" required />
+            <button type="submit">Adauga elevi</button>
+          </form>
+          <form id="createClassForm">
+            <h3>Creare clasa</h3>
+            <label for="className">Nume clasa:</label>
+            <input type="text" id="className" name="className" required />
+            <button type="submit">Creaza clasa</button>
+          </form>
+        </div>
       </section>
 
       <section class="recent-activity" id="recent">
@@ -51,7 +55,7 @@
     </main>
 
     <footer>
-      <p>&copy; 2024 Dashboard Profesor. Toate drepturile rezervate.</p>
+      <p>&copy; 2024 Dashboard Profesor.</p>
     </footer>
 
     <script src="/javascript/teacher_dashboard.js"></script>
