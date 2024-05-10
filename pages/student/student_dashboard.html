@@ -15,7 +15,7 @@
             <li><a href="#probleme">Probleme</a></li>
             <li><a href="#solutii">Solutii</a></li>
             <li><a href="#comentarii">Comentarii</a></li>
-            <li><a href="/pages/#">Logout</a></li>
+            <li><a href="/pages/index.html">Logout</a></li>
           </ul>
         </nav>
       </div>
@@ -25,20 +25,20 @@
       <div class="container">
         <section class="problems" id="probleme">
           <h2>Probleme</h2>
+          {% for problem in problems %}
           <div class="problem">
-            <h3>Problema 1</h3>
-            <p>Descrierea problemei...</p>
-            <button class="solve-btn" onclick="solveProblem('Problema 1')">
+            <h3>{{ problem[1] }}</h3>
+            <p>Descriere: {{ problem[2] }}</p>
+            <p>Dificultate: {{problem[3]}}</p>
+            <p>Categorie: {{problem[4]}}</p>
+            <button
+              class="solve-btn"
+              onclick="solveProblem('{{ problem[0] }}')"
+            >
               Rezolva
             </button>
           </div>
-          <div class="problem">
-            <h3>Problema 2</h3>
-            <p>Descrierea problemei...</p>
-            <button class="solve-btn" onclick="solveProblem('Problema 2')">
-              Rezolva
-            </button>
-          </div>
+          {% endfor %}
         </section>
 
         <section class="solutions" id="solutii">

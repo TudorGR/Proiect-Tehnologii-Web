@@ -15,7 +15,7 @@
           <li><a href="#utilizatori">Utilizatori</a></li>
           <li><a href="#probleme">Probleme</a></li>
           <li><a href="#clase">Clase</a></li>
-          <li><a href="/pages/#">Logout</a></li>
+          <li><a href="/pages/index.html">Logout</a></li>
         </ul>
       </nav>
     </header>
@@ -70,35 +70,37 @@
         <table id="problemTable">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Nume Problema</th>
               <th>Actiuni</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="listaProbleme">
+            {% for problem in problems %}
             <tr>
-              <td>Problema 1</td>
+              <td>{{ problem[0] }}</td>
+              <td>{{ problem[1] }}</td>
               <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
+                <button
+                  class="viewBtn"
+                  onclick="{handleViewProblem('{{ problem[0] }}')}"
+                >
+                  Vizualizeaza
+                </button>
+                <button
+                  class="deleteBtn"
+                  onclick="{handleDeleteProblem('{{ problem[0] }}')}"
+                >
+                  Sterge
+                </button>
               </td>
             </tr>
-            <tr>
-              <td>Problema 2</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Problema 3</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
-        <button id="addProblemBtn">Adauga Problema</button>
+        <button id="addProblemBtn" onclick="{handleAddProblem()}">
+          Adauga Problema
+        </button>
       </section>
 
       <section class="classes" id="clase">

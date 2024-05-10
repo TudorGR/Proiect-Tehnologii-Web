@@ -25,8 +25,8 @@
     <main>
       <div class="container">
         <section class="problem">
-          <h2>Problema 1</h2>
-          <p>Descrierea problemei...</p>
+          <h2 id="titlu">Problema 1</h2>
+          <p id="descriere">Descrierea problemei...</p>
           <form action="#" method="post" id="solutionForm">
             <label for="solution">Solutia ta:</label><br />
             <textarea
@@ -36,6 +36,8 @@
               cols="50"
             ></textarea
             ><br />
+            <label for="studentId">ID student:</label>
+            <input type="text" id="studentId" name="studentId" required />
             <button type="submit">Trimite solutia</button>
           </form>
         </section>

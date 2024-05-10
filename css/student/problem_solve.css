@@ -170,3 +170,9 @@ button:hover {
     font-size: 3vw;
   }
 }
+#studentId {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 18px;
+}

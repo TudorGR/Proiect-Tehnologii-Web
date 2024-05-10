@@ -1,5 +1,5 @@
-function solveProblem(problemName) {
-  window.location.href = "/pages/student/problem_solve.html";
+function solveProblem(problemId) {
+  window.location.href = `/pages/student/problem_solve.html?problem=${problemId}`;
 }
 
 function commentSolution(solutionName) {
