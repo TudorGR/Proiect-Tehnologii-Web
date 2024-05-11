@@ -34,35 +34,37 @@
         <table id="userTable">
           <thead>
             <tr>
-              <th>Nume Utilizator</th>
+              <th>ID</th>
+              <th>Email Utilizator</th>
               <th>Actiuni</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="listaUseri">
+            {% for user in users %}
             <tr>
-              <td>Andrei Enache</td>
+              <td>{{ user[0] }}</td>
+              <td>{{ user[2] }}</td>
               <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
+                <button
+                  class="viewBtn"
+                  onclick="{handleViewUser('{{ user[0] }}')}"
+                >
+                  Vizualizeaza
+                </button>
+                <button
+                  class="deleteBtn"
+                  onclick="{handleDeleteUser('{{ user[0] }}')}"
+                >
+                  Sterge
+                </button>
               </td>
             </tr>
-            <tr>
-              <td>George Filip</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Alex Cucos</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
-        <button id="addUserBtn">Adauga Utilizator</button>
+        <button id="addUserBtn" onclick="{handleAddUser()}">
+          Adauga Utilizator
+        </button>
       </section>
 
       <section class="problems" id="probleme">
@@ -108,44 +110,36 @@
         <table id="classTable">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Nume Clasa</th>
               <th>Actiuni</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="listaClase">
+            {% for class in classes %}
             <tr>
-              <td>Clasa A</td>
+              <td>{{ class[0] }}</td>
+              <td>{{ class[1] }}</td>
               <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
+                <button
+                  class="deleteBtn"
+                  onclick="{handleDeleteClass('{{ class[0] }}')}"
+                >
+                  Sterge
+                </button>
               </td>
             </tr>
-            <tr>
-              <td>Clasa B</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Clasa C</td>
-              <td>
-                <button class="viewBtn">Vizualizeaza</button>
-                <button class="deleteBtn">Sterge</button>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
-        <button id="addClassBtn">Adauga Clasa</button>
+        <button id="addClassBtn" onclick="{handleAddClass()}">
+          Adauga Clasa
+        </button>
       </section>
 
       <section class="recent-activity">
         <h2>Activitate recenta</h2>
-        <ul>
-          <li>Problema noua propusa de Profesorul X</li>
-          <li>Clasa Y a fost creata de Administrator</li>
-          <li>Raportul Z a fost evaluat</li>
-        </ul>
+        <ul id="recentActivity"></ul>
       </section>
     </main>
 
