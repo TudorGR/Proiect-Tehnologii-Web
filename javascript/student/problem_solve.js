@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     var solutionText = document.getElementById("solution").value;
     alert("Solutia trimisa catre server: " + solutionText);
-    var studentID = document.getElementById("studentId").value;
+    var studentID = localStorage.getItem("ID_user");
     console.log(solutionText);
 
     var currentTime = new Date().toISOString();
@@ -62,4 +62,33 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     solutionForm.reset();
   });
+});
+
+function updateLineNumbers() {
+  const textarea = document.getElementById("solution");
+  const lineNumbers = document.querySelector(".line-numbers");
+
+  const lines = textarea.value.split("\n").length;
+  let lineNumberHtml = "";
+  for (let i = 1; i <= lines; i++) {
+    lineNumberHtml += i + "<br>";
+  }
+
+  lineNumbers.innerHTML = lineNumberHtml;
+}
+
+function syncScroll() {
+  const textarea = document.getElementById("solution");
+  const lineNumbers = document.querySelector(".line-numbers");
+  lineNumbers.scrollTop = textarea.scrollTop;
+}
+
+function autoResize() {
+  const textarea = document.getElementById("solution");
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  updateLineNumbers();
 });

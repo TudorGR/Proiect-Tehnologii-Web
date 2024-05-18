@@ -1,0 +1,32 @@
+header {
+  background-color: #007bff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+header h1 {
+  margin: 0px;
+  text-align: center;
+}
+header nav ul {
+  padding: 0px;
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+header nav ul li a {
+  margin-left: 10px;
+  display: inline-block;
+  background-color: #fff;
+  color: #007bff;
+  outline: 1px solid #007bff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}

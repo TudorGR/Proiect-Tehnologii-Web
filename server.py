@@ -2,11 +2,16 @@ from flask import Flask, Blueprint, render_template, send_from_directory, jsonif
 import os
 import sqlite3
 import datetime
+import logging
 
-# Definirea Blueprint-ului pentru fișierele statice
+# Configurare logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+# Blueprint pentru fișiere statice
 static_files_bp = Blueprint('static_files', __name__)
 
-# Rută pentru a servi fișiere statice din directorul rădăcină al aplicației
+# Ruta pentru servirea fișierelor statice din directorul principal
 @static_files_bp.route('/<path:filename>')
 def serve_static(filename):
     root_dir = os.getcwd()  # Directorul rădăcină al aplicației Flask
@@ -15,258 +20,29 @@ def serve_static(filename):
 # Definirea obiectului Flask
 app = Flask(__name__, template_folder='.')
 
+# Rute pentru pagini HTML
+@app.route('/')
+def home():
+    return send_from_directory('pages', 'index.html')
 
-@app.route('/api/classes')
-def get_classes():
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-
-    # Execută o interogare pentru a obține toate problemele din baza de date
-    cursor.execute('SELECT * FROM Classes;')
-    
-    # Extrage toate rândurile (problemele) din rezultatul interogării
-    problems = cursor.fetchall()
-
-    # Închide conexiunea cu baza de date
-    conn.close()
-
-    # Returnează lista de probleme obținute din baza de date
-    return problems
-
-
-@app.route('/api/users')
-def get_users():
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-
-    # Execută o interogare pentru a obține toate problemele din baza de date
-    cursor.execute('SELECT * FROM Users;')
-    
-    # Extrage toate rândurile (problemele) din rezultatul interogării
-    problems = cursor.fetchall()
-
-    # Închide conexiunea cu baza de date
-    conn.close()
-
-    # Returnează lista de probleme obținute din baza de date
-    return problems
-
-
-@app.route('/api/problems')
-def get_problems():
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-
-    # Execută o interogare pentru a obține toate problemele din baza de date
-    cursor.execute('SELECT * FROM Problems;')
-    
-    # Extrage toate rândurile (problemele) din rezultatul interogării
-    problems = cursor.fetchall()
-
-    # Închide conexiunea cu baza de date
-    conn.close()
-
-    # Returnează lista de probleme obținute din baza de date
-    return problems
-
-
-
-@app.route('/deleteProblem',methods=['POST'])
-def deleteProblem():
-    data=request.json
-    ID = data.get("ID")
-
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Problema cu ID-ul: "+ID+" a fost stearsa."
-    
-    cursor.execute("DELETE FROM Problems WHERE id = ?", (ID,))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Stergere reușită!'})
-
-@app.route('/addProblem',methods=['POST'])
-def addProblem():
-    data=request.json
-    numeProblema = data.get("numeProblema")
-    ID = data.get("ID")
-    descriere= data.get("descriere")
-    dificultate= data.get("dificultate")
-    categorie= data.get("categorie")
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Problema cu ID-ul: "+ID+" a fost adaugata."
-    
-    cursor.execute("INSERT INTO Problems (id,titlu,descriere,dificultate,categorie) VALUES (?,?,?,?,?)", (ID,numeProblema,descriere,dificultate,categorie))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Adaugare reușită!'})
-
-
-
-@app.route('/addClass',methods=['POST'])
-def addClass():
-    data=request.json
-    ID = data.get("ID")
-    nume = data.get("nume")
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Clasa cu ID-ul: "+ID+" a fost adaugat."
-    
-    cursor.execute("INSERT INTO Classes (id,nume) VALUES (?,?)", (ID,nume))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Adaugare reușită!'})
-
-
-
-@app.route('/deleteClass',methods=['POST'])
-def deleteClass():
-    data=request.json
-    ID = data.get("ID")
-
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Clasa cu ID-ul: "+ID+" a fost stearsa."
-    
-    cursor.execute("DELETE FROM Classes WHERE id = ?", (ID,))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-    
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Stergere reușită!'})
-
-
-
-@app.route('/deleteUser',methods=['POST'])
-def deleteUser():
-    data=request.json
-    ID = data.get("ID")
-
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Userul cu ID-ul: "+ID+" a fost sters."
-    
-    cursor.execute("DELETE FROM Users WHERE id = ?", (ID,))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Stergere reușită!'})
-
-
-
-
-
-@app.route('/addUser',methods=['POST'])
-def addUser():
-    data=request.json
-    ID = data.get("ID")
-    name = data.get("name")
-    email= data.get("email")
-    password= data.get("password")
-    role= data.get("role")
-
-    print(name+" va fi adaugat")
-
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-    string="Userul cu ID-ul: "+ID+" a fost adaugat."
-    
-    cursor.execute("INSERT INTO Users (id,name,email,password,role) VALUES (?,?,?,?,?)", (ID,name,email,password,role))
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (string,))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({'message': 'Adaugare reușită!'})
-
-
-
-
-@app.route('/update_problem', methods=['POST'])
-def update_problem():
-    data=request.json
-    problemNumber = data.get("problemNumber")
-    cod = data.get('cod')
-    timp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    ID=data.get('ID')
-
-    print(data)
-    
-    # Conectați-vă la baza de date
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-
-
-    # Executați instrucțiunea SQL de actualizare
-    cursor.execute("INSERT INTO attempts (id_problema, cod, timp, id_user) VALUES (?, ?, ?,?)", (problemNumber, cod, timp,ID))
-
-    # Comiteți schimbările și închideți conexiunea cu baza de date
-    conn.commit()
-    conn.close()
-
-    # Returnează un mesaj JSON de confirmare
-    return jsonify({'message': 'Actualizare reușită!'})
-
-
-@app.route('/api/recentActivity')
-def recentActivity():
-    conn = sqlite3.connect('server.db')
-    cursor = conn.cursor()
-
-    cursor.execute('SELECT * FROM RecentActivity ORDER BY description DESC LIMIT 3;')
-    
-    problems = cursor.fetchall()
-
-    conn.close()
-
-    return problems
-
-
-
-# Ruta pentru pagina de dashboard a elevului
 @app.route('/pages/student/student_dashboard.html')
 def student_dashboard():
     problems = get_problems()
     return render_template('pages/student/student_dashboard.html', problems=problems)
 
+@app.route('/pages/teacher_dashboard.html')
+def teacher_dashboard():
+    classes = get_classes()
+    return render_template('pages/teacher_dashboard.html', classes=classes)
+
 @app.route('/pages/admin_dashboard.html')
 def admin_dashboard():
     problems = get_problems()
     users = get_users()
-    classes=get_classes()
-    return render_template('pages/admin_dashboard.html', problems=problems, users=users,classes=classes)
+    classes = get_classes()
+    return render_template('pages/admin_dashboard.html', problems=problems, users=users, classes=classes)
 
-
-
-
-
-
-# Ruta pentru a servi fișiere statice din directorul 'pages'
+# Rute pentru servirea fișierelor statice din directoarele 'pages' și 'javascript'
 @app.route('/pages/<path:filename>')
 def pages(filename):
     return send_from_directory(os.path.join(app.root_path, 'pages'), filename)
@@ -275,9 +51,176 @@ def pages(filename):
 def javascript(filename):
     return send_from_directory(os.path.join(app.root_path, 'javascript'), filename)
 
-# Înregistrarea Blueprint-ului pentru fișierele statice în aplicația principală
+# Rute API
+
+@app.route('/api/classes')
+def get_classes():
+    return query_db('SELECT * FROM Classes;')
+
+@app.route('/api/users')
+def get_users():
+    return query_db('SELECT * FROM Users;')
+
+@app.route('/api/problems')
+def get_problems():
+    return query_db('SELECT * FROM Problems;')
+
+@app.route('/api/recentActivity')
+def recentActivity():
+    return query_db('SELECT * FROM RecentActivity ORDER BY description DESC LIMIT 3;')
+
+@app.route('/api/studentAttempts', methods=['POST'])
+def get_student_attempts():
+    data = request.json
+    student_id = data.get('student_id')
+    
+    if student_id is None:
+        return jsonify({'error': 'student_id is required'}), 400
+    
+    query = "SELECT * FROM Attempts WHERE id_user = ?"
+    results = query_db(query, (student_id,))
+    attempts = [{'id': row[0], 'id_problema': row[1], 'timp': row[2], 'cod': row[3]} for row in results]
+    return jsonify(attempts)
+
+# Funcție generală pentru interogări
+def query_db(query, args=(), one=False):
+    conn = sqlite3.connect('server.db')
+    cursor = conn.cursor()
+    cursor.execute(query, args)
+    rv = cursor.fetchall()
+    conn.close()
+    return (rv[0] if rv else None) if one else rv
+
+
+
+# Rute pentru adăugare, ștergere și actualizare entități
+@app.route('/addProblem', methods=['POST'])
+def addProblem():
+    return modify_db(
+        "INSERT INTO Problems (id, titlu, descriere, dificultate, categorie) VALUES (?, ?, ?, ?, ?)",
+        "Problema cu ID-ul: {} a fost adaugata.",
+        ('ID', 'numeProblema', 'descriere', 'dificultate', 'categorie')
+    )
+
+@app.route('/addStudentToClass', methods=['POST'])
+def addStudentToClass():
+    return modify_db(
+        "INSERT INTO Students_Classes (student_id,class_id) VALUES (?, ?)",
+        "Problema cu ID-ul: {} a fost adaugata.",
+        ('student_id','class_id')
+    )
+
+@app.route('/deleteProblem', methods=['POST'])
+def deleteProblem():
+    return modify_db(
+        "DELETE FROM Problems WHERE id = ?",
+        "Problema cu ID-ul: {} a fost stearsa.",
+        ('ID',)
+    )
+
+@app.route('/addClass', methods=['POST'])
+def addClass():
+    return modify_db(
+        "INSERT INTO Classes (id, nume,prof_id) VALUES (?, ?,?)",
+        "Clasa cu ID-ul: {} a fost adaugata.",
+        ('ID', 'nume','prof_id')
+    )
+
+@app.route('/deleteClass', methods=['POST'])
+def deleteClass():
+    return modify_db(
+        "DELETE FROM Classes WHERE id = ?",
+        "Clasa cu ID-ul: {} a fost stearsa.",
+        ('ID',)
+    )
+
+@app.route('/addUser', methods=['POST'])
+def addUser():
+    return modify_db(
+        "INSERT INTO Users (id, name, email, password, role) VALUES (?, ?, ?, ?, ?)",
+        "Userul cu ID-ul: {} a fost adaugat.",
+        ('ID', 'name', 'email', 'password', 'role')
+    )
+
+@app.route('/deleteUser', methods=['POST'])
+def deleteUser():
+    return modify_db(
+        "DELETE FROM Users WHERE id = ?",
+        "Userul cu ID-ul: {} a fost sters.",
+        ('ID',)
+    )
+
+@app.route('/update_problem', methods=['POST'])
+def update_problem():
+    data = request.json
+    conn = sqlite3.connect('server.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO attempts (id_problema, cod, timp, id_user) VALUES (?, ?, ?, ?)",
+        (data.get('problemNumber'), data.get('cod'), datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), data.get('ID'))
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Actualizare reușită!'})
+
+@app.route('/checkUserClass', methods=['POST'])
+def checkUserClass():
+    data = request.json
+    student_id = data.get('student_id')
+    class_id = data.get('class_id')
+
+    conn = sqlite3.connect('server.db')
+    cursor = conn.cursor()
+    
+    query = "SELECT 1 FROM Students_Classes WHERE student_id = ? AND class_id = ?"
+    cursor.execute(query, (student_id, class_id))
+    result = cursor.fetchone()
+    
+    cursor.close()
+    conn.close()
+    
+    return jsonify({'exists': result is not None})
+
+
+@app.route('/api/classStudentCounts', methods=['POST'])
+def get_class_student_counts():
+    data = request.json
+    prof_id = data.get('prof_id')
+    
+    if prof_id is None:
+        return jsonify({'error': 'prof_id is required'}), 400
+    
+    query = '''
+        SELECT Classes.id, Classes.nume, COUNT(Students_Classes.student_id) as student_count
+        FROM Classes
+        LEFT JOIN Students_Classes ON Classes.id = Students_Classes.class_id
+        WHERE Classes.prof_id = ?
+        GROUP BY Classes.id;
+    '''
+    results = query_db(query, (prof_id,))
+    class_student_counts = [{'id': row[0], 'name': row[1], 'student_count': row[2]} for row in results]
+    return jsonify(class_student_counts)
+
+
+    
+
+# Funcție generală pentru modificarea bazei de date
+def modify_db(query, log_message, fields):
+    data = request.json
+    conn = sqlite3.connect('server.db')
+    cursor = conn.cursor()
+    values = tuple(data.get(field) for field in fields)
+    cursor.execute(query, values)
+    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (log_message.format(values[0]),))
+    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Operațiune reușită!'})
+
+# Înregistrarea blueprint-ului pentru fișiere statice
 app.register_blueprint(static_files_bp)
 
 # Rularea aplicației Flask
 if __name__ == '__main__':
+    print("Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)")
     app.run(debug=True)

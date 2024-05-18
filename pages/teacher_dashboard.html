@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Profesor</title>
     <link rel="stylesheet" href="/css/teacher_dashboard.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
   </head>
   <body>
     <header>
@@ -23,7 +25,30 @@
     <main>
       <section class="overview">
         <h2 id="dashboard">Prezentare generala</h2>
-        <canvas id="classChart"></canvas>
+        <div class="summary">
+          <div class="label-button">
+            <h2>Classes and Students</h2>
+            <button
+              type="button"
+              id="refresh-button"
+              onclick="{fetchStudentCounts()}"
+            >
+              Refresh
+            </button>
+          </div>
+
+          <table id="results-table" border="1">
+            <thead>
+              <tr>
+                <th>Class ID</th>
+                <th>Class Name</th>
+                <th>Student Count</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
         <div class="edit">
           <form id="addClassForm">
             <h3 id="clase">Adaugare elevi in clasa</h3>
@@ -33,13 +58,19 @@
               >ID-uri elevi (separate prin virgula):</label
             >
             <input type="text" id="studentIds" name="studentIds" required />
-            <button type="submit">Adauga elevi</button>
+            <button type="submit" onclick="{handleAddStudentToClass()}">
+              Adauga elevi
+            </button>
           </form>
           <form id="createClassForm">
             <h3>Creare clasa</h3>
             <label for="className">Nume clasa:</label>
             <input type="text" id="className" name="className" required />
-            <button type="submit">Creaza clasa</button>
+            <label for="classID">ID clasa:</label>
+            <input type="text" id="classID" name="classID" required />
+            <button type="submit" onclick="{handleAddClass()}">
+              Creaza clasa
+            </button>
           </form>
         </div>
       </section>

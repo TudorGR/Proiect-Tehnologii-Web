@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+  loadAttempts();
+});
+
 function solveProblem(problemId) {
   window.location.href = `/pages/student/problem_solve.html?problem=${problemId}`;
 }
@@ -11,23 +15,58 @@ function rateSolution(solutionName) {
   // marcarea unei solutii cu stele
   alert("Ai marcat cu stele solutia: " + solutionName);
 }
-document.addEventListener("DOMContentLoaded", function () {
-  var stars = document.querySelectorAll(".star");
 
-  // butoanele stea
-  stars.forEach(function (star) {
-    star.addEventListener("click", function () {
-      stars.forEach(function (s) {
-        s.classList.remove("selected");
-      });
+function displayAttempts(attempts) {
+  var attemptList = document.getElementById("attemptList");
+  attemptList.innerHTML = "";
 
-      var value = parseInt(star.value);
-      for (var i = 0; i < value; i++) {
-        stars[i].classList.add("selected");
-      }
+  attempts.forEach(function (attempt) {
+    var attemptDiv = document.createElement("div");
+    attemptDiv.classList.add("attempt");
 
-      // trimiterea la server
-      console.log("Dificultatea selectata: " + value);
-    });
+    var attemptInfo = document.createElement("p");
+    attemptInfo.classList.add("attemptText");
+    attemptInfo.textContent = "ID Problema: " + attempt.id_problema;
+
+    var attemptInfo2 = document.createElement("p");
+    attemptInfo2.classList.add("attemptText2");
+    attemptInfo2.textContent = " Timp: " + attempt.timp;
+
+    var viewCodeBtn = document.createElement("button");
+    viewCodeBtn.textContent = "View code";
+    viewCodeBtn.classList.add("viewCodeBtn");
+
+    var commentCodeBtn = document.createElement("button");
+    commentCodeBtn.textContent = "Comment code";
+    commentCodeBtn.classList.add("commentCodeBtn");
+
+    attemptDiv.appendChild(attemptInfo);
+    attemptDiv.appendChild(attemptInfo2);
+    attemptDiv.appendChild(viewCodeBtn);
+    attemptDiv.appendChild(commentCodeBtn);
+    attemptList.appendChild(attemptDiv);
   });
-});
+}
+
+function loadAttempts() {
+  fetch("/api/studentAttempts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      student_id: localStorage.getItem("ID_user"),
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        console.error("Eroare:", data.error);
+        return;
+      }
+      displayAttempts(data);
+    })
+    .catch((error) => {
+      console.error("Eroare de rețea:", error);
+    });
+}

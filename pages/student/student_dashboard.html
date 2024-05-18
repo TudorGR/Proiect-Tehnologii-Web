@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Elev</title>
     <link rel="stylesheet" href="/css/student/student_dashboard.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
   </head>
   <body>
     <header>
@@ -23,11 +25,11 @@
 
     <main>
       <div class="container">
+        <h2>Probleme</h2>
         <section class="problems" id="probleme">
-          <h2>Probleme</h2>
           {% for problem in problems %}
           <div class="problem">
-            <h3>{{ problem[1] }}</h3>
+            <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
             <p>Descriere: {{ problem[2] }}</p>
             <p>Dificultate: {{problem[3]}}</p>
             <p>Categorie: {{problem[4]}}</p>
@@ -43,29 +45,9 @@
 
         <section class="solutions" id="solutii">
           <h2>Solutii</h2>
-          <div class="solution">
-            <h3>Solutia ta pentru Problema 1</h3>
-            <p>Descrierea solutiei...</p>
-            <section class="comment">
-              <h2>Adauga un comentariu</h2>
-              <textarea
-                id="commentBox"
-                rows="4"
-                cols="50"
-                placeholder="Adauga un comentariu..."
-              ></textarea>
-            </section>
-            <section class="mark-stars">
-              <h3>Marcheaza cu stele (dificultate)</h3>
-              <div class="stars">
-                <button class="star" value="1">★</button>
-                <button class="star" value="2">★</button>
-                <button class="star" value="3">★</button>
-                <button class="star" value="4">★</button>
-                <button class="star" value="5">★</button>
-              </div>
-            </section>
-          </div>
+          <section class="attempts" id="incercari">
+            <div id="attemptList"></div>
+          </section>
         </section>
 
         <section class="comments" id="comentarii">

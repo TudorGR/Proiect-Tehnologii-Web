@@ -12,46 +12,14 @@ body {
   margin: 0 auto;
 }
 
-header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 20px 0;
-}
-
-header h1 {
-  font-size: 32px;
-  text-align: center;
-}
-
-nav ul {
-  list-style-type: none;
-  text-align: center;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 20px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-
-  font-size: 20px;
-  border: 2px solid white;
-  border-radius: 7px;
-  padding: 10px;
-  margin-right: 40px;
-}
-
 main {
   padding: 20px;
 }
 
 h2 {
   margin-bottom: 10px;
-  font-size: 28px;
+  font-size: 26px;
+  text-align: center;
 }
 
 .problem {
@@ -62,22 +30,25 @@ h2 {
 }
 .problem p {
   color: gray;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 label {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 textarea {
   width: 100%;
   margin-bottom: 10px;
   border-radius: 5px;
-  resize: none;
+  border: 1px solid rgb(224, 224, 224);
   outline: none;
   font-family: "Fira Code", monospace;
-  font-size: 18px;
+  font-size: 16px;
+  padding-left: 32px;
+  overflow: hidden;
+  resize: none;
 }
 
 button {
@@ -87,22 +58,52 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
+  display: block;
 }
 
 button:hover {
   background-color: #0056b3;
 }
+
+#studentId {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 18px;
+  display: block;
+  margin: 10px 0;
+  width: 140px;
+  border: 1px solid rgb(224, 224, 224);
+}
+
+.text {
+  position: relative;
+  display: flex;
+}
+
+.line-numbers {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  background: whitesmoke;
+  text-align: right;
+  padding-right: 5px;
+  box-sizing: border-box;
+  font-family: "Fira Code", monospace;
+  font-size: 16px;
+  color: gray;
+  margin-bottom: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-family: "Fira Code", monospace;
+}
+
 @media all and (max-width: 768px) {
-  header h1 {
-    font-size: 26px;
-  }
-  nav ul li a {
-    font-size: 14px;
-    padding: 5px;
-  }
   .hero h2 {
-    font-size: 22px;
+    font-size: 20px;
     margin-top: 40px;
     margin-bottom: 30px;
     width: 360px;
@@ -111,32 +112,36 @@ button:hover {
   .hero p {
     width: 360px;
     margin: auto;
-    font-size: 16px;
-  }
-  h2 {
-    font-size: 22px;
-  }
-  .problem p {
-    font-size: 16px;
-  }
-  textarea {
     font-size: 14px;
   }
+  h2 {
+    font-size: 20px;
+  }
+  .problem p {
+    font-size: 14px;
+  }
+  textarea {
+    font-size: 12px;
+    padding-left: 20px;
+  }
   button {
+    font-size: 14px;
+  }
+  #studentId {
+    font-size: 14px;
+    width: 115px;
+  }
+  label {
     font-size: 16px;
+  }
+  .line-numbers {
+    font-size: 12px;
+    width: 15px;
   }
 }
 @media all and (max-width: 360px) {
-  header h1 {
-    font-size: 6vw;
-  }
-  nav ul li a {
-    font-size: 3vw;
-    padding: 5px;
-  }
-  nav ul {
-    margin: 0;
-    margin-bottom: 10px;
+  .problem {
+    padding: 6vw;
   }
   .hero h2 {
     font-size: 5vw;
@@ -165,14 +170,20 @@ button:hover {
   }
   textarea {
     font-size: 3vw;
+    padding-left: 4vw;
   }
   button {
     font-size: 3vw;
+    padding: 3vw;
   }
-}
-#studentId {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  font-size: 18px;
+  #studentId {
+    font-size: 3vw;
+    width: 20vw;
+    padding: 3vw;
+    margin: 4vw 0;
+  }
+  .line-numbers {
+    font-size: 3vw;
+    width: 4vw;
+  }
 }

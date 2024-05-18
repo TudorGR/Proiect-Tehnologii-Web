@@ -14,12 +14,12 @@ body {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(97, 97, 97, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .container h2 {
   margin-top: 0;
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .form-group {
@@ -30,7 +30,7 @@ body {
   display: block;
   font-weight: bold;
   margin-bottom: 15px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .form-group input {
@@ -38,11 +38,11 @@ body {
   padding: 15px;
   border: 2px solid whitesmoke;
   border-radius: 3px;
-  font-size: 18px;
+  font-size: 16px;
 }
 .form-group input::placeholder {
   color: rgb(206, 206, 206);
-  font-size: 18px;
+  font-size: 16px;
 }
 
 button {
@@ -53,7 +53,8 @@ button {
   border-radius: 3px;
   cursor: pointer;
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 button:hover {
@@ -61,38 +62,38 @@ button:hover {
 }
 @media all and (max-width: 768px) {
   .container h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
   .container label {
-    font-size: 16px;
+    font-size: 14px;
   }
   .form-group input {
-    font-size: 14px;
+    font-size: 12px;
     width: 300px;
   }
   button {
-    font-size: 16px;
+    font-size: 12px;
   }
   .form-group input::placeholder {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 @media all and (max-width: 360px) {
   .container h2 {
-    font-size: 5vw;
+    font-size: 4vw;
   }
   .container label {
-    font-size: 4vw;
-  }
-  .form-group input {
-    font-size: 4vw;
-    width: 70vw;
-    padding: 4vw;
-  }
-  button {
     font-size: 3vw;
   }
+  .form-group input {
+    font-size: 3vw;
+    width: 70vw;
+    padding: 3vw;
+  }
+  button {
+    font-size: 2vw;
+  }
   .form-group input::placeholder {
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }
