@@ -27,7 +27,42 @@ h2 {
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+.comment {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.comment textarea {
+  padding-left: 2px;
+}
+
+.comment h3,
+.comment p {
+  margin: 0px;
+}
+
+.comms {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.addComm {
+  flex: 1;
+}
+
+.viewComm {
+  flex: 1;
+}
+.comments {
+  height: 300px;
+  overflow: scroll;
+}
+
 .problem p {
   color: gray;
   font-size: 18px;
@@ -102,6 +137,19 @@ button:hover {
 }
 
 @media all and (max-width: 768px) {
+  .comments {
+    height: 235px;
+    overflow: scroll;
+  }
+  .comment h3 {
+    font-size: 16px;
+  }
+  .comment p {
+    font-size: 12px;
+  }
+  .comment {
+    padding: 10px;
+  }
   .hero h2 {
     font-size: 20px;
     margin-top: 40px;
@@ -140,6 +188,19 @@ button:hover {
   }
 }
 @media all and (max-width: 360px) {
+  .comments {
+    height: 70vw;
+    overflow: scroll;
+  }
+  .comment h3 {
+    font-size: 4vw;
+  }
+  .comment p {
+    font-size: 3vw;
+  }
+  .comment {
+    padding: 2vw;
+  }
   .problem {
     padding: 6vw;
   }

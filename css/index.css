@@ -169,7 +169,6 @@ a {
   .btn {
     font-size: 2vw;
     margin-top: 30px;
-    padding: 10px;
   }
   #features h2 {
     font-size: 4vw;
@@ -184,6 +183,6 @@ a {
     font-size: 3vw;
   }
   .btn {
-    padding: 2vw;
+    padding: 2.5vw;
   }
 }

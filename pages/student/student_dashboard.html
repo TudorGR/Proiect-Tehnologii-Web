@@ -25,38 +25,36 @@
 
     <main>
       <div class="container">
-        <h2>Probleme</h2>
-        <section class="problems" id="probleme">
-          {% for problem in problems %}
-          <div class="problem">
-            <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
-            <p>Descriere: {{ problem[2] }}</p>
-            <p>Dificultate: {{problem[3]}}</p>
-            <p>Categorie: {{problem[4]}}</p>
-            <button
-              class="solve-btn"
-              onclick="solveProblem('{{ problem[0] }}')"
-            >
-              Rezolva
-            </button>
+        <div class="sec">
+          <div class="secProb">
+            <h2>Probleme</h2>
+            <section class="problems" id="probleme">
+              {% for problem in problems %}
+              <div class="problem">
+                <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
+                <p>Descriere: {{ problem[2] }}</p>
+                <p>Dificultate: {{problem[3]}}</p>
+                <p>Categorie: {{problem[4]}}</p>
+                <button
+                  class="solve-btn"
+                  onclick="solveProblem('{{ problem[0] }}')"
+                >
+                  Rezolva
+                </button>
+              </div>
+              {% endfor %}
+            </section>
           </div>
-          {% endfor %}
-        </section>
 
-        <section class="solutions" id="solutii">
-          <h2>Solutii</h2>
-          <section class="attempts" id="incercari">
-            <div id="attemptList"></div>
-          </section>
-        </section>
-
-        <section class="comments" id="comentarii">
-          <h2>Comentarii</h2>
-          <div class="comment">
-            <h3>Comentariu la Problema 1</h3>
-            <p>Comentariul tau...</p>
+          <div class="secSolCom">
+            <h2>Solutii</h2>
+            <section class="solutions" id="solutii">
+              <section class="attempts" id="incercari">
+                <div id="attemptList"></div>
+              </section>
+            </section>
           </div>
-        </section>
+        </div>
       </div>
     </main>
 

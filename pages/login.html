@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <h2>Autentificare</h2>
-      <form id="loginForm">
+      <form id="loginForm" autocomplete="off">
         <div class="form-group">
           <label for="email">Nume de utilizator / Email:</label>
           <input
@@ -17,7 +17,7 @@
             id="email"
             name="email"
             required
-            placeholder="email..."
+            placeholder="introdu email-ul..."
           />
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
             id="password"
             name="password"
             required
-            placeholder="parola..."
+            placeholder="introdu parola..."
           />
         </div>
         <button type="submit">Autentificare</button>

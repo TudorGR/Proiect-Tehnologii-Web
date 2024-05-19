@@ -8,6 +8,7 @@ body {
 main {
   padding: 30px;
 }
+
 main h2 {
   font-size: 26px;
 }
@@ -104,7 +105,7 @@ canvas {
 }
 #userTable td button {
   font-size: 18px;
-  padding: 8px 30px;
+  padding: 8px 12px;
 }
 
 #userTable th {
@@ -156,10 +157,6 @@ button:hover {
   background-color: #138496;
 }
 
-.problems {
-  margin-bottom: 30px;
-}
-
 #problemTable {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   width: 100%;
@@ -177,7 +174,7 @@ button:hover {
 }
 #problemTable td button {
   font-size: 18px;
-  padding: 8px 30px;
+  padding: 8px 12px;
 }
 
 #problemTable th {
@@ -186,6 +183,23 @@ button:hover {
 
 .classes {
   margin-bottom: 30px;
+}
+
+.problem {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+.problem p,
+.problem h3 {
+  margin: 0px;
 }
 
 #classTable {
@@ -205,7 +219,7 @@ button:hover {
 }
 #classTable td button {
   font-size: 18px;
-  padding: 8px 30px;
+  padding: 8px 12px;
 }
 
 #classTable th {
@@ -216,7 +230,6 @@ button {
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 8px 16px;
   cursor: pointer;
   border-radius: 4px;
   margin-right: 5px;
@@ -261,7 +274,35 @@ button:hover {
 #addProblemBtn {
   font-size: 18px;
 }
+
+.sec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sec1 {
+  flex: 1;
+}
+.sec2 {
+  flex: 1;
+}
+@media all and (max-width: 950px) {
+  .sec {
+    flex-direction: column;
+  }
+}
 @media all and (max-width: 768px) {
+  .problem p,
+  .problem h3 {
+    font-size: 14px;
+  }
+  header nav ul li a {
+    padding: 10px !important;
+  }
+  .problem button {
+    font-size: 12px;
+  }
   .hero h2 {
     font-size: 18px;
     margin-top: 40px;
@@ -328,6 +369,18 @@ button:hover {
   }
 }
 @media all and (max-width: 360px) {
+  header nav ul li a {
+    padding: 2vw !important;
+    margin-left: 2vw !important;
+  }
+  .problem {
+    font-size: 3vw;
+    padding: 4vw;
+  }
+  .problem button {
+    font-size: 3vw;
+    padding: 2vw;
+  }
   .hero h2 {
     font-size: 4vw;
     margin-top: 40px;
@@ -372,7 +425,7 @@ button:hover {
   #addClassBtn {
     margin-bottom: 1vw;
     padding: 1vw 2vw;
-    font-size: 4vw;
+    font-size: 3vw;
   }
   button {
     padding: 2vw 4vw;

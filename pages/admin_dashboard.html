@@ -30,119 +30,149 @@
           <canvas id="classReportChart"></canvas>
         </div>
       </section>
+      <div class="sec">
+        <div class="sec1">
+          <section class="users" id="utilizatori">
+            <h2>Utilizatori</h2>
+            <table id="userTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Email Utilizator</th>
+                  <th>Actiuni</th>
+                </tr>
+              </thead>
+              <tbody id="listaUseri">
+                {% for user in users %}
+                <tr>
+                  <td>{{ user[0] }}</td>
+                  <td>{{ user[2] }}</td>
+                  <td>
+                    <button
+                      class="viewBtn"
+                      onclick="{handleViewUser('{{ user[0] }}')}"
+                    >
+                      Vizualizeaza
+                    </button>
+                    <button
+                      class="deleteBtn"
+                      onclick="{handleDeleteUser('{{ user[0] }}')}"
+                    >
+                      Sterge
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button id="addUserBtn" onclick="{handleAddUser()}">
+              Adauga Utilizator
+            </button>
+          </section>
 
-      <section class="users" id="utilizatori">
-        <h2>Utilizatori</h2>
-        <table id="userTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Email Utilizator</th>
-              <th>Actiuni</th>
-            </tr>
-          </thead>
-          <tbody id="listaUseri">
-            {% for user in users %}
-            <tr>
-              <td>{{ user[0] }}</td>
-              <td>{{ user[2] }}</td>
-              <td>
-                <button
-                  class="viewBtn"
-                  onclick="{handleViewUser('{{ user[0] }}')}"
-                >
-                  Vizualizeaza
-                </button>
-                <button
-                  class="deleteBtn"
-                  onclick="{handleDeleteUser('{{ user[0] }}')}"
-                >
-                  Sterge
-                </button>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <button id="addUserBtn" onclick="{handleAddUser()}">
-          Adauga Utilizator
-        </button>
-      </section>
+          <section class="problems" id="probleme">
+            <h2>Probleme</h2>
+            <table id="problemTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nume Problema</th>
+                  <th>Actiuni</th>
+                </tr>
+              </thead>
+              <tbody id="listaProbleme">
+                {% for problem in problems %}
+                <tr>
+                  <td>{{ problem[0] }}</td>
+                  <td>{{ problem[1] }}</td>
+                  <td>
+                    <button
+                      class="viewBtn"
+                      onclick="{handleViewProblem('{{ problem[0] }}')}"
+                    >
+                      Vizualizeaza
+                    </button>
+                    <button
+                      class="deleteBtn"
+                      onclick="{handleDeleteProblem('{{ problem[0] }}')}"
+                    >
+                      Sterge
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button id="addProblemBtn" onclick="{handleAddProblem()}">
+              Adauga Problema
+            </button>
+          </section>
+        </div>
+        <div class="sec2">
+          <section class="classes" id="clase">
+            <h2>Clase</h2>
+            <table id="classTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nume Clasa</th>
+                  <th>Actiuni</th>
+                </tr>
+              </thead>
+              <tbody id="listaClase">
+                {% for class in classes %}
+                <tr>
+                  <td>{{ class[0] }}</td>
+                  <td>{{ class[1] }}</td>
+                  <td>
+                    <button
+                      class="deleteBtn"
+                      onclick="{handleDeleteClass('{{ class[0] }}')}"
+                    >
+                      Sterge
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button id="addClassBtn" onclick="{handleAddClass()}">
+              Adauga Clasa
+            </button>
+          </section>
 
-      <section class="problems" id="probleme">
-        <h2>Probleme</h2>
-        <table id="problemTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nume Problema</th>
-              <th>Actiuni</th>
-            </tr>
-          </thead>
-          <tbody id="listaProbleme">
+          <section class="problems">
+            <h2>Probleme neconfirmate</h2>
             {% for problem in problems %}
-            <tr>
-              <td>{{ problem[0] }}</td>
-              <td>{{ problem[1] }}</td>
-              <td>
-                <button
-                  class="viewBtn"
-                  onclick="{handleViewProblem('{{ problem[0] }}')}"
-                >
-                  Vizualizeaza
-                </button>
-                <button
-                  class="deleteBtn"
-                  onclick="{handleDeleteProblem('{{ problem[0] }}')}"
-                >
-                  Sterge
-                </button>
-              </td>
-            </tr>
+            <div class="problem">
+              <div class="labelProblem">
+                <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
+                <p>Dificultate: {{problem[3]}}</p>
+                <p>Categorie: {{problem[4]}}</p>
+              </div>
+              <button
+                class="solve-btn"
+                onclick="viewProblem('{{ problem[0] }}')"
+              >
+                Vezi
+              </button>
+              <button
+                class="viewBtn"
+                onclick="confirmProblem('{{ problem[0] }}')"
+              >
+                Confirma
+              </button>
+              <button
+                class="deleteBtn"
+                onclick="deleteProblem('{{ problem[0] }}')"
+              >
+                Sterge
+              </button>
+            </div>
             {% endfor %}
-          </tbody>
-        </table>
-        <button id="addProblemBtn" onclick="{handleAddProblem()}">
-          Adauga Problema
-        </button>
-      </section>
-
-      <section class="classes" id="clase">
-        <h2>Clase</h2>
-        <table id="classTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nume Clasa</th>
-              <th>Actiuni</th>
-            </tr>
-          </thead>
-          <tbody id="listaClase">
-            {% for class in classes %}
-            <tr>
-              <td>{{ class[0] }}</td>
-              <td>{{ class[1] }}</td>
-              <td>
-                <button
-                  class="deleteBtn"
-                  onclick="{handleDeleteClass('{{ class[0] }}')}"
-                >
-                  Sterge
-                </button>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <button id="addClassBtn" onclick="{handleAddClass()}">
-          Adauga Clasa
-        </button>
-      </section>
-
-      <section class="recent-activity">
-        <h2>Activitate recenta</h2>
-        <ul id="recentActivity"></ul>
-      </section>
+          </section>
+        </div>
+      </div>
     </main>
 
     <footer>

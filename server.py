@@ -33,11 +33,12 @@ def student_dashboard():
 @app.route('/pages/teacher_dashboard.html')
 def teacher_dashboard():
     classes = get_classes()
-    return render_template('pages/teacher_dashboard.html', classes=classes)
+    problems=get_problems_unverified();
+    return render_template('pages/teacher_dashboard.html', classes=classes,problems=problems)
 
 @app.route('/pages/admin_dashboard.html')
 def admin_dashboard():
-    problems = get_problems()
+    problems = get_problems_unverified()
     users = get_users()
     classes = get_classes()
     return render_template('pages/admin_dashboard.html', problems=problems, users=users, classes=classes)
@@ -63,11 +64,32 @@ def get_users():
 
 @app.route('/api/problems')
 def get_problems():
-    return query_db('SELECT * FROM Problems;')
+    return query_db('SELECT * FROM Problems where verified=1;')
 
-@app.route('/api/recentActivity')
-def recentActivity():
-    return query_db('SELECT * FROM RecentActivity ORDER BY description DESC LIMIT 3;')
+@app.route('/api/problemsUnverified')
+def get_problems_unverified():
+    return query_db('SELECT * FROM Problems where verified=0;')
+
+@app.route('/api/getProblemCode', methods=['POST'])
+def getProblemCode():
+    data = request.json
+    id_user = data.get('id_user')
+    id_problema = data.get('id_problema')
+    result = query_db('SELECT cod FROM attempts WHERE id_user = ? AND id_problema = ?', [id_user, id_problema])
+    if result:
+        return jsonify({'code': result})
+    else:
+        return jsonify({'error': 'No code found'}), 404
+    
+
+@app.route('/api/getComments', methods=['POST'])
+def get_comments_for_problem():
+    data = request.json
+    problem_id=data.get('id_problem')
+    query = "SELECT * FROM Comments WHERE id_problem = ?"
+    comments = query_db(query, (problem_id,))
+    return jsonify(comments)
+
 
 @app.route('/api/studentAttempts', methods=['POST'])
 def get_student_attempts():
@@ -97,9 +119,17 @@ def query_db(query, args=(), one=False):
 @app.route('/addProblem', methods=['POST'])
 def addProblem():
     return modify_db(
-        "INSERT INTO Problems (id, titlu, descriere, dificultate, categorie) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO Problems (id, titlu, descriere, dificultate, categorie,verified) VALUES (?, ?, ?, ?, ?,0)",
         "Problema cu ID-ul: {} a fost adaugata.",
         ('ID', 'numeProblema', 'descriere', 'dificultate', 'categorie')
+    )
+
+@app.route('/addComment', methods=['POST'])
+def addComment():
+    return modify_db(
+        "INSERT INTO Comments (content, id_user,id_problem) VALUES (?, ?, ?)",
+        "Comentariul a fost adaugat.",
+        ('content', 'id_user', 'id_problem')
     )
 
 @app.route('/addStudentToClass', methods=['POST'])
@@ -211,8 +241,6 @@ def modify_db(query, log_message, fields):
     cursor = conn.cursor()
     values = tuple(data.get(field) for field in fields)
     cursor.execute(query, values)
-    cursor.execute("INSERT INTO recentActivity (description) VALUES (?)", (log_message.format(values[0]),))
-    cursor.execute("DELETE FROM recentActivity WHERE rowid NOT IN (SELECT rowid FROM recentActivity ORDER BY rowid DESC LIMIT 3)")
     conn.commit()
     conn.close()
     return jsonify({'message': 'Operațiune reușită!'})

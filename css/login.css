@@ -36,10 +36,15 @@ body {
 .form-group input {
   width: 450px;
   padding: 15px;
-  border: 2px solid whitesmoke;
-  border-radius: 3px;
+  border: 1px solid rgb(117, 184, 255);
+  border-radius: 5px;
   font-size: 16px;
+  background-color: whitesmoke;
 }
+.form-group input:focus {
+  outline: 2px solid #007bff;
+}
+
 .form-group input::placeholder {
   color: rgb(206, 206, 206);
   font-size: 16px;

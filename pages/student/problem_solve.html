@@ -26,8 +26,8 @@
 
     <main>
       <div class="container">
+        <h2 id="titlu">Problema 1</h2>
         <section class="problem">
-          <h2 id="titlu">Problema 1</h2>
           <p id="descriere">Descrierea problemei...</p>
           <form action="#" method="post" id="solutionForm">
             <label for="solution">Solutia ta:</label><br />
@@ -45,6 +45,28 @@
             </div>
             <button type="submit">Trimite solutia</button>
           </form>
+        </section>
+        <section class="comms">
+          <div class="addComm">
+            <h2>Adauga comentariu</h2>
+            <section class="comment">
+              <form id="commentForm">
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="10"
+                  required
+                ></textarea>
+                <button type="button" onclick="{handleAddComment()}">
+                  Trimite comentariul
+                </button>
+              </form>
+            </section>
+          </div>
+          <div class="viewComm">
+            <h2>Comentarii</h2>
+            <section class="comments" id="comentarii"></section>
+          </div>
         </section>
       </div>
     </main>

@@ -1,19 +1,4 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const recentActivityList = document.getElementById("recentActivity");
-
-  fetch("/api/recentActivity")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((activity) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = activity;
-        recentActivityList.appendChild(listItem);
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching recent activity:", error);
-    });
-
   // Grafic pentru probleme
   var problemCanvas = document.getElementById("problemChart");
   var problemCtx = problemCanvas.getContext("2d");
