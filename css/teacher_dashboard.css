@@ -146,12 +146,6 @@ main {
   margin-left: 10px;
 }
 
-.addProblemHeader {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 .addProblemHeader label {
   margin-right: 20px;
   font-size: 14px;
@@ -211,7 +205,7 @@ main {
   display: block;
   margin-bottom: 5px;
   font-size: 18px;
-  color: gray;
+  color: rgb(173, 173, 173);
 }
 
 #addClassForm input[type="text"] {
@@ -258,7 +252,7 @@ main {
 #createClassForm label {
   display: block;
   margin-bottom: 5px;
-  color: gray;
+  color: rgb(173, 173, 173);
   font-size: 18px;
 }
 
@@ -281,11 +275,25 @@ main {
   border-radius: 4px;
   cursor: pointer;
   font-size: 18px;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 #createClassForm button:hover {
   background-color: #0056b3;
+}
+
+.addHeaders {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.addProblemHeader {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .edit {
@@ -333,7 +341,16 @@ th {
   font-size: 18px;
 }
 
+@media all and (max-width: 1300px) {
+  .addHeaders {
+    flex-direction: column;
+  }
+}
 @media all and (max-width: 768px) {
+  #difficulty option {
+    font-size: 12px;
+    padding: 5px;
+  }
   main {
     padding: 15px;
   }
@@ -423,6 +440,11 @@ th {
   .deleteBtn {
     font-size: 14px;
     padding: 5px 10px;
+  }
+}
+@media all and (max-width: 600px) {
+  .addHeaders {
+    flex-direction: column;
   }
 }
 @media all and (max-width: 360px) {

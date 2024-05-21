@@ -66,8 +66,11 @@
             <h3>Creare clasa</h3>
             <label for="className">Nume clasa:</label>
             <input type="text" id="className" name="className" required />
-            <label for="classID">ID clasa:</label>
-            <input type="text" id="classID" name="classID" required />
+            <label for="classID">Ofera un nume sugestiv clasei tale.</label>
+            <label for="classID"
+              >*ID-ul clasei este generat ca si urmatorul numar dupa cel mai
+              mare*</label
+            >
             <button type="submit" onclick="{handleAddClass()}">
               Creaza clasa
             </button>
@@ -77,21 +80,21 @@
       <section class="add-problem">
         <h2>Adaugare problema</h2>
         <form id="addProblemForm">
-          <div class="addProblemHeader">
-            <label for="problemID">ID problema:</label>
-            <input type="text" id="problemID" name="problemID" required />
-            <label for="problemName">Nume problema:</label>
-            <input type="text" id="problemName" name="problemName" required />
-          </div>
-          <div class="addProblemHeader">
-            <label for="category">Categorie problema:</label>
-            <input type="text" id="category" name="category" required />
-            <label for="difficulty">Dificultate:</label>
-            <select id="difficulty" name="difficulty" required>
-              <option value="usor">Usor</option>
-              <option value="mediu">Mediu</option>
-              <option value="dificil">Dificil</option>
-            </select>
+          <div class="addHeaders">
+            <div class="addProblemHeader">
+              <label for="problemName">Nume problema:</label>
+              <input type="text" id="problemName" name="problemName" required />
+              <label for="category">Categorie problema:</label>
+              <input type="text" id="category" name="category" required />
+            </div>
+            <div class="addProblemHeader">
+              <label for="difficulty">Dificultate:</label>
+              <select id="difficulty" name="difficulty" required>
+                <option value="usor">Usor</option>
+                <option value="mediu">Mediu</option>
+                <option value="dificil">Dificil</option>
+              </select>
+            </div>
           </div>
           <label for="description"><h3>Descriere:</h3></label>
           <textarea
@@ -104,15 +107,6 @@
             Trimite problema
           </button>
         </form>
-      </section>
-
-      <section class="recent-activity" id="recent">
-        <h2>Activitate recenta</h2>
-        <ul>
-          <li>Clasa X a fost creata</li>
-          <li>Problema #3 a fost atribuita clasei Y</li>
-          <li>Raport nou primit de la elevul Z</li>
-        </ul>
       </section>
     </main>
 

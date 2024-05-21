@@ -42,28 +42,7 @@
                   <th>Actiuni</th>
                 </tr>
               </thead>
-              <tbody id="listaUseri">
-                {% for user in users %}
-                <tr>
-                  <td>{{ user[0] }}</td>
-                  <td>{{ user[2] }}</td>
-                  <td>
-                    <button
-                      class="viewBtn"
-                      onclick="{handleViewUser('{{ user[0] }}')}"
-                    >
-                      Vizualizeaza
-                    </button>
-                    <button
-                      class="deleteBtn"
-                      onclick="{handleDeleteUser('{{ user[0] }}')}"
-                    >
-                      Sterge
-                    </button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              <tbody id="listaUseri"></tbody>
             </table>
             <button id="addUserBtn" onclick="{handleAddUser()}">
               Adauga Utilizator
@@ -71,7 +50,7 @@
           </section>
 
           <section class="problems" id="probleme">
-            <h2>Probleme</h2>
+            <h2>Probleme verificate</h2>
             <table id="problemTable">
               <thead>
                 <tr>
@@ -80,28 +59,7 @@
                   <th>Actiuni</th>
                 </tr>
               </thead>
-              <tbody id="listaProbleme">
-                {% for problem in problems %}
-                <tr>
-                  <td>{{ problem[0] }}</td>
-                  <td>{{ problem[1] }}</td>
-                  <td>
-                    <button
-                      class="viewBtn"
-                      onclick="{handleViewProblem('{{ problem[0] }}')}"
-                    >
-                      Vizualizeaza
-                    </button>
-                    <button
-                      class="deleteBtn"
-                      onclick="{handleDeleteProblem('{{ problem[0] }}')}"
-                    >
-                      Sterge
-                    </button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              <tbody id="listaProbleme"></tbody>
             </table>
             <button id="addProblemBtn" onclick="{handleAddProblem()}">
               Adauga Problema
@@ -119,57 +77,15 @@
                   <th>Actiuni</th>
                 </tr>
               </thead>
-              <tbody id="listaClase">
-                {% for class in classes %}
-                <tr>
-                  <td>{{ class[0] }}</td>
-                  <td>{{ class[1] }}</td>
-                  <td>
-                    <button
-                      class="deleteBtn"
-                      onclick="{handleDeleteClass('{{ class[0] }}')}"
-                    >
-                      Sterge
-                    </button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              <tbody id="listaClase"></tbody>
             </table>
             <button id="addClassBtn" onclick="{handleAddClass()}">
               Adauga Clasa
             </button>
           </section>
 
-          <section class="problems">
-            <h2>Probleme neconfirmate</h2>
-            {% for problem in problems %}
-            <div class="problem">
-              <div class="labelProblem">
-                <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
-                <p>Dificultate: {{problem[3]}}</p>
-                <p>Categorie: {{problem[4]}}</p>
-              </div>
-              <button
-                class="solve-btn"
-                onclick="viewProblem('{{ problem[0] }}')"
-              >
-                Vezi
-              </button>
-              <button
-                class="viewBtn"
-                onclick="confirmProblem('{{ problem[0] }}')"
-              >
-                Confirma
-              </button>
-              <button
-                class="deleteBtn"
-                onclick="deleteProblem('{{ problem[0] }}')"
-              >
-                Sterge
-              </button>
-            </div>
-            {% endfor %}
+          <section id="problems">
+            <h2>Probleme neverificate</h2>
           </section>
         </div>
       </div>

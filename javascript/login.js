@@ -7,7 +7,7 @@ document
     var password = document.getElementById("password").value;
 
     if (email == "admin" && password == "admin") {
-      window.location.href = "admin_dashboard.html";
+      window.location.href = "/pages/admin_dashboard.html";
     } else {
       checkUser(email, password)
         .then((result) => {
@@ -18,9 +18,9 @@ document
             if (result.role == "student") {
               window.location.href = "/pages/student/student_dashboard.html";
             } else if (result.role == "teacher") {
-              window.location.href = "teacher_dashboard.html";
+              window.location.href = "/pages/teacher_dashboard.html";
             } else if (result.role == "admin") {
-              window.location.href = "admin_dashboard.html";
+              window.location.href = "/pages/admin_dashboard.html";
             }
           }
         })
@@ -29,17 +29,20 @@ document
         });
     }
   });
+
 function checkUser(email, password) {
   return new Promise((resolve, reject) => {
-    fetch("/api/users")
+    fetch("/api/users") // Change to match your route
       .then((response) => response.json())
       .then((data) => {
         let userID = null;
         let role = null;
         const exists = data.some((user) => {
-          if (user[2] === email && user[3] === password) {
-            userID = user[0];
-            role = user[4];
+          console.log(user.email);
+          if (user.email === email && user.password === password) {
+            // Assuming email and password are in the JSON response
+            userID = user.id;
+            role = user.role;
             return true;
           }
           return false;

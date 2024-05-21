@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  getUsers();
+  getVerifiedProblems();
+  getUnverifiedProblems();
+  getClasses();
+
   // Grafic pentru probleme
   var problemCanvas = document.getElementById("problemChart");
   var problemCtx = problemCanvas.getContext("2d");
@@ -33,14 +38,220 @@ document.addEventListener("DOMContentLoaded", async function () {
   );
 });
 
+function getUsers() {
+  fetch("/api/users")
+    .then((response) => response.json())
+    .then((data) => {
+      injectUsersIntoTable(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching users:", error);
+    });
+}
+
+function getVerifiedProblems() {
+  fetch("/api/verifiedProblems")
+    .then((response) => response.json())
+    .then((data) => {
+      injectVerifiedProblemsIntoTable(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching problems:", error);
+    });
+}
+
+function getUnverifiedProblems() {
+  fetch("/api/unverifiedProblems")
+    .then((response) => response.json())
+    .then((data) => {
+      injectUnverifiedProblemsIntoTable(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching problems:", error);
+    });
+}
+
+function getClasses() {
+  fetch("/api/classes")
+    .then((response) => response.json())
+    .then((data) => {
+      injectClassesIntoTable(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching problems:", error);
+    });
+}
+
+function injectUsersIntoTable(users) {
+  const tableBody = document.getElementById("listaUseri");
+
+  users.forEach((user) => {
+    const row = document.createElement("tr");
+
+    const idCell = document.createElement("td");
+    idCell.textContent = user.id;
+
+    const emailCell = document.createElement("td");
+    emailCell.textContent = user.email;
+
+    const actionCell = document.createElement("td");
+
+    const viewButton = document.createElement("button");
+    viewButton.textContent = "Vizualizeaza";
+    viewButton.classList.add("viewBtn");
+    viewButton.addEventListener("click", function () {
+      handleViewUser(user.id);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Sterge";
+    deleteButton.classList.add("deleteBtn");
+    deleteButton.addEventListener("click", function () {
+      handleDeleteUser(user.id);
+    });
+
+    actionCell.appendChild(viewButton);
+    actionCell.appendChild(deleteButton);
+
+    row.appendChild(idCell);
+    row.appendChild(emailCell);
+    row.appendChild(actionCell);
+
+    tableBody.appendChild(row);
+  });
+}
+
+function injectVerifiedProblemsIntoTable(problems) {
+  const tableBody = document.getElementById("listaProbleme");
+
+  problems.forEach((problem) => {
+    const row = document.createElement("tr");
+
+    const idCell = document.createElement("td");
+    idCell.textContent = problem.id;
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = problem.titlu;
+
+    const actionCell = document.createElement("td");
+
+    const viewButton = document.createElement("button");
+    viewButton.textContent = "Vizualizeaza";
+    viewButton.classList.add("viewBtn");
+    viewButton.addEventListener("click", function () {
+      handleViewProblem(problem.id);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Sterge";
+    deleteButton.classList.add("deleteBtn");
+    deleteButton.addEventListener("click", function () {
+      handleDeleteProblem(problem.id);
+    });
+
+    actionCell.appendChild(viewButton);
+    actionCell.appendChild(deleteButton);
+
+    row.appendChild(idCell);
+    row.appendChild(nameCell);
+    row.appendChild(actionCell);
+
+    tableBody.appendChild(row);
+  });
+}
+
+function injectUnverifiedProblemsIntoTable(problems) {
+  const container = document.getElementById("problems");
+
+  problems.forEach((problem) => {
+    const problemDiv = document.createElement("div");
+    problemDiv.classList.add("problem");
+
+    const labelProblemDiv = document.createElement("div");
+    labelProblemDiv.classList.add("labelProblem");
+
+    const titleHeader = document.createElement("h3");
+    titleHeader.textContent = `${problem.titlu} [${problem.id}]`;
+
+    const difficultyParagraph = document.createElement("p");
+    difficultyParagraph.textContent = `Dificultate: ${problem.dificultate}`;
+
+    const categoryParagraph = document.createElement("p");
+    categoryParagraph.textContent = `Categorie: ${problem.categorie}`;
+
+    labelProblemDiv.appendChild(titleHeader);
+    labelProblemDiv.appendChild(difficultyParagraph);
+    labelProblemDiv.appendChild(categoryParagraph);
+
+    const viewButton = document.createElement("button");
+    viewButton.textContent = "Vezi";
+    viewButton.classList.add("solve-btn");
+    viewButton.addEventListener("click", function () {
+      handleViewProblem(problem.id);
+    });
+
+    const confirmButton = document.createElement("button");
+    confirmButton.textContent = "Confirma";
+    confirmButton.classList.add("viewBtn");
+    confirmButton.addEventListener("click", function () {
+      confirmProblem(problem[0]);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Sterge";
+    deleteButton.classList.add("deleteBtn");
+    deleteButton.addEventListener("click", function () {
+      handleDeleteProblem(problem.id);
+    });
+
+    problemDiv.appendChild(labelProblemDiv);
+    problemDiv.appendChild(viewButton);
+    problemDiv.appendChild(confirmButton);
+    problemDiv.appendChild(deleteButton);
+
+    container.appendChild(problemDiv);
+  });
+}
+
+function injectClassesIntoTable(classes) {
+  const tableBody = document.getElementById("listaClase");
+
+  classes.forEach((clas) => {
+    const row = document.createElement("tr");
+
+    const idCell = document.createElement("td");
+    idCell.textContent = clas.id;
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = clas.nume;
+
+    const actionCell = document.createElement("td");
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Sterge";
+    deleteButton.classList.add("deleteBtn");
+    deleteButton.addEventListener("click", function () {
+      handleDeleteClass(clas.id);
+    });
+
+    actionCell.appendChild(deleteButton);
+
+    row.appendChild(idCell);
+    row.appendChild(nameCell);
+    row.appendChild(actionCell);
+
+    tableBody.appendChild(row);
+  });
+}
+
 function getNumarProbleme() {
-  return fetch("/api/problems")
+  return fetch("/api/verifiedProblems")
     .then((response) => response.json())
     .then((data) => {
       const numarProbleme = {
-        usoare: data.filter((problem) => problem[3] === "usor").length,
-        medii: data.filter((problem) => problem[3] === "mediu").length,
-        grele: data.filter((problem) => problem[3] === "greu").length,
+        usoare: data.filter((problem) => problem.dificultate === "usor").length,
+        medii: data.filter((problem) => problem.dificultate === "mediu").length,
+        grele: data.filter((problem) => problem.dificultate === "greu").length,
       };
       return numarProbleme;
     })
@@ -71,7 +282,6 @@ function getNumarClase() {
       return 0;
     });
 }
-
 function drawChart(ctx, data, colors, labels) {
   var barWidth = 70;
   var startX = 20;
@@ -94,7 +304,6 @@ function drawChart(ctx, data, colors, labels) {
     ctx.fillText(labels[i], legendStartX + 20, legendStartY + 10 + i * 20);
   }
 }
-
 function addUserToTable(user) {
   var table = document
     .getElementById("userTable")
@@ -108,58 +317,43 @@ function addUserToTable(user) {
     '<button class="deleteBtn">Sterge</button>';
 }
 
-document
-  .getElementById("userTable")
-  .addEventListener("click", function (event) {
-    if (event.target.classList.contains("deleteBtn")) {
-      // Butonul de stergere
-      var row = event.target.parentElement.parentElement;
-      var username = row.cells[0].textContent;
-      row.remove();
-    }
-  });
+function handleAddUser() {
+  var email = prompt("Introduce email-ul userului:");
 
-document
-  .getElementById("problemTable")
-  .addEventListener("click", function (event) {
-    if (event.target.classList.contains("deleteBtn")) {
-      // Butonul de stergere
-      var row = event.target.parentElement.parentElement;
-      var problemName = row.cells[0].textContent;
-      row.remove();
-    }
-  });
+  checkUserExists(email)
+    .then((exists) => {
+      if (!exists && email !== "" && email !== undefined) {
+        var name = prompt("Introduceti numele userului:");
+        var password = prompt("Introduce parola userului:");
+        var role = prompt("Introduce rolul userului:");
 
-document
-  .getElementById("classTable")
-  .addEventListener("click", function (event) {
-    if (event.target.classList.contains("deleteBtn")) {
-      // Butonul de stergere
-      var row = event.target.parentElement.parentElement;
-      var className = row.cells[0].textContent;
-      row.remove();
-    }
-  });
+        const data = {
+          name: name,
+          email: email,
+          password: password,
+          role: role,
+        };
 
-function handleViewProblem(problemNumber) {
-  fetch("/api/problems")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((problem) => {
-        if (problem[0] == problemNumber) {
-          alert(
-            "descriere: " +
-              problem[2] +
-              "\ndificultate: " +
-              problem[3] +
-              "\ncategorie: " +
-              problem[4]
-          );
-        }
-      });
+        fetch("/addUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return res.json();
+          })
+          .catch((error) => {
+            console.error("Eroare la actualizare:", error);
+          });
+      }
     })
     .catch((error) => {
-      console.error("Error fetching problems:", error);
+      console.error("Error:", error);
     });
 }
 function handleViewUser(ID) {
@@ -167,14 +361,14 @@ function handleViewUser(ID) {
     .then((response) => response.json())
     .then((data) => {
       data.forEach((user) => {
-        if (user[0] == ID) {
+        if (user.id == ID) {
           alert(
             "Email: " +
-              user[2] +
+              user.email +
               "\npassword: " +
-              user[3] +
+              user.password +
               "\nrole: " +
-              user[4]
+              user.role
           );
         }
       });
@@ -183,37 +377,13 @@ function handleViewUser(ID) {
       console.error("Error fetching problems:", error);
     });
 }
-function handleDeleteProblem(ID) {
-  const data = {
-    ID: ID,
-  };
 
-  fetch("/deleteProblem", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return res.json();
-    })
-    .then((data) => {
-      console.log("Stergere reușită:", data);
-    })
-    .catch((error) => {
-      console.error("Eroare la actualizare:", error);
-    });
-}
 function handleDeleteUser(ID) {
   const data = {
     ID: ID,
   };
 
-  fetch("/deleteUser", {
+  fetch("/api/deleteUser", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -233,12 +403,50 @@ function handleDeleteUser(ID) {
       console.error("Eroare la actualizare:", error);
     });
 }
-function handleDeleteClass(ID) {
+
+function checkUserExists(email) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/users")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some((user) => user.email == email);
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking user:", error);
+        reject(error);
+      });
+  });
+}
+
+function handleViewProblem(problemNumber) {
+  fetch("/api/problems")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((problem) => {
+        if (problem.id == problemNumber) {
+          alert(
+            "descriere: " +
+              problem.descriere +
+              "\ndificultate: " +
+              problem.dificultate +
+              "\ncategorie: " +
+              problem.categorie
+          );
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching problems:", error);
+    });
+}
+
+function handleDeleteProblem(ID) {
   const data = {
     ID: ID,
   };
 
-  fetch("/deleteClass", {
+  fetch("/api/deleteProblem", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -279,8 +487,9 @@ function handleAddProblem() {
           dificultate: dificultate,
           categorie: categorie,
         };
+        console.log(data);
 
-        fetch("/addProblem", {
+        fetch("/api/addProblem", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -293,9 +502,6 @@ function handleAddProblem() {
             }
             return res.json();
           })
-          .then((data) => {
-            getProblems();
-          })
           .catch((error) => {
             console.error("Eroare la actualizare:", error);
           });
@@ -305,6 +511,70 @@ function handleAddProblem() {
       console.error("Error:", error);
     });
 }
+
+function checkProblemExists(problemNumber) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/problems")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some((problem) => problem.id == problemNumber);
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking problem:", error);
+        reject(error);
+      });
+  });
+}
+
+document
+  .getElementById("userTable")
+  .addEventListener("click", function (event) {
+    if (event.target.classList.contains("deleteBtn")) {
+      // Butonul de stergere
+      var row = event.target.parentElement.parentElement;
+      var username = row.cells[0].textContent;
+      row.remove();
+    }
+  });
+
+document
+  .getElementById("problemTable")
+  .addEventListener("click", function (event) {
+    if (event.target.classList.contains("deleteBtn")) {
+      // Butonul de stergere
+      var row = event.target.parentElement.parentElement;
+      var problemName = row.cells[0].textContent;
+      row.remove();
+    }
+  });
+
+document
+  .getElementById("classTable")
+  .addEventListener("click", function (event) {
+    if (event.target.classList.contains("deleteBtn")) {
+      // Butonul de stergere
+      var row = event.target.parentElement.parentElement;
+      var className = row.cells[0].textContent;
+      row.remove();
+    }
+  });
+
+function checkClassExists(ID) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/classes")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some((clas) => clas.id == ID);
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking problem:", error);
+        reject(error);
+      });
+  });
+}
+
 function handleAddClass() {
   var ID = prompt("Introduceti id-ul clasei:");
 
@@ -331,9 +601,6 @@ function handleAddClass() {
             }
             return res.json();
           })
-          .then((data) => {
-            getClasses();
-          })
           .catch((error) => {
             console.error("Eroare la actualizare:", error);
           });
@@ -344,240 +611,28 @@ function handleAddClass() {
     });
 }
 
-function handleAddUser() {
-  var ID = prompt("Introduceti id-ul userului:");
-  var email = prompt("Introduce email-ul userului:");
+function handleDeleteClass(ID) {
+  const data = {
+    ID: ID,
+  };
 
-  checkUserExists(ID, email)
-    .then((exists) => {
-      if (
-        !isNaN(ID) &&
-        ID !== "" &&
-        ID !== undefined &&
-        !exists &&
-        email !== "" &&
-        email !== undefined
-      ) {
-        var name = prompt("Introduceti numele userului:");
-        var password = prompt("Introduce parola userului:");
-        var role = prompt("Introduce rolul userului:");
-
-        const data = {
-          ID: ID,
-          name: name,
-          email: email,
-          password: password,
-          role: role,
-        };
-
-        fetch("/addUser", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return res.json();
-          })
-          .then((data) => {
-            getUsers();
-          })
-          .catch((error) => {
-            console.error("Eroare la actualizare:", error);
-          });
+  fetch("/api/deleteClass", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
       }
+      return res.json();
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-function getClasses() {
-  fetch("/api/classes")
-    .then((response) => response.json())
     .then((data) => {
-      displayClasses(data);
+      console.log("Stergere reușită:", data);
     })
     .catch((error) => {
-      console.error("Error fetching problems:", error);
+      console.error("Eroare la actualizare:", error);
     });
-}
-function getProblems() {
-  fetch("/api/problems")
-    .then((response) => response.json())
-    .then((data) => {
-      displayProblems(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching problems:", error);
-    });
-}
-function getUsers() {
-  fetch("/api/users")
-    .then((response) => response.json())
-    .then((data) => {
-      displayUsers(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching users:", error);
-    });
-}
-function displayClasses(clas) {
-  const container = document.getElementById("listaClase");
-
-  container.textContent = "";
-
-  clas.forEach((clas) => {
-    const classRow = document.createElement("tr");
-
-    const titleCell1 = document.createElement("td");
-    titleCell1.textContent = clas[0];
-
-    const titleCell2 = document.createElement("td");
-    titleCell2.textContent = clas[1];
-
-    classRow.appendChild(titleCell1);
-    classRow.appendChild(titleCell2);
-
-    const actionCell = document.createElement("td");
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("deleteBtn");
-    deleteButton.textContent = "Sterge";
-    deleteButton.onclick = function () {
-      handleDeleteClass(clas[0]);
-    };
-
-    actionCell.appendChild(deleteButton);
-
-    classRow.appendChild(actionCell);
-
-    container.appendChild(classRow);
-  });
-}
-function displayProblems(problems) {
-  const container = document.getElementById("listaProbleme");
-
-  container.textContent = "";
-
-  problems.forEach((problem) => {
-    const problemRow = document.createElement("tr");
-
-    const titleCell1 = document.createElement("td");
-    titleCell1.textContent = problem[0];
-
-    const titleCell2 = document.createElement("td");
-    titleCell2.textContent = problem[1];
-
-    problemRow.appendChild(titleCell1);
-    problemRow.appendChild(titleCell2);
-
-    const actionCell = document.createElement("td");
-    const viewButton = document.createElement("button");
-    viewButton.classList.add("viewBtn");
-    viewButton.textContent = "Vizualizeaza";
-    viewButton.onclick = function () {
-      handleViewProblem(problem[0]);
-    };
-    actionCell.appendChild(viewButton);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("deleteBtn");
-    deleteButton.textContent = "Sterge";
-    deleteButton.onclick = function () {
-      handleDeleteProblem(problem[0]);
-    };
-
-    actionCell.appendChild(deleteButton);
-
-    problemRow.appendChild(actionCell);
-
-    container.appendChild(problemRow);
-  });
-}
-function displayUsers(users) {
-  const container = document.getElementById("listaUseri");
-
-  container.textContent = "";
-
-  users.forEach((user) => {
-    const userRow = document.createElement("tr");
-
-    const titleCell1 = document.createElement("td");
-    titleCell1.textContent = user[0];
-
-    const titleCell2 = document.createElement("td");
-    titleCell2.textContent = user[2];
-
-    userRow.appendChild(titleCell1);
-    userRow.appendChild(titleCell2);
-
-    const actionCell = document.createElement("td");
-    const viewButton = document.createElement("button");
-    viewButton.classList.add("viewBtn");
-    viewButton.textContent = "Vizualizeaza";
-    viewButton.onclick = function () {
-      handleViewUser(user[0]);
-    };
-    actionCell.appendChild(viewButton);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("deleteBtn");
-    deleteButton.textContent = "Sterge";
-    deleteButton.onclick = function () {
-      handleDeleteUser(user[0]);
-    };
-
-    actionCell.appendChild(deleteButton);
-
-    userRow.appendChild(actionCell);
-
-    container.appendChild(userRow);
-  });
-}
-function checkProblemExists(problemNumber) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/problems")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some((problem) => problem[0] == problemNumber);
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking problem:", error);
-        reject(error);
-      });
-  });
-}
-function checkClassExists(ID) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/classes")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some((clas) => clas[0] == ID);
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking problem:", error);
-        reject(error);
-      });
-  });
-}
-function checkUserExists(ID, email) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some((user) => user[0] == ID || user[2] == email);
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking user:", error);
-        reject(error);
-      });
-  });
 }

@@ -13,167 +13,99 @@ document.addEventListener("DOMContentLoaded", function () {
 
   createClassForm.addEventListener("submit", function (event) {
     event.preventDefault();
-
-    var className = document.getElementById("className").value;
-
-    // crearea clasei, trimitere la server...
-
-    //alert('Clasa cu numele: "' + className + '" a fost creata.');
   });
 });
 
-function handleAddProblem() {
-  var ID = document.getElementById("problemID").value;
-
-  checkProblemExists(ID)
-    .then((exists) => {
-      if (!isNaN(ID) && ID !== "" && ID !== undefined && !exists) {
-        var numeProblema = document.getElementById("problemName").value;
-        var descriere = document.getElementById("description").value;
-        var dificultate = document.getElementById("difficulty").value;
-        var categorie = document.getElementById("category").value;
-        document.getElementById("addProblemForm").reset();
-
-        const data = {
-          ID: ID,
-          numeProblema: numeProblema,
-          descriere: descriere,
-          dificultate: dificultate,
-          categorie: categorie,
-        };
-
-        fetch("/addProblem", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => {
-            alert("Problema trimisa.");
-            if (!res.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return res.json();
-          })
-          .catch((error) => {
-            console.error("Eroare la actualizare:", error);
-          });
-      } else {
-        alert("ID exista deja / ID trebuie sa fie un numar.");
-        document.getElementById("addProblemForm").reset();
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-function checkProblemExists(problemNumber) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/problems")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some((problem) => problem[0] == problemNumber);
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking problem:", error);
-        reject(error);
-      });
-  });
-}
-
 function handleAddClass() {
-  var ID = document.getElementById("classID").value;
   var prof_id = localStorage.getItem("ID_user");
 
-  checkClassExists(ID)
-    .then((exists) => {
-      if (!isNaN(ID) && ID !== "" && ID !== undefined && !exists) {
-        var nume = document.getElementById("className").value;
-        document.getElementById("createClassForm").reset();
+  var nume = document.getElementById("className").value;
+  document.getElementById("createClassForm").reset();
 
-        const data = {
-          ID: ID,
-          nume: nume,
-          prof_id: Number(prof_id),
-        };
+  const data = {
+    nume: nume,
+    prof_id: Number(prof_id),
+  };
 
-        fetch("/addClass", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }).then((res) => {
-          if (!res.ok) {
-            throw new Error("Network response was not ok");
-          }
-          alert('Clasa cu numele: "' + nume + '" a fost creata.');
-          return res.json();
-        });
+  fetch("/addClass", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    alert('Clasa cu numele: "' + nume + '" a fost creata.');
+    return res.json();
+  });
+  document.getElementById("createClassForm").reset();
+}
+
+function fetchStudentCounts() {
+  const prof_id = localStorage.getItem("ID_user");
+  fetch("/api/getClassStudentCounts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ prof_id: Number(prof_id) }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        alert(data.error);
       } else {
-        alert("ID exista deja.");
+        const tbody = document.querySelector("#results-table tbody");
+        tbody.innerHTML = "";
+
+        data.forEach((classInfo) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                  <td>${classInfo.id}</td>
+                  <td>${classInfo.nume}</td>
+                  <td>${classInfo.student_count}</td>
+                  <td>
+                      <button class="viewBtn" onclick="handleViewClass(${classInfo.id})">View Class</button>
+                      <button class="deleteBtn" onclick="handleDeleteClass(${classInfo.id})">Delete Class</button>
+                  </td>
+              `;
+          tbody.appendChild(row);
+        });
       }
-      document.getElementById("createClassForm").reset();
+    })
+    .catch((error) => console.error("Error:", error));
+}
+
+function handleDeleteClass(ID) {
+  const data = {
+    ID: ID,
+  };
+
+  fetch("/api/deleteClass", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Stergere reușită:", data);
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error("Eroare la actualizare:", error);
     });
 }
-function checkClassExists(ID) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/classes")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some((clas) => clas[0] == ID);
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking class:", error);
-        reject(error);
-      });
-  });
-}
 
-function checkUserExists(ID) {
-  return new Promise((resolve, reject) => {
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => {
-        const exists = data.some(
-          (user) => user[0] == ID && user[4] == "student"
-        );
-        resolve(exists);
-      })
-      .catch((error) => {
-        console.error("Error checking user:", error);
-        reject(error);
-      });
-  });
-}
-
-function checkUserClass(student_id, class_id) {
-  return new Promise((resolve, reject) => {
-    const data = { student_id: Number(student_id), class_id: class_id };
-
-    fetch("/checkUserClass", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data.exists);
-      })
-      .catch((error) => {
-        console.error("Error checking user class:", error);
-        reject(error);
-      });
-  });
+function handleViewClass(ID) {
+  window.location.href = `/pages/class.html?class=${ID}`;
 }
 
 function handleAddStudentToClass() {
@@ -192,8 +124,7 @@ function handleAddStudentToClass() {
                   student_id: Number(student_id),
                   class_id: class_id,
                 };
-
-                fetch("/addStudentToClass", {
+                fetch("/api/addStudentToClass", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -235,6 +166,60 @@ function handleAddStudentToClass() {
   });
 }
 
+function checkClassExists(ID) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/classes")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some((clas) => clas.id == ID);
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking class:", error);
+        reject(error);
+      });
+  });
+}
+
+function checkUserExists(ID) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/users")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some(
+          (user) => user.id == ID && user.role == "student"
+        );
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking user:", error);
+        reject(error);
+      });
+  });
+}
+
+function checkUserClass(student_id, class_id) {
+  return new Promise((resolve, reject) => {
+    const data = { student_id: Number(student_id), class_id: class_id };
+
+    fetch("/api/checkUserClass", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        resolve(data.exists);
+      })
+      .catch((error) => {
+        console.error("Error checking user class:", error);
+        reject(error);
+      });
+  });
+}
+
 document
   .getElementById("results-table")
   .addEventListener("click", function (event) {
@@ -244,12 +229,22 @@ document
       row.remove();
     }
   });
-function handleDeleteClass(ID) {
+
+function handleAddProblem() {
+  var numeProblema = document.getElementById("problemName").value;
+  var descriere = document.getElementById("description").value;
+  var dificultate = document.getElementById("difficulty").value;
+  var categorie = document.getElementById("category").value;
+  document.getElementById("addProblemForm").reset();
+
   const data = {
-    ID: ID,
+    numeProblema: numeProblema,
+    descriere: descriere,
+    dificultate: dificultate,
+    categorie: categorie,
   };
 
-  fetch("/deleteClass", {
+  fetch("/api/addProblem", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -257,52 +252,28 @@ function handleDeleteClass(ID) {
     body: JSON.stringify(data),
   })
     .then((res) => {
+      alert("Problema trimisa pentru evaluare.");
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
       return res.json();
     })
-    .then((data) => {
-      console.log("Stergere reușită:", data);
-    })
     .catch((error) => {
       console.error("Eroare la actualizare:", error);
     });
 }
-function fetchStudentCounts() {
-  const profId = localStorage.getItem("ID_user");
-  fetch("/api/classStudentCounts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prof_id: Number(profId) }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.error) {
-        alert(data.error);
-      } else {
-        const tbody = document.querySelector("#results-table tbody");
-        tbody.innerHTML = "";
 
-        data.forEach((classInfo) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-                  <td>${classInfo.id}</td>
-                  <td>${classInfo.name}</td>
-                  <td>${classInfo.student_count}</td>
-                  <td>
-                      <button class="viewBtn" onclick="handleViewClass(${classInfo.id})">View Class</button>
-                      <button class="deleteBtn" onclick="handleDeleteClass(${classInfo.id})">Delete Class</button>
-                  </td>
-              `;
-          tbody.appendChild(row);
-        });
-      }
-    })
-    .catch((error) => console.error("Error:", error));
-}
-function handleViewClass(ID) {
-  window.location.href = `/pages/class.html?class=${ID}`;
+function checkProblemExists(ID) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/problems")
+      .then((response) => response.json())
+      .then((data) => {
+        const exists = data.some((problem) => problem.id == ID);
+        resolve(exists);
+      })
+      .catch((error) => {
+        console.error("Error checking problem:", error);
+        reject(error);
+      });
+  });
 }
