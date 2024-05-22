@@ -38,7 +38,6 @@ function checkUser(email, password) {
         let userID = null;
         let role = null;
         const exists = data.some((user) => {
-          console.log(user.email);
           if (user.email === email && user.password === password) {
             // Assuming email and password are in the JSON response
             userID = user.id;

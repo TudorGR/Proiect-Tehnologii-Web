@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem</title>
+    <link rel="stylesheet" href="/css/problem.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Programare pentru Liceu</h1>
+      <nav id="navigation"></nav>
+    </header>
+    <main>
+      <h2 id="studentsCount">Lista de Studenti:</h2>
+      <section class="student-list">
+        <ul id="studentsList"></ul>
+      </section>
+      <section class="problem">
+        <label for="solution">Codul trimis:</label><br />
+        <div class="text">
+          <div class="line-numbers"></div>
+          <textarea
+            oninput="updateLineNumbers();"
+            onscroll="syncScroll()"
+            id="solution"
+            name="solution"
+            rows="1"
+            cols="50"
+            readonly
+            placeholder="Codul problemelor va aparea aici."
+          ></textarea
+          ><br />
+        </div>
+      </section>
+      <section class="evaluation">
+        <label for="evaluation">Evaluare:</label><br />
+        <div class="text">
+          <textarea
+            id="evaluation"
+            name="evaluation"
+            rows="10"
+            cols="50"
+          ></textarea
+          ><br />
+        </div>
+        <button
+          type="button"
+          id="sendEvaluation"
+          onclick="handleSendEvaluation()"
+        >
+          Trimite evaluarea
+        </button>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Programare pentru liceu.</p>
+      </div>
+    </footer>
+    <script src="/javascript/problem.js"></script>
+  </body>
+</html>

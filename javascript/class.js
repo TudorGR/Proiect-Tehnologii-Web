@@ -1,20 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const queryString = window.location.search;
-  const parts = queryString.split("=");
-  const ID = parts[1];
+const urlParams = new URLSearchParams(window.location.search);
+const ID = urlParams.get("class");
+const nume = urlParams.get("nume");
 
+document.addEventListener("DOMContentLoaded", () => {
+  fetchStudentsClass(ID);
   fetchProblems("All");
   injectHomeworks(ID);
 
-  document.getElementById("classID").textContent = "Class ID: " + ID;
+  document.getElementById("classInfo").textContent =
+    "ID Clasa: " + ID + " Nume: " + nume;
 
   //crearea temei
   document
-    .getElementById("createHomeworkForm")
-    .addEventListener("submit", async function (event) {
+    .getElementById("createHwBtn")
+    .addEventListener("click", async function (event) {
       event.preventDefault();
 
-      const nume = document.getElementById("themeName").value;
+      const name = document.getElementById("homeworkName").value;
       const problemIds = document
         .getElementById("problemIds")
         .value.split(",")
@@ -34,25 +36,56 @@ document.addEventListener("DOMContentLoaded", () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              nume: nume,
+              name: name,
               problem_id: id,
               class_id: ID,
             }),
           });
 
           if (!response.ok) {
-            throw new Error("Failed to add homework");
+            throw new Error(response);
           }
 
           const result = await response.json();
-          alert(`Homework added successfully for problem with ID: ${id}`);
         } catch (error) {
           console.error("Error adding homework:", error);
-          alert("Failed to add homework for problem with ID: " + id);
+          alert("Failed to create/add (to) homework.");
         }
       }
+      injectHomeworks(ID);
     });
 });
+
+async function handleDeleteHomework(class_id, name, elementId) {
+  const data = {
+    class_id: class_id,
+    name: name,
+  };
+
+  try {
+    const response = await fetch("/api/deleteHomework", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete homework");
+    }
+
+    // Ștergerea temei din DOM
+    // const element = document.getElementById(elementId);
+    // if (element) {
+    //   element.remove();
+    // }
+    injectHomeworks(ID);
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred while deleting the homework.");
+  }
+}
 
 async function fetchHomeworks() {
   try {
@@ -68,34 +101,38 @@ async function fetchHomeworks() {
 }
 
 async function injectHomeworks(class_id) {
-  const homeworkList = document.getElementById("themesList");
+  const homeworkList = document.getElementById("homeworkList");
+  homeworkList.innerHTML = "";
   const homeworks = await fetchHomeworks();
 
   const filteredData = homeworks.filter((item) => item.class_id == class_id);
 
   const groupedByNume = filteredData.reduce((acc, cur) => {
-    if (!acc[cur.nume]) {
-      acc[cur.nume] = [];
+    if (!acc[cur.name]) {
+      acc[cur.name] = [];
     }
-    acc[cur.nume].push(cur.problem_id);
+    acc[cur.name].push(cur.problem_id);
     return acc;
   }, {});
 
-  Object.keys(groupedByNume).forEach((homework) => {
-    const homeworkTitle = document.createElement("h2");
-    homeworkTitle.textContent = `Tema: ${homework}`;
+  document.getElementById("homeworksCount").textContent = `Lista de teme: ${
+    Object.keys(groupedByNume).length
+  }`;
+
+  Object.keys(groupedByNume).forEach((homework, index) => {
+    const homeworkId = `homework-${index}`;
+
+    const homeworkTitle = document.createElement("div");
+    homeworkTitle.setAttribute("id", homeworkId);
+    homeworkTitle.innerHTML = `<p>Tema: ${homework}</p> <button id="deleteHomeworkBtn" onclick="handleDeleteHomework(${class_id}, '${homework}', '${homeworkId}')">Sterge</button>`;
     homeworkList.appendChild(homeworkTitle);
 
     const homeworkProblems = document.createElement("div");
     homeworkProblems.classList.add("homeworkProblems");
-    homeworkList.appendChild(homeworkProblems);
+    homeworkTitle.appendChild(homeworkProblems);
 
-    ////
     groupedByNume[homework].forEach((problem) => {
       const homeworkItem = document.createElement("li");
-      const itemTitle = document.createElement("h3");
-      itemTitle.textContent = problem;
-      homeworkItem.appendChild(itemTitle);
 
       // Adăugăm problemele în aceeași listă
       const exerciseItem = document.createElement("p");
@@ -103,18 +140,20 @@ async function injectHomeworks(class_id) {
       homeworkItem.appendChild(exerciseItem);
 
       const viewExerciseButton = document.createElement("button");
-      viewExerciseButton.textContent = "Vezi Exercițiu";
+      viewExerciseButton.textContent = "Vezi";
+      viewExerciseButton.classList.add("viewBtn");
       viewExerciseButton.addEventListener("click", () => {
-        // Acțiunea când se apasă butonul "Vezi Exercițiu"
-        alert(`Detalii exercițiu pentru tema: ${homework.nume}`);
-
-        ///
+        handleViewProblem(problem);
       });
       homeworkItem.appendChild(viewExerciseButton);
 
       homeworkProblems.appendChild(homeworkItem);
     });
   });
+}
+
+function handleViewProblem(problem_id) {
+  window.location.href = `/pages/problem.html?class_id=${ID}&problem_id=${problem_id}&class_name=${nume}`;
 }
 
 function checkProblemExists(ID) {
@@ -163,6 +202,10 @@ function displayProblems(problems) {
   const problemList = document.querySelector(".problem-list ul");
   problemList.innerHTML = "";
 
+  document.getElementById(
+    "problemsCount"
+  ).textContent = `Lista de probleme: ${problems.length}`;
+
   problems.forEach((problem, index) => {
     const listItem = document.createElement("li");
     listItem.id = `problem`;
@@ -172,7 +215,9 @@ function displayProblems(problems) {
     else difColor = "greu";
     listItem.innerHTML = `
         <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong> (Dificultate: ${problem.dificultate}) (Categorie: ${problem.categorie})
-        <button type="button" class="viewBtn" data-description="${problem.descriere}">View Problem</button>
+        <button id="exportCsvButton" onclick="{exportCsv(${problem.id})}">
+        Export as CSV
+      </button><button type="button" class="viewBtn" data-description="${problem.descriere}">View Problem</button>
       `;
     problemList.appendChild(listItem);
   });
@@ -199,4 +244,79 @@ function showPopup(description) {
   popup.querySelector(".close-button").addEventListener("click", () => {
     document.body.removeChild(popup);
   });
+}
+
+async function fetchStudentsClass(class_id) {
+  const data = {
+    class_id: class_id,
+  };
+  try {
+    const response = await fetch("/api/getStudentsClass", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const students = await response.json();
+    displayStudents(students);
+  } catch (error) {
+    console.error("Error fetching students:", error);
+  }
+}
+
+function displayStudents(students) {
+  const studentsList = document.getElementById("studentsList");
+  studentsList.innerHTML = "";
+  document.getElementById(
+    "studentsCount"
+  ).textContent = `Lista de Studenti: ${students.length}`;
+
+  students.forEach((student) => {
+    const liItem = document.createElement("li");
+    const listItem = document.createElement("p");
+    listItem.textContent = `ID:${student.id}`;
+    const listItem2 = document.createElement("p");
+    listItem2.textContent = `Nume:${student.name}`;
+    const listItem3 = document.createElement("p");
+    listItem3.textContent = `Email:${student.email}`;
+    liItem.appendChild(listItem);
+    liItem.appendChild(listItem2);
+    liItem.appendChild(listItem3);
+    studentsList.appendChild(liItem);
+  });
+}
+
+function exportCsv(problem_id) {
+  const data = {
+    problem_id: problem_id,
+  };
+  fetch("/api/exportProblems/csv", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "problem.csv");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
 }

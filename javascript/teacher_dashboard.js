@@ -37,7 +37,7 @@ function handleAddClass() {
     if (!res.ok) {
       throw new Error("Network response was not ok");
     }
-    alert('Clasa cu numele: "' + nume + '" a fost creata.');
+    fetchStudentCounts();
     return res.json();
   });
   document.getElementById("createClassForm").reset();
@@ -67,7 +67,7 @@ function fetchStudentCounts() {
                   <td>${classInfo.nume}</td>
                   <td>${classInfo.student_count}</td>
                   <td>
-                      <button class="viewBtn" onclick="handleViewClass(${classInfo.id})">View Class</button>
+                      <button class="viewBtn" onclick="handleViewClass(${classInfo.id},'${classInfo.nume}')">View Class</button>
                       <button class="deleteBtn" onclick="handleDeleteClass(${classInfo.id})">Delete Class</button>
                   </td>
               `;
@@ -94,6 +94,7 @@ function handleDeleteClass(ID) {
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
+      fetchStudentCounts();
       return res.json();
     })
     .then((data) => {
@@ -104,8 +105,8 @@ function handleDeleteClass(ID) {
     });
 }
 
-function handleViewClass(ID) {
-  window.location.href = `/pages/class.html?class=${ID}`;
+function handleViewClass(ID, nume) {
+  window.location.href = `/pages/class.html?class=${ID}&nume=${nume}`;
 }
 
 function handleAddStudentToClass() {
@@ -135,12 +136,8 @@ function handleAddStudentToClass() {
                     if (!res.ok) {
                       throw new Error("Network response was not ok");
                     }
+                    fetchStudentCounts();
                     return res.json();
-                  })
-                  .then(() => {
-                    alert(
-                      `Studentul cu ID-ul: ${student_id} a fost adaugat la clasa: ${class_id}`
-                    );
                   })
                   .catch((error) => {
                     console.error("Error adding student to class:", error);
@@ -219,16 +216,6 @@ function checkUserClass(student_id, class_id) {
       });
   });
 }
-
-document
-  .getElementById("results-table")
-  .addEventListener("click", function (event) {
-    if (event.target.classList.contains("deleteBtn")) {
-      // Butonul de stergere
-      var row = event.target.parentElement.parentElement;
-      row.remove();
-    }
-  });
 
 function handleAddProblem() {
   var numeProblema = document.getElementById("problemName").value;

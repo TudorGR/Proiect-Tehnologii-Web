@@ -7,6 +7,7 @@ const {
   addClass,
   deleteClass,
   getClassStudentCounts,
+  getStudentsClass,
 } = require("./controllers/classController");
 const {
   getUsers,
@@ -21,12 +22,16 @@ const {
   deleteProblem,
   getProblems,
   addProblem,
+  exportProblemsCsv,
+  getAttempts,
+  evaluateAttempt,
 } = require("./controllers/problemController");
 const { getRecentActivity } = require("./controllers/utilityController");
 const {
   addHomework,
   getHomework,
   getHomeworkForClass,
+  deleteHomework,
 } = require("./controllers/homeworkController");
 
 // Helper function to serve static files
@@ -69,18 +74,28 @@ const server = http.createServer((req, res) => {
     getHomework(req, res);
   } else if (pathname === "/api/addHomework") {
     addHomework(req, res);
+  } else if (pathname === "/api/deleteHomework") {
+    deleteHomework(req, res);
+  } else if (pathname === "/api/getStudentsClass") {
+    getStudentsClass(req, res);
   } else if (pathname === "/api/deleteClass") {
     deleteClass(req, res);
   } else if (pathname === "/api/classes") {
     getClasses(req, res);
   } else if (pathname === "/api/getClassStudentCounts") {
     getClassStudentCounts(req, res);
+  } else if (pathname === "/api/exportProblems/csv") {
+    exportProblemsCsv(req, res);
   } else if (pathname === "/api/unverifiedProblems") {
     getUnverifiedProblems(req, res);
   } else if (pathname === "/api/verifiedProblems") {
     getVerifiedProblems(req, res);
   } else if (pathname === "/api/addProblem") {
     addProblem(req, res);
+  } else if (pathname === "/api/evaluateAttempt") {
+    evaluateAttempt(req, res);
+  } else if (pathname === "/api/getAttempts") {
+    getAttempts(req, res);
   } else if (pathname === "/api/problems") {
     getProblems(req, res);
   } else if (pathname === "/api/deleteProblem") {

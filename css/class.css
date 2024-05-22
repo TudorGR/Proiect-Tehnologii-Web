@@ -15,6 +15,7 @@ main {
 
 .problem-list {
   margin-bottom: 30px;
+  flex: 1;
 }
 
 .problem-list h2 {
@@ -32,7 +33,7 @@ main {
 }
 .problem-list ul {
   height: 350px;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 0;
 }
 .problem-list ul {
@@ -55,14 +56,64 @@ main {
 .categoryLabel {
   margin-left: 10px;
 }
+#category {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 7px;
+}
+
+.student-list {
+  margin: 0px;
+  flex: 1;
+}
+
+.student-list h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.student-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sec2 {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.student-list ul li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.student-list p {
+  margin: 10px 0px;
+}
+
+.student-list ul li:hover {
+  background-color: #f1f1f1;
+}
+
+.createHomework {
+  flex: 1;
+}
 
 #createHomeworkForm {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  padding: 40px;
   background-color: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  flex: 1;
-  margin-left: 10px;
+  padding: 40px;
+  height: 300px;
 }
 
 #createHomeworkForm label {
@@ -97,13 +148,31 @@ main {
   background-color: #0056b3;
 }
 
+.homeworkWrapper {
+  flex: 1;
+}
+
 .homework-list {
   margin: 20px 0;
+  height: 340px;
+  overflow-y: scroll;
+  padding: 0px 20px;
+  background-color: whitesmoke;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .homework-list h2 {
   font-size: 1.5em;
-  margin-bottom: 10px;
+  margin: 0px;
+}
+#deleteHomeworkBtn {
+  margin: 10px 0px;
+}
+
+#homeworkList div p {
+  display: inline-block;
 }
 
 .homework-list ul {
@@ -111,26 +180,23 @@ main {
   padding: 0;
 }
 .homeworkProblems {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   background-color: #f9f9f9;
-  border-radius: 7px;
-  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
   height: 200px;
-  overflow: scroll;
-}
-.homeworkProblems::-webkit-scrollbar {
-  display: none;
+  overflow-y: scroll;
 }
 
 .homework-list li {
   background-color: white;
-  border: 1px solid #ddd;
   border-radius: 5px;
   transition: background-color 0.3s ease;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 5px;
 }
 .homework-list p {
@@ -162,6 +228,12 @@ main {
 
 .homework-list button:hover {
   background-color: #0056b3;
+}
+
+.sec {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .popup {
@@ -197,19 +269,38 @@ main {
 
 .viewBtn {
   color: black;
-  padding: 5px 10px;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#exportCsvButton {
+  color: black;
+  padding: 10px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
   margin-left: 10px;
 }
+.problem-list ul li {
+  font-size: 16px;
+}
 #problem {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
   display: flex;
-  justify-content: space-around;
-  padding: 5px 20px;
+  padding: 5px 10px;
   margin-top: 5px;
   align-items: center;
+  transition: background-color 0.3s ease;
+}
+#problem:hover {
+  background-color: #f1f1f1;
 }
 .usor {
   color: rgb(0, 255, 0);

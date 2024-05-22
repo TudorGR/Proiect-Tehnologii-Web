@@ -13,63 +13,67 @@
       <h1>Class Dashboard</h1>
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Probleme</a></li>
-          <li><a href="#">Teme</a></li>
-          <li><a href="#">Statistici</a></li>
-          <li><a href="#">Profil</a></li>
+          <li><a href="./teacher_dashboard.html">Back</a></li>
         </ul>
       </nav>
     </header>
     <main>
-      <h1 id="classID"></h1>
-      <section class="homework-list">
-        <h2>Lista de teme</h2>
-        <ul id="themesList"></ul>
-      </section>
-      <section class="createHomework">
-        <h2>Creaza o tema noua</h2>
-        <form id="createHomeworkForm">
-          <label for="themeName">Nume tema:</label><br />
-          <input
-            type="text"
-            id="themeName"
-            name="themeName"
-            required
-          /><br /><br />
-
-          <label for="problemIds">ID-urile problemelor:</label><br />
-          <input
-            type="text"
-            id="problemIds"
-            name="problemIds"
-            placeholder="ID1, ID2, ID3..."
-            required
-          /><br /><br />
-
-          <button type="submit">Creaza tema</button>
-        </form>
-      </section>
-
-      <section class="problem-list">
-        <h2>Lista de probleme</h2>
-        <div class="navigation">
-          <label for="category" class="categoryLabel">Categorie:</label>
-          <select
-            id="category"
-            name="category"
-            onchange="fetchProblems(this.value)"
-            required
-          >
-            <option value="All">All</option>
-            <option value="Math">Math</option>
-            <option value="BackTracking">BackTracking</option>
-            <option value="Functions">Functions</option>
-            <option value="Graphs">Graphs</option>
-          </select>
+      <h1 id="classInfo"></h1>
+      <div class="sec">
+        <div class="homeworkWrapper">
+          <h2 id="homeworksCount">Lista de teme:</h2>
+          <section class="homework-list">
+            <ul id="homeworkList"></ul>
+          </section>
         </div>
-        <ul></ul>
-      </section>
+        <section class="student-list">
+          <h2 id="studentsCount">Lista de Studenti:</h2>
+          <ul id="studentsList"></ul>
+        </section>
+      </div>
+      <div class="sec2">
+        <section class="problem-list">
+          <div class="navigation">
+            <h2 id="problemsCount">Lista de probleme:</h2>
+            <select
+              id="category"
+              name="category"
+              onchange="fetchProblems(this.value)"
+              required
+            >
+              <option value="All">All</option>
+              <option value="Math">Math</option>
+              <option value="BackTracking">BackTracking</option>
+              <option value="Functions">Functions</option>
+              <option value="Graphs">Graphs</option>
+            </select>
+          </div>
+          <ul></ul>
+        </section>
+        <section class="createHomework">
+          <h2>Creaza/Adauga (la) o tema</h2>
+          <form id="createHomeworkForm">
+            <label for="homeworkName">Nume tema:</label><br />
+            <input
+              type="text"
+              id="homeworkName"
+              name="homeworkName"
+              required
+            /><br /><br />
+
+            <label for="problemIds">ID-urile problemelor:</label><br />
+            <input
+              type="text"
+              id="problemIds"
+              name="problemIds"
+              placeholder="id1, id2, id3..."
+              required
+            /><br /><br />
+
+            <button type="button" id="createHwBtn">Creaza / Adauga</button>
+          </form>
+        </section>
+      </div>
     </main>
     <footer>
       <p>&copy; 2024 Aplicația de Învățare a Programării</p>
