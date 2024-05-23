@@ -3,8 +3,10 @@ const class_id = urlParams.get("class_id");
 const problem_id = urlParams.get("problem_id");
 const class_name = urlParams.get("class_name");
 var student_id = null;
+var attempt_id = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+  viewProblem(problem_id);
   fetchAttempts(1);
   fetchStudentsClass(class_id);
 
@@ -75,7 +77,7 @@ async function displayStudents(students) {
         const btn = document.createElement("button");
         btn.classList.add("evalBtn");
         btn.onclick = () => {
-          student_id = student.id;
+          attempt_id = attempts[attemptKey].id;
           handleViewAttempt(attempts[attemptKey]);
         };
         btn.textContent = "Vezi codul";
@@ -170,7 +172,7 @@ function autoResize() {
 }
 
 function handleSendEvaluation() {
-  if (student_id == null) {
+  if (attempt_id == null) {
     alert("Selecteaza 'Vezi codul' la un elev.");
     return;
   }
@@ -183,10 +185,10 @@ function handleSendEvaluation() {
   }
 
   const data = {
-    student_id: student_id,
-    problem_id: problem_id,
+    attempt_id: attempt_id,
     evaluare: evalText,
   };
+
   fetch("/api/evaluateAttempt", {
     method: "POST",
     headers: {
@@ -201,9 +203,25 @@ function handleSendEvaluation() {
       return res.json();
     })
     .then((data) => {
-      console.log("Evaluare reușită:", data);
+      alert("Evaluare trimisa.");
     })
     .catch((error) => {
       console.error("Eroare la evaluare:", error);
     });
+}
+
+function viewProblem(ID) {
+  fetch(`/api/getDescription`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ problem_id: ID }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("problemDescription").textContent =
+        data[0].descriere;
+    })
+    .catch((error) => console.error("Error updating user role:", error));
 }

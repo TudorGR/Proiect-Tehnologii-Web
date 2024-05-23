@@ -23,73 +23,47 @@
     </header>
 
     <main>
-      <section class="overview" id="dashboard">
-        <h2>Prezentare generala</h2>
-        <div class="charts">
-          <canvas id="problemChart"></canvas>
-          <canvas id="classReportChart"></canvas>
-        </div>
+      <h2>Utilizatori</h2>
+      <section id="users-section">
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Change Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </section>
-      <div class="sec">
-        <div class="sec1">
-          <section class="users" id="utilizatori">
-            <h2>Utilizatori</h2>
-            <table id="userTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Email Utilizator</th>
-                  <th>Actiuni</th>
-                </tr>
-              </thead>
-              <tbody id="listaUseri"></tbody>
-            </table>
-            <button id="addUserBtn" onclick="{handleAddUser()}">
-              Adauga Utilizator
-            </button>
-          </section>
 
-          <section class="problems" id="probleme">
-            <h2>Probleme verificate</h2>
-            <table id="problemTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nume Problema</th>
-                  <th>Actiuni</th>
-                </tr>
-              </thead>
-              <tbody id="listaProbleme"></tbody>
-            </table>
-            <button id="addProblemBtn" onclick="{handleAddProblem()}">
-              Adauga Problema
-            </button>
-          </section>
-        </div>
-        <div class="sec2">
-          <section class="classes" id="clase">
-            <h2>Clase</h2>
-            <table id="classTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nume Clasa</th>
-                  <th>Actiuni</th>
-                </tr>
-              </thead>
-              <tbody id="listaClase"></tbody>
-            </table>
-            <button id="addClassBtn" onclick="{handleAddClass()}">
-              Adauga Clasa
-            </button>
-          </section>
-
-          <section id="problems">
-            <h2>Probleme neverificate</h2>
-          </section>
-        </div>
-      </div>
+      <h2>Probleme Neverificate</h2>
+      <section id="unverified-problems-section">
+        <table id="unverified-problems-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Titlu</th>
+              <th>Dificultate</th>
+              <th>Categorie</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
     </main>
+    <!-- popup-ul -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Problem Description</h2>
+        <p id="popup-description"></p>
+      </div>
+    </div>
 
     <footer>
       <p>&copy; 2024 Dashboard Administrator</p>

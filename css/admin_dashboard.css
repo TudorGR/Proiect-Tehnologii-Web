@@ -13,438 +13,113 @@ main {
   flex: 1;
 }
 
-main h2 {
-  font-size: 26px;
-}
-
-.overview {
-  margin-bottom: 30px;
-}
-
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.stat {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.stat h3 {
-  margin-bottom: 10px;
-}
-
-.recent-activity ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.recent-activity ul li {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
-canvas {
-  margin-top: 20px;
+section {
+  margin-bottom: 40px;
+  height: 300px;
+  overflow-y: scroll;
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-.recent-activity ul {
-  padding: 0;
-}
-
-.recent-activity ul li {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-#problemChart {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  width: 360px;
-  height: 180px;
-  margin-bottom: 20px;
-  display: block;
-  background-color: white;
-}
-
-#classReportChart {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  width: 360px;
-  height: 180px;
-  display: block;
-  background-color: white;
-}
-
-.charts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-#userTable {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
-#userTable th,
-#userTable td {
+table,
+th,
+td {
   border: 1px solid #ddd;
+}
+
+th,
+td {
   padding: 8px;
   text-align: left;
-  background-color: white;
-  font-size: 18px;
-  text-align: center;
-}
-#userTable td button {
-  font-size: 18px;
-  padding: 8px 12px;
 }
 
-#userTable th {
+th {
   background-color: #f2f2f2;
 }
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.viewBtn {
-  background-color: #28a745;
-}
-
-.viewBtn:hover {
-  background-color: #218838;
-}
-
-.deleteBtn {
-  background-color: #dc3545;
-}
-
-.deleteBtn:hover {
-  background-color: #c82333;
-}
-
-#addUserBtn {
-  background-color: #17a2b8;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-#addUserBtn:hover {
-  background-color: #138496;
-}
-
-#problemTable {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-#problemTable th,
-#problemTable td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-  background-color: white;
-  font-size: 18px;
-}
-#problemTable td button {
-  font-size: 18px;
-  padding: 8px 12px;
-}
-
-#problemTable th {
-  background-color: #f2f2f2;
-}
-
-.classes {
-  margin-bottom: 30px;
-}
-
-.problem {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 30px;
-}
-
-.problem p,
-.problem h3 {
+#users-table,
+#unverified-problems-table {
   margin: 0px;
 }
 
-#classTable {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+#users-table tr:hover,
+#unverified-problems-table tr:hover {
+  transition: background-color 0.3s ease;
+  background-color: #f1f1f1;
 }
 
-#classTable th,
-#classTable td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-  background-color: white;
-  font-size: 18px;
-}
-#classTable td button {
-  font-size: 18px;
-  padding: 8px 12px;
-}
-
-#classTable th {
-  background-color: #f2f2f2;
+select {
+  padding: 5px;
+  margin: 0;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
 }
 
 button {
+  padding: 7px;
+  margin: 0 4px;
+  cursor: pointer;
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
+  border-radius: 5px;
+}
+
+.popup {
+  display: none;
+  opacity: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.2s ease;
+}
+
+.popup.show {
+  display: block;
+  opacity: 1;
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  transform: scale(0.7);
+  transition: transform 0.5s ease;
+}
+
+.popup-content.show {
+  transform: scale(1);
+}
+
+#popup-description {
+  font-size: 20px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
-  border-radius: 4px;
-  margin-right: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.viewBtn {
-  background-color: #28a745;
-}
-
-.viewBtn:hover {
-  background-color: #218838;
-}
-
-.deleteBtn {
-  background-color: #dc3545;
-}
-
-.deleteBtn:hover {
-  background-color: #c82333;
-}
-
-#addProblemBtn,
-#addClassBtn {
-  background-color: #17a2b8;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 20px;
-}
-
-#addProblemBtn:hover,
-#addClassBtn:hover {
-  background-color: #138496;
-}
-#addClassBtn,
-#addProblemBtn {
-  font-size: 18px;
-}
-
-.sec {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
-}
-.sec1 {
-  flex: 1;
-}
-.sec2 {
-  flex: 1;
-}
-@media all and (max-width: 950px) {
-  .sec {
-    flex-direction: column;
-  }
-}
-@media all and (max-width: 768px) {
-  .problem p,
-  .problem h3 {
-    font-size: 12px;
-  }
-  header nav ul li a {
-    padding: 10px !important;
-  }
-  .problem button {
-    font-size: 12px;
-  }
-  .hero h2 {
-    font-size: 18px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    width: 360px;
-    margin: 40px auto;
-  }
-  .hero p {
-    width: 360px;
-    margin: auto;
-    font-size: 14px;
-  }
-
-  #classReportChart {
-    width: 170px;
-    height: 120px;
-  }
-  #problemChart {
-    width: 170px;
-    height: 120px;
-  }
-  main h2 {
-    font-size: 18px;
-  }
-  #userTable th,
-  #problemTable th,
-  #classTable th,
-  #userTable td,
-  #problemTable td,
-  #classTable td {
-    font-size: 12px;
-    padding: 5px;
-  }
-  #problemTable td button,
-  #userTable td button,
-  #classTable td button,
-  #addUserBtn,
-  #addProblemBtn,
-  #addClassBtn {
-    font-size: 12px;
-  }
-
-  #classTable td button,
-  #userTable td button,
-  #problemTable td button {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  .recent-activity ul li {
-    font-size: 14px;
-  }
-  nav ul li {
-    margin: 1px;
-  }
-  td {
-    text-wrap: nowrap;
-  }
-  nav ul li a {
-    padding: 3px;
-  }
-  main {
-    padding: 20px;
-  }
-}
-@media all and (max-width: 360px) {
-  .problem p,
-  .problem h3 {
-    font-size: 3vw;
-  }
-  header nav ul li a {
-    padding: 2vw !important;
-    margin-left: 2vw !important;
-  }
-  .problem {
-    font-size: 3vw;
-    padding: 4vw;
-  }
-  .problem button {
-    font-size: 3vw;
-    padding: 2vw;
-  }
-  .hero h2 {
-    font-size: 4vw;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    width: 100%;
-  }
-  .hero p {
-    width: 100%;
-    font-size: 4vw;
-  }
-
-  nav ul li {
-    margin: 0;
-  }
-  main h2 {
-    font-size: 4vw;
-  }
-  #problemChart {
-    width: 40vw;
-    height: 25vw;
-  }
-  #classReportChart {
-    width: 40vw;
-    height: 25vw;
-  }
-  main h2 {
-    font-size: 4vw;
-  }
-  #userTable th,
-  #problemTable th,
-  #classTable th,
-  #userTable td,
-  #problemTable td,
-  #classTable td {
-    font-size: 3vw;
-  }
-  #problemTable td button,
-  #userTable td button,
-  #classTable td button,
-  #addUserBtn,
-  #addProblemBtn,
-  #addClassBtn {
-    margin-bottom: 1vw;
-    padding: 1vw 2vw;
-    font-size: 3vw;
-  }
-  button {
-    padding: 2vw 4vw;
-  }
-  td {
-    text-wrap: nowrap;
-  }
-  nav ul li a {
-    padding: 1vw;
-  }
-  .recent-activity ul li {
-    font-size: 3vw;
-  }
 }

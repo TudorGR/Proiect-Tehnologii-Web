@@ -18,8 +18,18 @@ body {
 }
 
 .container h2 {
-  margin-top: 0;
+  margin-bottom: 10px;
+  margin-top: 0px;
   font-size: 28px;
+}
+
+.container a {
+  color: rgb(170, 170, 170);
+  font-size: 14px;
+}
+
+#loginForm {
+  margin-top: 10px;
 }
 
 .form-group {

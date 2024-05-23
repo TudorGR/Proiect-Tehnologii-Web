@@ -72,11 +72,37 @@ main {
   display: block;
 }
 
+.sec {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.sec1,
+.sec2 {
+  flex: 1;
+  height: 410px;
+}
+
+#problemDescription {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  height: 300px;
+  line-height: 25px;
+}
+.sec1 section {
+  overflow-y: scroll;
+  height: 300px;
+}
+
 .evalBtn {
   margin-left: 10px;
   background-color: #007bff;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;

@@ -15,6 +15,7 @@ const {
   deleteUser,
   addStudentToClass,
   checkUserClass,
+  changeUserRole,
 } = require("./controllers/userController");
 const {
   getUnverifiedProblems,
@@ -25,6 +26,8 @@ const {
   exportProblemsCsv,
   getAttempts,
   evaluateAttempt,
+  getDescription,
+  setVerified,
 } = require("./controllers/problemController");
 const { getRecentActivity } = require("./controllers/utilityController");
 const {
@@ -86,8 +89,12 @@ const server = http.createServer((req, res) => {
     getClassStudentCounts(req, res);
   } else if (pathname === "/api/exportProblems/csv") {
     exportProblemsCsv(req, res);
+  } else if (pathname === "/api/getDescription") {
+    getDescription(req, res);
   } else if (pathname === "/api/unverifiedProblems") {
     getUnverifiedProblems(req, res);
+  } else if (pathname === "/api/setVerified") {
+    setVerified(req, res);
   } else if (pathname === "/api/verifiedProblems") {
     getVerifiedProblems(req, res);
   } else if (pathname === "/api/addProblem") {
@@ -100,6 +107,8 @@ const server = http.createServer((req, res) => {
     getProblems(req, res);
   } else if (pathname === "/api/deleteProblem") {
     deleteProblem(req, res);
+  } else if (pathname === "/api/changeUserRole") {
+    changeUserRole(req, res);
   } else if (pathname === "/api/users") {
     getUsers(req, res);
   } else if (pathname === "/api/checkUserClass") {
@@ -113,7 +122,7 @@ const server = http.createServer((req, res) => {
   } else if (pathname === "/api/studentAttempts" && req.method === "POST") {
   } else if (pathname === "/addClass" && req.method === "POST") {
     addClass(req, res);
-  } else if (pathname === "/addUser" && req.method === "POST") {
+  } else if (pathname === "/api/addUser") {
     addUser(req, res);
   }
 });

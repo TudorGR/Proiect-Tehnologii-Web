@@ -225,6 +225,58 @@ function getAttempts(req, res) {
   });
 }
 
+function getDescription(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    const data = JSON.parse(body);
+    const problem_id = data.problem_id;
+    let sqlQuery;
+
+    sqlQuery = "Select descriere from problems where id=?";
+
+    queryDb(sqlQuery, [problem_id], (err, rows) => {
+      if (err) {
+        res.writeHead(500);
+        res.end("Database error");
+      } else {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(rows));
+      }
+    });
+  });
+}
+
+function setVerified(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    const data = JSON.parse(body);
+    const problem_id = data.problem_id;
+    let sqlQuery;
+
+    sqlQuery = "update problems set verified=1 where id=?";
+
+    queryDb(sqlQuery, [problem_id], (err, rows) => {
+      if (err) {
+        res.writeHead(500);
+        res.end("Database error");
+      } else {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(rows));
+      }
+    });
+  });
+}
+
 function evaluateAttempt(req, res) {
   let body = "";
 
@@ -235,17 +287,16 @@ function evaluateAttempt(req, res) {
   req.on("end", () => {
     try {
       const data = JSON.parse(body);
-      const { student_id, problem_id, evaluare } = data;
+      const { attempt_id, evaluare } = data;
 
-      if (!student_id || !problem_id || !evaluare) {
+      if (!attempt_id) {
         res.writeHead(400);
         res.end("All fields are required in the request body");
         return;
       }
 
-      const query =
-        "update Attempts set evaluare=? where id_user=? and id_problema=?;";
-      queryDb(query, [evaluare, student_id, problem_id], (err) => {
+      const query = "update Attempts set evaluare=? where id=?;";
+      queryDb(query, [evaluare, attempt_id], (err) => {
         if (err) {
           console.error("Database error:", err);
           res.writeHead(500);
@@ -282,4 +333,6 @@ module.exports = {
   exportProblemsCsv,
   getAttempts,
   evaluateAttempt,
+  getDescription,
+  setVerified,
 };

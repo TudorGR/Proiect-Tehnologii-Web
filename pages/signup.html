@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Autentificare</title>
+    <title>Inregistrare</title>
     <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
     <div class="container">
-      <h2>Autentificare</h2>
-      <a href="/pages/signup.html">Inregistreaza-te daca nu ai cont</a>
+      <h2>Inregistrare</h2>
       <form id="loginForm" autocomplete="off">
         <div class="form-group">
           <label for="email">Email:</label>
@@ -31,10 +30,20 @@
             placeholder="introdu parola..."
           />
         </div>
-        <button type="submit">Autentificare</button>
+        <div class="form-group">
+          <label for="confirmPassword">Confirma parola:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="confirma parola..."
+          />
+        </div>
+        <button type="submit">Inregistrare</button>
       </form>
     </div>
 
-    <script src="/javascript/login.js"></script>
+    <script src="/javascript/signup.js"></script>
   </body>
 </html>

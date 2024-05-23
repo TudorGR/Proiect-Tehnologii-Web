@@ -12,6 +12,53 @@ function getUsers(req, res) {
   });
 }
 
+function changeUserRole(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    try {
+      const data = JSON.parse(body);
+      const { user_id, role } = data;
+
+      if (!user_id) {
+        res.writeHead(400);
+        res.end("All fields are required in the request body");
+        return;
+      }
+
+      const query = "update users set role=? where id=?;";
+      queryDb(query, [role, user_id], (err) => {
+        if (err) {
+          console.error("Database error:", err);
+          res.writeHead(500);
+          res.end("Database error");
+        } else {
+          res.writeHead(200);
+          res.end(
+            JSON.stringify({
+              message: `Update completed.`,
+            })
+          );
+        }
+      });
+    } catch (error) {
+      console.error("Error parsing request body:", error);
+      res.writeHead(400);
+      res.end("Invalid JSON in request body");
+    }
+  });
+
+  req.on("error", (error) => {
+    console.error("Request error:", error);
+    res.writeHead(400);
+    res.end("Error receiving request");
+  });
+}
+
 function addUser(req, res) {
   let body = "";
   req.on("data", (chunk) => {
@@ -19,11 +66,11 @@ function addUser(req, res) {
   });
   req.on("end", () => {
     const data = JSON.parse(body);
-    const { ID, name, email, password, role } = data;
+    const { name, email, password, role } = data;
 
     const query =
-      "INSERT INTO Users (ID, name, email, password, role) VALUES (?, ?, ?, ?, ?)";
-    queryDb(query, [ID, name, email, password, role], (err) => {
+      "INSERT INTO Users (name, email, password, role) VALUES (?, ?, ?, ?)";
+    queryDb(query, [name, email, password, role], (err) => {
       if (err) {
         res.writeHead(500);
         res.end("Database error");
@@ -117,4 +164,5 @@ module.exports = {
   deleteUser,
   addStudentToClass,
   checkUserClass,
+  changeUserRole,
 };
