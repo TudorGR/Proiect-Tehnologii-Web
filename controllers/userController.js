@@ -76,9 +76,7 @@ function addUser(req, res) {
         res.end("Database error");
       } else {
         res.writeHead(200);
-        res.end(
-          JSON.stringify({ message: `User with ID: ${ID} has been added.` })
-        );
+        res.end(JSON.stringify({ message: `User has been added.` }));
       }
     });
   });

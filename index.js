@@ -28,13 +28,16 @@ const {
   evaluateAttempt,
   getDescription,
   setVerified,
+  sendAttempt,
 } = require("./controllers/problemController");
 const { getRecentActivity } = require("./controllers/utilityController");
+const { addComment, getComments } = require("./controllers/commentController");
 const {
   addHomework,
   getHomework,
   getHomeworkForClass,
   deleteHomework,
+  getHomeworksForStudent,
 } = require("./controllers/homeworkController");
 
 // Helper function to serve static files
@@ -71,6 +74,12 @@ const server = http.createServer((req, res) => {
       path.join(__dirname, "pages", "index.html"),
       "text/html"
     );
+  } else if (pathname === "/api/addComment") {
+    addComment(req, res);
+  } else if (pathname === "/api/getComments") {
+    getComments(req, res);
+  } else if (pathname === "/api/getHomeworksForStudent") {
+    getHomeworksForStudent(req, res);
   } else if (pathname === "/api/getHomeworkForClass") {
     getHomeworkForClass(req, res);
   } else if (pathname === "/api/getHomework") {
@@ -99,6 +108,8 @@ const server = http.createServer((req, res) => {
     getVerifiedProblems(req, res);
   } else if (pathname === "/api/addProblem") {
     addProblem(req, res);
+  } else if (pathname === "/api/sendAttempt") {
+    sendAttempt(req, res);
   } else if (pathname === "/api/evaluateAttempt") {
     evaluateAttempt(req, res);
   } else if (pathname === "/api/getAttempts") {

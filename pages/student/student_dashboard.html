@@ -24,37 +24,31 @@
     </header>
 
     <main>
-      <div class="container">
-        <div class="sec">
-          <div class="secProb">
-            <h2>Probleme</h2>
-            <section class="problems" id="probleme">
-              {% for problem in problems %}
-              <div class="problem">
-                <h3>{{ problem[1] }} [{{problem[0]}}]</h3>
-                <p>Descriere: {{ problem[2] }}</p>
-                <p>Dificultate: {{problem[3]}}</p>
-                <p>Categorie: {{problem[4]}}</p>
-                <button
-                  class="solve-btn"
-                  onclick="solveProblem('{{ problem[0] }}')"
-                >
-                  Rezolva
-                </button>
-              </div>
-              {% endfor %}
-            </section>
-          </div>
-
-          <div class="secSolCom">
-            <h2>Solutii</h2>
-            <section class="solutions" id="solutii">
-              <section class="attempts" id="incercari">
-                <div id="attemptList"></div>
-              </section>
-            </section>
-          </div>
+      <div class="sec">
+        <div class="sec1">
+          <h2 id="homeworksCount">Lista de teme:</h2>
+          <section class="homework-list">
+            <ul id="homeworkList"></ul>
+          </section>
         </div>
+        <section class="problem-list">
+          <div class="navigation">
+            <h2 id="problemsCount">Lista de probleme:</h2>
+            <select
+              id="category"
+              name="category"
+              onchange="fetchProblems(this.value)"
+              required
+            >
+              <option value="All">All</option>
+              <option value="Math">Math</option>
+              <option value="BackTracking">BackTracking</option>
+              <option value="Functions">Functions</option>
+              <option value="Graphs">Graphs</option>
+            </select>
+          </div>
+          <ul></ul>
+        </section>
       </div>
     </main>
 

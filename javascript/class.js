@@ -104,6 +104,7 @@ async function injectHomeworks(class_id) {
   const homeworkList = document.getElementById("homeworkList");
   homeworkList.innerHTML = "";
   const homeworks = await fetchHomeworks();
+  console.log(homeworks);
 
   const filteredData = homeworks.filter((item) => item.class_id == class_id);
 
@@ -134,7 +135,7 @@ async function injectHomeworks(class_id) {
     groupedByNume[homework].forEach((problem) => {
       const homeworkItem = document.createElement("li");
 
-      // Adăugăm problemele în aceeași listă
+      // Adaugam problemele in aceeasi lista
       const exerciseItem = document.createElement("p");
       exerciseItem.textContent = `ID Problemă: ${problem}`;
       homeworkItem.appendChild(exerciseItem);

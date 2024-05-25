@@ -1,12 +1,10 @@
+const urlParams = new URLSearchParams(window.location.search);
+const problem_id = urlParams.get("problem_id");
 document.addEventListener("DOMContentLoaded", function () {
   var solutionForm = document.getElementById("solutionForm");
+  displayAttempts();
 
-  //extragere numar problema din url
-  const queryString = window.location.search;
-  const parts = queryString.split("=");
-  const problemNumber = parts[1];
-
-  displayComments(problemNumber);
+  displayComments(problem_id);
 
   titlu = document.getElementById("titlu");
   descriere = document.getElementById("descriere");
@@ -15,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       data.forEach((problem) => {
-        if (problem[0] == problemNumber) {
-          titlu.textContent = problem[1];
-          descriere.textContent = problem[2];
+        if (problem.id == problem_id) {
+          titlu.textContent = problem.titlu;
+          descriere.textContent = problem.descriere;
         }
       });
     })
@@ -28,21 +26,35 @@ document.addEventListener("DOMContentLoaded", function () {
   solutionForm.addEventListener("submit", function (event) {
     event.preventDefault();
     var solutionText = document.getElementById("solution").value;
-    alert("Solutia trimisa catre server: " + solutionText);
     var studentID = localStorage.getItem("ID_user");
-    console.log(solutionText);
 
-    var currentTime = new Date().toISOString();
+    const currentTime = new Date();
+    const formattedTime = `${currentTime.getFullYear()}-${(
+      currentTime.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${currentTime
+      .getDate()
+      .toString()
+      .padStart(2, "0")} ${currentTime
+      .getHours()
+      .toString()
+      .padStart(2, "0")}:${currentTime
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}:${currentTime
+      .getSeconds()
+      .toString()
+      .padStart(2, "0")}`;
 
-    //trimitem codul si timpul la server
     const data = {
-      problemNumber: problemNumber,
+      problem_id: problem_id,
       cod: solutionText,
-      timp: currentTime,
+      timp: formattedTime,
       ID: studentID,
     };
 
-    fetch("/update_problem", {
+    fetch("/api/sendAttempt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return res.json();
       })
       .then((data) => {
-        console.log("Actualizare reușită:", data);
+        displayAttempts();
       })
       .catch((error) => {
         console.error("Eroare la actualizare:", error);
@@ -64,6 +76,33 @@ document.addEventListener("DOMContentLoaded", function () {
     solutionForm.reset();
   });
 });
+
+async function fetchAttempts(student_id) {
+  const data = {
+    student_id: student_id,
+    problem_id: problem_id,
+  };
+
+  try {
+    const response = await fetch("/api/getAttempts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const attempt = await response.json();
+    return attempt;
+  } catch (error) {
+    console.error("Error fetching attempt:", error);
+    throw error;
+  }
+}
 
 function updateLineNumbers() {
   const textarea = document.getElementById("solution");
@@ -97,12 +136,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 function handleAddComment() {
   var content = document.getElementById("description").value;
   var id_user = localStorage.getItem("ID_user");
-
-  const queryString = window.location.search;
-  const parts = queryString.split("=");
-  const problemNumber = parts[1];
-
-  var id_problem = problemNumber;
 
   const data = {
     content: content,
@@ -155,9 +188,8 @@ function displayComments(id_problem) {
         const commentTitle = document.createElement("h3");
         const commentContent = document.createElement("p");
 
-        commentTitle.textContent = `ID user: ${comment[1]}`;
-        console.log(comment.content);
-        commentContent.textContent = comment[2];
+        commentTitle.textContent = `ID user: ${comment.student_id}`;
+        commentContent.textContent = comment.content;
 
         commentDiv.appendChild(commentTitle);
         commentDiv.appendChild(commentContent);
@@ -166,5 +198,108 @@ function displayComments(id_problem) {
     })
     .catch((error) => {
       console.error("Eroare la obținerea comentariilor:", error);
+    });
+}
+
+function handleViewEvaluation(evaluare) {
+  alert(evaluare);
+}
+
+function handleViewCode(cod) {
+  document.getElementById("solution").textContent = cod;
+  updateLineNumbers();
+  autoResize();
+}
+
+async function displayAttempts() {
+  const attemptList = document.getElementById("attempts");
+  attemptList.innerHTML = "";
+
+  const attempts = await fetchAttempts(localStorage.getItem("ID_user"));
+
+  attempts.forEach((attempt) => {
+    const listItem = document.createElement("li");
+    listItem.id = `attempt`;
+    listItem.innerHTML = `
+        <h3>#${attempt.id_problema} ${attempt.timp}${
+      attempt.evaluare != 0
+        ? ` Evaluat <button class="viewEvaluation" onclick="handleViewEvaluation('${attempt.evaluare}')">View evaluation</button>`
+        : ""
+    }</h3>`;
+    const viewExerciseButton = document.createElement("button");
+    viewExerciseButton.textContent = "Vezi";
+    viewExerciseButton.classList.add("viewBtn");
+    viewExerciseButton.addEventListener("click", () => {
+      handleViewCode(attempt.cod);
+    });
+    listItem.appendChild(viewExerciseButton);
+    attemptList.appendChild(listItem);
+  });
+}
+
+function displayComments(id_problem) {
+  const data = {
+    id_problem: id_problem,
+  };
+
+  fetch("/api/getComments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((comments) => {
+      const commentsSection = document.getElementById("comentarii");
+
+      commentsSection.innerHTML = "";
+
+      comments.forEach((comment) => {
+        const commentDiv = document.createElement("div");
+        commentDiv.classList.add("comment");
+        const commentTitle = document.createElement("h3");
+        const commentContent = document.createElement("p");
+
+        commentTitle.textContent = `ID user: ${comment.student_id}`;
+        console.log(comment.content);
+        commentContent.textContent = comment.content;
+
+        commentDiv.appendChild(commentTitle);
+        commentDiv.appendChild(commentContent);
+        commentsSection.appendChild(commentDiv);
+      });
+    })
+    .catch((error) => {
+      console.error("Eroare la obținerea comentariilor:", error);
+    });
+}
+
+function handleAddComment() {
+  var content = document.getElementById("description").value;
+
+  const data = {
+    content: content,
+    id_user: localStorage.getItem("ID_user"),
+    id_problem: problem_id,
+  };
+
+  fetch("/api/addComment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      document.getElementById("commentForm").reset();
+      displayComments(problem_id);
+      return res.json();
+    })
+    .catch((error) => {
+      console.error("Eroare la actualizare:", error);
     });
 }

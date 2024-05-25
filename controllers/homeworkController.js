@@ -41,6 +41,43 @@ function getHomeworkForClass(req, res) {
   });
 }
 
+function getHomeworksForStudent(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    try {
+      const data = JSON.parse(body);
+      const { student_id } = data;
+
+      const query = `
+        SELECT h.name, h.problem_id, h.class_id
+        FROM Students_Classes sc
+        JOIN Homeworks h ON sc.class_id = h.class_id
+        WHERE sc.student_id = ?;
+      `;
+
+      queryDb(query, [student_id], (err, results) => {
+        if (err) {
+          console.error("Database error:", err);
+          res.writeHead(500);
+          res.end("Database error: " + err.message);
+        } else {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(results));
+        }
+      });
+    } catch (error) {
+      console.error("Error parsing request body:", error);
+      res.writeHead(400);
+      res.end("Invalid JSON in request body");
+    }
+  });
+}
+
 function getHomework(req, res) {
   queryDb("SELECT * FROM Homeworks;", [], (err, rows) => {
     if (err) {
@@ -173,4 +210,5 @@ module.exports = {
   getHomework,
   getHomeworkForClass,
   deleteHomework,
+  getHomeworksForStudent,
 };

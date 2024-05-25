@@ -32,7 +32,7 @@ h2 {
 .comment {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
@@ -60,7 +60,8 @@ h2 {
 }
 .comments {
   height: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
+  padding: 5px;
 }
 
 .problem p {
@@ -135,116 +136,39 @@ button:hover {
   border-bottom-left-radius: 5px;
   font-family: "Fira Code", monospace;
 }
-
-@media all and (max-width: 768px) {
-  .comments {
-    height: 235px;
-    overflow: scroll;
-  }
-  .comment h3 {
-    font-size: 16px;
-  }
-  .comment p {
-    font-size: 12px;
-  }
-  .comment {
-    padding: 10px;
-  }
-  .hero h2 {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    width: 360px;
-    margin: 40px auto;
-  }
-  .hero p {
-    width: 360px;
-    margin: auto;
-    font-size: 14px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  .problem p {
-    font-size: 14px;
-  }
-  textarea {
-    font-size: 12px;
-    padding-left: 20px;
-  }
-  button {
-    font-size: 14px;
-  }
-  #studentId {
-    font-size: 14px;
-    width: 115px;
-  }
-  label {
-    font-size: 16px;
-  }
-  .line-numbers {
-    font-size: 12px;
-    width: 15px;
-  }
+#attempts {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  overflow-y: scroll;
+  height: 300px;
 }
-@media all and (max-width: 360px) {
-  .comments {
-    height: 70vw;
-    overflow: scroll;
-  }
-  .comment h3 {
-    font-size: 4vw;
-  }
-  .comment p {
-    font-size: 3vw;
-  }
-  .comment {
-    padding: 2vw;
-  }
-  .problem {
-    padding: 6vw;
-  }
-  .hero h2 {
-    font-size: 5vw;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    width: 100%;
-  }
-  .hero p {
-    width: 100%;
-    font-size: 4vw;
-  }
-  nav ul {
-    padding: 0;
-  }
-  nav ul li {
-    margin: 0;
-  }
-  h2 {
-    font-size: 4vw;
-  }
-  .problem p {
-    font-size: 3vw;
-  }
-  label {
-    font-size: 4vw;
-  }
-  textarea {
-    font-size: 3vw;
-    padding-left: 4vw;
-  }
-  button {
-    font-size: 3vw;
-    padding: 3vw;
-  }
-  #studentId {
-    font-size: 3vw;
-    width: 20vw;
-    padding: 3vw;
-    margin: 4vw 0;
-  }
-  .line-numbers {
-    font-size: 3vw;
-    width: 4vw;
-  }
+
+#attempt {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: whitesmoke;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#attempt h3 {
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+
+.viewCode {
+  height: 100%;
+}
+
+.viewEvaluation {
+  margin-left: 20px;
 }

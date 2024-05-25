@@ -277,6 +277,36 @@ function setVerified(req, res) {
   });
 }
 
+function sendAttempt(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    const data = JSON.parse(body);
+    const problem_id = data.problem_id;
+    const cod = data.cod;
+    const timp = data.timp;
+    const ID = data.ID;
+    let sqlQuery;
+
+    sqlQuery =
+      "insert into Attempts (id_user,id_problema,timp,cod,evaluare) values (?,?,?,?,?);";
+
+    queryDb(sqlQuery, [ID, problem_id, timp, cod, 0], (err, rows) => {
+      if (err) {
+        res.writeHead(500);
+        res.end("Database error");
+      } else {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(rows));
+      }
+    });
+  });
+}
+
 function evaluateAttempt(req, res) {
   let body = "";
 
@@ -335,4 +365,5 @@ module.exports = {
   evaluateAttempt,
   getDescription,
   setVerified,
+  sendAttempt,
 };
