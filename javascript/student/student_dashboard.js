@@ -1,8 +1,30 @@
 var student_id = localStorage.getItem("ID_user");
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   fetchProblems("All");
   injectHomeworks(student_id);
+
+  const problems = await fetchProblems("All");
+
+  let attemptsNumber = 0;
+  let correctAttemptsNumber = 0;
+
+  for (const problem of problems) {
+    const attempts = await fetchAttempts(problem.id);
+    attemptsNumber += attempts.length;
+    attempts.forEach((attempt) => {
+      if (attempt.result == 1) {
+        correctAttemptsNumber++;
+      }
+    });
+  }
+
+  document.getElementById(
+    "problemsNumber"
+  ).textContent = `Rezolvari trimise ${attemptsNumber}`;
+  document.getElementById(
+    "correctProblemsNumber"
+  ).textContent = `Rezolvari corecte ${correctAttemptsNumber}`;
 });
 
 async function fetchProblems(categorie) {
@@ -28,6 +50,33 @@ async function fetchProblems(categorie) {
     return problems;
   } catch (error) {
     console.error("Error fetching problems:", error);
+    throw error;
+  }
+}
+
+async function fetchAttempts(problem_id) {
+  const data = {
+    student_id: student_id,
+    problem_id: problem_id,
+  };
+
+  try {
+    const response = await fetch("/api/getAttempts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const attempt = await response.json();
+    return attempt;
+  } catch (error) {
+    console.error("Error fetching attempt:", error);
     throw error;
   }
 }

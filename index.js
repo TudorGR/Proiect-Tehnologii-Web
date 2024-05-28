@@ -24,6 +24,7 @@ const {
   getProblems,
   addProblem,
   exportProblemsCsv,
+  importProblemsCsv,
   getAttempts,
   evaluateAttempt,
   getDescription,
@@ -96,6 +97,8 @@ const server = http.createServer((req, res) => {
     getClasses(req, res);
   } else if (pathname === "/api/getClassStudentCounts") {
     getClassStudentCounts(req, res);
+  } else if (pathname === "/api/importProblems/csv") {
+    importProblemsCsv(req, res);
   } else if (pathname === "/api/exportProblems/csv") {
     exportProblemsCsv(req, res);
   } else if (pathname === "/api/getDescription") {

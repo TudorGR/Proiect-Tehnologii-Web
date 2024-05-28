@@ -1,5 +1,61 @@
 const { queryDb } = require("../utils/db");
 
+function importProblemsCsv(req, res) {
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
+
+  req.on("end", () => {
+    const csvData = body;
+
+    const lines = csvData.split("\n");
+
+    if (lines.length !== 2) {
+      res.writeHead(400);
+      res.end("Invalid CSV format: Expected 2 lines (headers and data)");
+      return;
+    }
+
+    const headers = lines[0].split(",");
+    const row = lines[1].split(",");
+
+    if (headers.length !== row.length) {
+      res.writeHead(400);
+      res.end(
+        "Invalid CSV format: Number of values in data row does not match headers"
+      );
+      return;
+    }
+
+    const problemData = {};
+    for (let i = 1; i < headers.length; i++) {
+      if (i == headers.length - 1) {
+        problemData[headers[i].trim()] = 0;
+      } else {
+        problemData[headers[i].trim()] = row[i].trim();
+      }
+    }
+
+    queryDb(
+      "INSERT INTO Problems (titlu, descriere, dificultate, categorie, verified) VALUES (?, ?, ?, ?, ?)",
+      Object.values(problemData),
+      (err) => {
+        if (err) {
+          console.error("Error inserting problem:", err);
+          res.writeHead(500);
+          res.end("Error importing problem");
+          return;
+        }
+
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end("Problem imported successfully.");
+      }
+    );
+  });
+}
+
 function exportProblemsCsv(req, res) {
   let body = "";
 
@@ -317,7 +373,7 @@ function evaluateAttempt(req, res) {
   req.on("end", () => {
     try {
       const data = JSON.parse(body);
-      const { attempt_id, evaluare } = data;
+      const { attempt_id, evaluare, result } = data;
 
       if (!attempt_id) {
         res.writeHead(400);
@@ -325,8 +381,8 @@ function evaluateAttempt(req, res) {
         return;
       }
 
-      const query = "update Attempts set evaluare=? where id=?;";
-      queryDb(query, [evaluare, attempt_id], (err) => {
+      const query = "update Attempts set evaluare=?,result=? where id=?;";
+      queryDb(query, [evaluare, result, attempt_id], (err) => {
         if (err) {
           console.error("Database error:", err);
           res.writeHead(500);
@@ -366,4 +422,5 @@ module.exports = {
   getDescription,
   setVerified,
   sendAttempt,
+  importProblemsCsv,
 };

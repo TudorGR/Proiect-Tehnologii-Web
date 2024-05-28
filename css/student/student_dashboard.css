@@ -22,7 +22,7 @@ main {
   border-radius: 7px;
 }
 .problem-list ul {
-  height: 70vh;
+  height: 65vh;
   overflow-y: scroll;
   padding: 0;
   margin: 0px;
@@ -51,6 +51,20 @@ main {
 }
 .greu {
   color: red;
+}
+
+.stats {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.stats h2 {
+  margin-right: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#correctProblemsNumber {
+  color: rgb(0, 161, 0);
 }
 
 .navigation {
@@ -130,7 +144,7 @@ main {
 
 .homework-list {
   margin: 20px 0;
-  height: 70vh;
+  height: 65vh;
   overflow-y: scroll;
   padding: 0px 20px;
   background-color: whitesmoke;

@@ -125,6 +125,18 @@ main {
 .add-problem button:focus {
   outline: none;
 }
+
+.import {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: whitesmoke;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 #addProblemForm textarea {
   border: none;
   outline: none;
@@ -144,7 +156,6 @@ main {
   padding: 40px;
   background-color: #f9f9f9;
   border-radius: 5px;
-  margin-left: 10px;
 }
 
 .addProblemHeader label {

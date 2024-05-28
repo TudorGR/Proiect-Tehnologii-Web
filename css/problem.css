@@ -83,6 +83,28 @@ main {
   flex: 1;
   height: 410px;
 }
+#evaluationStatus {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
+}
+#evaluationStatus input {
+  margin: 0px 10px;
+}
+
+.greenBg {
+  background-color: rgb(30, 255, 0) !important;
+}
+.redBg {
+  background-color: red !important;
+}
+.greenBg:hover {
+  background-color: rgb(23, 194, 0) !important;
+}
+.redBg:hover {
+  background-color: rgb(190, 0, 0) !important;
+}
 
 #problemDescription {
   background-color: #fff;

@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const class_id = urlParams.get("class_id");
 const problem_id = urlParams.get("problem_id");
 const class_name = urlParams.get("class_name");
+let result = null;
 var student_id = null;
 var attempt_id = null;
 
@@ -9,6 +10,17 @@ document.addEventListener("DOMContentLoaded", () => {
   viewProblem(problem_id);
   fetchAttempts(1);
   fetchStudentsClass(class_id);
+
+  document
+    .getElementById("evaluationStatus")
+    .addEventListener("change", function () {
+      let selectedOption = document.querySelector(
+        'input[name="raspuns"]:checked'
+      );
+      if (selectedOption.value == "corect") {
+        result = 1;
+      } else result = 0;
+    });
 
   document.getElementById(
     "navigation"
@@ -91,7 +103,14 @@ async function displayStudents(students) {
 
         divItem.appendChild(item);
         divItem.appendChild(btn);
-        divItem.appendChild(btn2);
+        if (attempts[attemptKey].evaluare != 0) {
+          if (attempts[attemptKey].result == 1) {
+            btn2.classList.add("greenBg");
+          } else {
+            btn2.classList.add("redBg");
+          }
+          divItem.appendChild(btn2);
+        }
         listItem4.appendChild(divItem);
       });
 
@@ -184,10 +203,17 @@ function handleSendEvaluation() {
     return;
   }
 
+  if (result == null) {
+    alert("Selecteaza Corect/Gresit.");
+    return;
+  }
+
   const data = {
     attempt_id: attempt_id,
     evaluare: evalText,
+    result: result,
   };
+  console.log(data);
 
   fetch("/api/evaluateAttempt", {
     method: "POST",

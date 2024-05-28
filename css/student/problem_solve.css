@@ -16,6 +16,19 @@ main {
   padding: 20px;
 }
 
+.greenBg {
+  background-color: rgb(30, 255, 0) !important;
+}
+.redBg {
+  background-color: red !important;
+}
+.greenBg:hover {
+  background-color: rgb(23, 194, 0) !important;
+}
+.redBg:hover {
+  background-color: rgb(190, 0, 0) !important;
+}
+
 h2 {
   margin-bottom: 10px;
   font-size: 26px;

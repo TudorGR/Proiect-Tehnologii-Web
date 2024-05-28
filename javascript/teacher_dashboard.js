@@ -4,6 +4,27 @@ document.addEventListener("DOMContentLoaded", function () {
   var addClassForm = document.getElementById("addClassForm");
   var createClassForm = document.getElementById("createClassForm");
 
+  const fileInput = document.getElementById("problemFile");
+  const importButton = document.getElementById("importButton");
+
+  importButton.addEventListener("click", () => {
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert("Please select a CSV file to import.");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const csvData = event.target.result;
+      sendCsvData(csvData); // Send data to the API
+    };
+
+    reader.readAsText(file);
+  });
+
   addClassForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -260,6 +281,32 @@ function checkProblemExists(ID) {
       })
       .catch((error) => {
         console.error("Error checking problem:", error);
+        reject(error);
+      });
+  });
+}
+
+function sendCsvData(csvData) {
+  return new Promise((resolve, reject) => {
+    fetch("/api/importProblems/csv", {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/csv",
+      },
+      body: csvData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Problem imported and sent to evaluation successfully.");
+          return response.text();
+        } else {
+          throw new Error("Error importing problems: " + response.statusText);
+        }
+      })
+      .then((responseData) => {
+        resolve(responseData);
+      })
+      .catch((error) => {
         reject(error);
       });
   });

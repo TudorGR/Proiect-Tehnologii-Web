@@ -223,7 +223,11 @@ async function displayAttempts() {
     listItem.innerHTML = `
         <h3>#${attempt.id_problema} ${attempt.timp}${
       attempt.evaluare != 0
-        ? ` Evaluat <button class="viewEvaluation" onclick="handleViewEvaluation('${attempt.evaluare}')">View evaluation</button>`
+        ? ` Evaluat <button class="viewEvaluation ${
+            attempt.result == 1 ? "greenBg" : "redBg"
+          }" onclick="handleViewEvaluation('${
+            attempt.evaluare
+          }')">View evaluation</button>`
         : ""
     }</h3>`;
     const viewExerciseButton = document.createElement("button");
