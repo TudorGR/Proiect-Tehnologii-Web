@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="/css/admin_dashboard.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/hide.css" />
   </head>
   <body>
     <header>
       <h1>Dashboard Administrator</h1>
       <nav>
         <ul>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#utilizatori">Utilizatori</a></li>
-          <li><a href="#probleme">Probleme</a></li>
-          <li><a href="#clase">Clase</a></li>
           <li><a href="/pages/index.html">Logout</a></li>
         </ul>
       </nav>
@@ -25,6 +22,7 @@
     <main>
       <h2>Utilizatori</h2>
       <section id="users-section">
+        <h2 class="hide">empty</h2>
         <table id="users-table">
           <thead>
             <tr>
@@ -42,6 +40,7 @@
 
       <h2>Probleme Neverificate</h2>
       <section id="unverified-problems-section">
+        <h2 class="hide">empty</h2>
         <table id="unverified-problems-table">
           <thead>
             <tr>
@@ -59,14 +58,14 @@
     <!-- popup-ul -->
     <div id="popup" class="popup">
       <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
+        <span class="close" onclick="closePopup()">X</span>
         <h2>Problem Description</h2>
         <p id="popup-description"></p>
       </div>
     </div>
 
     <footer>
-      <p>&copy; 2024 Dashboard Administrator</p>
+      <p>2024 Dashboard Administrator</p>
     </footer>
 
     <script src="/javascript/admin_dashboard.js"></script>

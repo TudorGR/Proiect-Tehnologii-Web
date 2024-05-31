@@ -218,8 +218,8 @@ async function displayAttempts() {
   const attempts = await fetchAttempts(localStorage.getItem("ID_user"));
 
   attempts.forEach((attempt) => {
-    const listItem = document.createElement("li");
-    listItem.id = `attempt`;
+    const listItem = document.createElement("div");
+    listItem.classList.add(`attempt`);
     listItem.innerHTML = `
         <h3>#${attempt.id_problema}&nbsp;${attempt.timp}${
       attempt.evaluare != 0

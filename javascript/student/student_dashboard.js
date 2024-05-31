@@ -91,23 +91,24 @@ function displayProblems(problems) {
 
   problems.forEach((problem, index) => {
     const listItem = document.createElement("li");
-    listItem.id = `problem`;
+    listItem.classList.add("problem");
+    listItem.cal = `problem`;
     var difColor;
     if (problem.dificultate == "usor") difColor = "usor";
     else if (problem.dificultate == "mediu") difColor = "mediu";
     else difColor = "greu";
     listItem.innerHTML = `
         <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong>&nbsp;[${problem.categorie}]
-        <button id="exportCsvButton" onclick="{exportCsv(${problem.id})}">
+        <button class="exportCsvButton" onclick="{exportCsv(${problem.id})}">
         Export&nbsp;CSV
-      </button><button type="button" class="viewBtn" problem_id="${problem.id}">Solve</button>
+      </button><button type="button" class="viewBtn" data-problem-id="${problem.id}">Solve</button>
       `;
     problemList.appendChild(listItem);
   });
 
   document.querySelectorAll(".viewBtn").forEach((button) => {
     button.addEventListener("click", (event) => {
-      const problem_id = event.target.getAttribute("problem_id");
+      const problem_id = event.target.getAttribute("data-problem-id");
       window.location.href = `/pages/student/problem_solve.html?problem_id=${problem_id}`;
     });
   });
@@ -179,17 +180,18 @@ async function injectHomeworks(student_id) {
   Object.keys(groupedByNume).forEach((homework, index) => {
     const homeworkId = `homework-${index}`;
 
-    const homeworkTitle = document.createElement("div");
+    const homeworkTitle = document.createElement("li");
     homeworkTitle.setAttribute("id", homeworkId);
     homeworkTitle.innerHTML = `<p class="homeworkName">Tema: ${homework}</p>`;
     homeworkList.appendChild(homeworkTitle);
 
-    const homeworkProblems = document.createElement("div");
+    const homeworkProblems = document.createElement("ul");
     homeworkProblems.classList.add("homeworkProblems");
     homeworkTitle.appendChild(homeworkProblems);
 
     groupedByNume[homework].forEach((problem) => {
       const homeworkItem = document.createElement("li");
+      homeworkItem.classList.add("prob");
 
       // Adaugam problemele in aceeasi lista
       const exerciseItem = document.createElement("p");
@@ -198,7 +200,6 @@ async function injectHomeworks(student_id) {
 
       const viewExerciseButton = document.createElement("button");
       viewExerciseButton.textContent = "Solve";
-      viewExerciseButton.classList.add("viewBtn");
       viewExerciseButton.addEventListener("click", () => {
         window.location.href = `/pages/student/problem_solve.html?problem_id=${problem}`;
       });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +13,6 @@
       <h1>Dashboard Profesor</h1>
       <nav>
         <ul>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#clase">Clase</a></li>
           <li><a href="/pages/index.html">Logout</a></li>
         </ul>
       </nav>
@@ -24,7 +22,7 @@
       <section class="overview">
         <h2 id="dashboard">Prezentare generala</h2>
         <div class="summary">
-          <table id="results-table" border="1">
+          <table id="results-table">
             <thead>
               <tr>
                 <th>Class ID</th>
@@ -53,8 +51,8 @@
             <h3>Creare clasa</h3>
             <label for="className">Nume clasa:</label>
             <input type="text" id="className" name="className" required />
-            <label for="classID">Ofera un nume sugestiv clasei tale.</label>
-            <label for="classID"
+            <label>Ofera un nume sugestiv clasei tale.</label>
+            <label
               >*ID-ul clasei este generat ca si urmatorul numar dupa cel mai
               mare*</label
             >
@@ -81,13 +79,14 @@
             <div class="addProblemHeader">
               <label for="difficulty">Dificultate:</label>
               <select id="difficulty" name="difficulty" required>
+                <option value="" disabled selected>select</option>
                 <option value="usor">Usor</option>
                 <option value="mediu">Mediu</option>
                 <option value="dificil">Dificil</option>
               </select>
             </div>
           </div>
-          <label for="description"><h3>Descriere:</h3></label>
+          <label for="description">Descriere:</label>
           <textarea
             id="description"
             name="description"
@@ -102,7 +101,7 @@
     </main>
 
     <footer>
-      <p>&copy; 2024 Dashboard Profesor.</p>
+      <p>2024 Dashboard Profesor.</p>
     </footer>
 
     <script src="/javascript/teacher_dashboard.js"></script>

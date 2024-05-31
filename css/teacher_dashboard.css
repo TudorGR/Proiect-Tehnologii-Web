@@ -469,6 +469,9 @@ th {
   }
 }
 @media all and (max-width: 360px) {
+  #addProblemForm label {
+    font-size: 3vw;
+  }
   .import input {
     font-size: 3vw;
   }

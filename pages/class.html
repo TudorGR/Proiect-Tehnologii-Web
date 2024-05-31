@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/class.css" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/hide.css" />
   </head>
   <body>
     <header>
@@ -18,11 +19,12 @@
       </nav>
     </header>
     <main>
-      <h1 id="classInfo"></h1>
+      <h1 id="classInfo">null</h1>
       <div class="sec">
         <div class="homeworkWrapper">
           <h2 id="homeworksCount">Teme:</h2>
           <section class="homework-list">
+            <h2 class="hide">empty</h2>
             <ul id="homeworkList"></ul>
           </section>
         </div>
@@ -41,6 +43,7 @@
               onchange="fetchProblems(this.value)"
               required
             >
+              <option value="" disabled selected>select</option>
               <option value="All">All</option>
               <option value="Math">Math</option>
               <option value="BackTracking">BackTracking</option>
@@ -51,10 +54,8 @@
           <ul></ul>
         </section>
         <section class="createHomework">
-          <h2>
-            Creaza/Adauga
-            <p>(la) o tema</p>
-          </h2>
+          <h2>Creaza/Adauga</h2>
+          <h2>(la) o tema</h2>
           <form id="createHomeworkForm">
             <label for="homeworkName">Nume tema:</label><br />
             <input
@@ -79,7 +80,7 @@
       </div>
     </main>
     <footer>
-      <p>&copy; 2024 Aplicația de Învățare a Programării</p>
+      <p>2024 Class Dashboard</p>
     </footer>
     <script src="../javascript/class.js"></script>
   </body>

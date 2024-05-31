@@ -160,7 +160,7 @@ button:hover {
   height: 300px;
 }
 
-#attempt {
+.attempt {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -171,7 +171,7 @@ button:hover {
   padding: 5px;
 }
 
-#attempt h3 {
+.attempt h3 {
   margin: 0px;
   display: flex;
   flex-direction: row;
@@ -243,7 +243,7 @@ button:hover {
   #attempts {
     padding: 5px;
   }
-  #attempt h3 {
+  .attempt h3 {
     font-size: 14px;
   }
   .viewEvaluation {
@@ -318,7 +318,7 @@ button:hover {
   #attempts {
     padding: 1vw;
   }
-  #attempt h3 {
+  .attempt h3 {
     font-size: 3vw;
   }
   .viewEvaluation {
@@ -334,7 +334,7 @@ button:hover {
   #attempts {
     height: 40vw;
   }
-  #attempt {
+  .attempt {
     margin-bottom: 2vw;
   }
 }

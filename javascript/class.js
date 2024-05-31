@@ -123,12 +123,12 @@ async function injectHomeworks(class_id) {
   Object.keys(groupedByNume).forEach((homework, index) => {
     const homeworkId = `homework-${index}`;
 
-    const homeworkTitle = document.createElement("div");
+    const homeworkTitle = document.createElement("li");
     homeworkTitle.setAttribute("id", homeworkId);
-    homeworkTitle.innerHTML = `<p>Tema: ${homework}</p> <button id="deleteHomeworkBtn" onclick="handleDeleteHomework(${class_id}, '${homework}', '${homeworkId}')">Sterge</button>`;
+    homeworkTitle.innerHTML = `<p>Tema: ${homework}</p> <button class="deleteHomeworkBtn" onclick="handleDeleteHomework(${class_id}, '${homework}', '${homeworkId}')">Sterge</button>`;
     homeworkList.appendChild(homeworkTitle);
 
-    const homeworkProblems = document.createElement("div");
+    const homeworkProblems = document.createElement("ul");
     homeworkProblems.classList.add("homeworkProblems");
     homeworkTitle.appendChild(homeworkProblems);
 
@@ -209,14 +209,14 @@ function displayProblems(problems) {
 
   problems.forEach((problem, index) => {
     const listItem = document.createElement("li");
-    listItem.id = `problem`;
+    listItem.classList.add("problem");
     var difColor;
     if (problem.dificultate == "usor") difColor = "usor";
     else if (problem.dificultate == "mediu") difColor = "mediu";
     else difColor = "greu";
     listItem.innerHTML = `
         <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong>&nbsp;(${problem.categorie})&nbsp;
-        <button id="exportCsvButton" onclick="{exportCsv(${problem.id})}">
+        <button class="exportCsvButton" onclick="{exportCsv(${problem.id})}">
         Export as CSV
       </button><button type="button" class="viewBtn" data-description="${problem.descriere}">View Problem</button>
       `;

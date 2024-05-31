@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/student/problem_solve.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/hide.css" />
   </head>
   <body>
     <header>
@@ -15,9 +16,7 @@
         <nav>
           <ul>
             <li>
-              <a href="/pages/student/student_dashboard.html"
-                >Inapoi la Dashboard</a
-              >
+              <a href="/pages/student/student_dashboard.html">Inapoi</a>
             </li>
           </ul>
         </nav>
@@ -28,6 +27,7 @@
       <div class="container">
         <h2 id="titlu">Problema 1</h2>
         <section class="problem">
+          <h2 class="hide">empty</h2>
           <p id="descriere">Descrierea problemei...</p>
           <form action="#" method="post" id="solutionForm">
             <label for="solution">Solutia ta:</label><br />
@@ -47,9 +47,11 @@
           </form>
         </section>
         <section class="comms">
+          <h2 class="hide">empty</h2>
           <div class="addComm">
             <h2>Adauga&nbsp;comentariu</h2>
             <section class="comment">
+              <h2 class="hide">empty</h2>
               <form id="commentForm">
                 <textarea
                   id="description"
@@ -65,11 +67,13 @@
           </div>
           <div class="viewComm">
             <h2>Comentarii</h2>
-            <section class="comments" id="comentarii"></section>
+            <section class="comments" id="comentarii">
+              <h2 class="hide">empty</h2>
+            </section>
           </div>
         </section>
       </div>
-      <section id="attempts"></section>
+      <section id="attempts"><h2 class="hide">empty</h2></section>
     </main>
 
     <script src="/javascript/student/problem_solve.js"></script>

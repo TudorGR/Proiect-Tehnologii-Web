@@ -6,6 +6,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 main {
@@ -13,14 +14,6 @@ main {
   padding: 30px;
 }
 
-.problem-list ul li {
-  margin-top: 20px;
-  padding: 20px;
-  font-size: 18px;
-  border: none;
-  background-color: white;
-  border-radius: 7px;
-}
 .problem-list ul {
   height: 65vh;
   overflow-y: scroll;
@@ -30,7 +23,7 @@ main {
 .problem-list ul {
   list-style: none;
 }
-#problem {
+.problem {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   display: flex;
@@ -41,7 +34,7 @@ main {
   justify-content: space-around;
   transition: background-color 0.3s ease;
 }
-#problem:hover {
+.problem:hover {
   background-color: #f1f1f1;
 }
 .usor {
@@ -94,7 +87,7 @@ main {
   border-radius: 7px;
   width: 60px;
 }
-#exportCsvButton {
+.exportCsvButton {
   color: black;
   padding: 10px 10px;
   border: none;
@@ -163,7 +156,7 @@ main {
   margin: 10px 0px;
 }
 
-#homeworkList div p {
+#homeworkList li p {
   display: inline-block;
 }
 
@@ -180,12 +173,12 @@ main {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 20px;
+  padding: 20px !important;
   height: 200px;
   overflow-y: scroll;
 }
 
-.homework-list li {
+.prob {
   background-color: white;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -200,16 +193,12 @@ main {
   margin: 0px 10px;
 }
 
-.homework-list li:hover {
+.prob:hover {
   background-color: #f1f1f1;
 }
 
 .homework-list h3 {
   margin: 0px;
-}
-.homework-list ul ul {
-  list-style-type: disc;
-  padding-left: 20px;
 }
 
 .homework-list button {
@@ -266,49 +255,50 @@ main {
   .homeworkProblems li p {
     font-size: 12px;
   }
-  .viewBtn {
+  .viewBtn,
+  .exportCsvButton {
     font-size: 12px;
     margin: 0px;
+    padding: 5px;
   }
   .homework-list {
     padding: 0px 10px;
   }
   .homeworkProblems {
-    padding: 10px;
+    padding: 10px !important;
+    height: 100px;
   }
-  .homework-list li {
+  .prob {
     padding: 5px;
   }
-  #homeworkList div p {
+  #homeworkList li p {
     margin: 0px;
     text-wrap: nowrap;
   }
   .homework-list button {
-    padding: 6px 8px;
-  }
-  .homeworkProblems {
-    height: 100px;
+    padding: 4px 6px;
+    font-size: 14px;
   }
   #category {
     padding: 5px;
     width: 50px;
   }
-  #problem {
+  .problem {
     font-size: 12px;
-    padding: 2px 5px;
+    padding: 2px;
   }
-  #problem button {
+  .problembutton {
     font-size: 12px;
     padding: 5px;
     margin: 0px;
   }
 }
 @media all and (max-width: 450px) {
-  #exportCsvButton {
+  .exportCsvButton {
     text-indent: -9999px;
     line-height: 0;
   }
-  #exportCsvButton:after {
+  .exportCsvButton:after {
     content: "Csv";
     text-indent: 0;
     display: block;
@@ -365,27 +355,43 @@ main {
   #homeworkList {
     margin: 3vw 0px;
   }
-  #homeworkList div p {
+  #homeworkList li p {
     text-wrap: nowrap;
     margin: 2vw 0px !important;
   }
   .homework-list button {
     padding: 1vw 2vw;
   }
-  .homeworkProblems {
-    height: 20vw;
+  .homework-list {
+    height: 100vw;
+  }
+  .problem-list ul {
+    height: 100vw;
   }
   #category {
     padding: 1vw;
     width: 15vw;
   }
-  #problem {
+  .problem {
     font-size: 3vw;
     padding: 0.5vw 1vw;
   }
-  #problem button {
+  .problembutton {
     font-size: 3vw;
     padding: 1vw;
     margin: 0px;
+  }
+  .homework-list ul {
+    padding: 2vw !important;
+  }
+  .exportCsvButton,
+  .viewBtn {
+    padding: 1vw;
+    font-size: 3vw;
+    margin: 0px;
+  }
+  .prob button {
+    padding: 1vw;
+    font-size: 2vw;
   }
 }

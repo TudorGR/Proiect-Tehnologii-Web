@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/student/student_dashboard.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/hide.css" />
   </head>
   <body>
     <header>
@@ -22,13 +23,14 @@
 
     <main>
       <div class="stats">
-        <h2 id="problemsNumber"></h2>
-        <h2 id="correctProblemsNumber"></h2>
+        <h2 id="problemsNumber">null</h2>
+        <h2 id="correctProblemsNumber">null</h2>
       </div>
       <div class="sec">
         <div class="sec1">
           <h2 id="homeworksCount">Teme:</h2>
           <section class="homework-list">
+            <h3 class="hide">empty</h3>
             <ul id="homeworkList"></ul>
           </section>
         </div>
@@ -41,6 +43,7 @@
               onchange="fetchProblems(this.value)"
               required
             >
+              <option value="" disabled selected>select</option>
               <option value="All">All</option>
               <option value="Math">Math</option>
               <option value="BackTracking">BackTracking</option>
@@ -55,7 +58,7 @@
 
     <footer>
       <div class="container">
-        <p>&copy; 2024 Dashboard Elev.</p>
+        <p>2024 Dashboard Elev.</p>
       </div>
     </footer>
 
