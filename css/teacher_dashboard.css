@@ -429,6 +429,7 @@ th {
     flex-direction: column;
   }
   #addProblemForm {
+    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -443,6 +444,7 @@ th {
   #results-table th,
   #results-table td {
     padding: 5px;
+    font-size: 14px;
   }
   #results-table td:last-child {
     display: flex;
@@ -456,6 +458,10 @@ th {
     font-size: 14px;
     padding: 5px 10px;
   }
+  .import input,
+  .import button {
+    font-size: 12px;
+  }
 }
 @media all and (max-width: 600px) {
   .addHeaders {
@@ -463,6 +469,22 @@ th {
   }
 }
 @media all and (max-width: 360px) {
+  .import input {
+    font-size: 3vw;
+  }
+  .import button {
+    font-size: 3vw;
+    padding: 3vw;
+  }
+  .addProblemHeader {
+    margin-top: 0px;
+  }
+  .overview {
+    margin-bottom: 5vw;
+  }
+  .add-problem {
+    margin-top: 5vw;
+  }
   #addProblemForm textarea {
     font-size: 4vw;
   }
@@ -470,7 +492,7 @@ th {
     font-size: 4vw;
   }
   #addProblemForm {
-    padding: 10vw;
+    padding: 8vw;
   }
   .addProblemHeader select {
     font-size: 4vw;
@@ -487,6 +509,7 @@ th {
   #results-table th,
   #results-table td {
     padding: 1vw 3vw;
+    font-size: 4vw;
   }
 
   .viewBtn,
@@ -515,6 +538,7 @@ th {
 
   #addProblemForm button {
     font-size: 4vw;
+    padding: 3vw;
   }
 
   .hero h2 {
@@ -542,6 +566,7 @@ th {
   }
   #addClassForm {
     padding: 2vw;
+    margin-right: 2vw;
   }
   #addClassForm h3 {
     font-size: 4vw;
@@ -555,6 +580,7 @@ th {
   }
   #createClassForm {
     padding: 2vw;
+    margin-left: 2vw;
   }
   #createClassForm h3 {
     font-size: 4vw;

@@ -66,6 +66,8 @@ main {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .show {
@@ -212,4 +214,187 @@ button:hover {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   font-family: "Fira Code", monospace;
+}
+.evalBtn {
+  padding: 10px;
+  height: 100%;
+}
+@media all and (max-width: 768px) {
+  h2 {
+    font-size: 20px;
+  }
+  #problemDescription {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 10px;
+  }
+  .student-item h3 {
+    font-size: 16px;
+  }
+  .attemptP {
+    font-size: 14px;
+  }
+  .student-item {
+    padding: 10px;
+  }
+  .problems {
+    padding: 5px;
+  }
+  .problems div p {
+    font-size: 12px;
+    margin: 0px;
+  }
+  .evalBtn {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .student-list {
+    padding: 10px;
+  }
+  .greenBg,
+  .redBg {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  .greenBg:after,
+  .redBg:after {
+    content: "E";
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+  }
+  .student-list,
+  #problemDescription {
+    margin-bottom: 0px;
+  }
+  .sec1,
+  .sec2 {
+    height: 370px;
+  }
+
+  .problem label {
+    font-size: 14px;
+  }
+  .problem textarea {
+    font-size: 12px;
+    padding-left: 16px;
+  }
+  .line-numbers {
+    width: 15px;
+    padding-right: 2px;
+    font-size: 12px;
+  }
+  .problem {
+    padding: 10px;
+  }
+  .evaluation label {
+    font-size: 14px;
+  }
+  #evaluationStatus label,
+  #evaluationStatus input {
+    font-size: 14px;
+  }
+  #sendEvaluation {
+    font-size: 14px;
+    padding: 7px;
+  }
+  .evaluation textarea {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+}
+@media all and (max-width: 650px) {
+  .codeBtn {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  .codeBtn:after {
+    content: "C";
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+  }
+}
+@media all and (max-width: 360px) {
+  .problem {
+    margin-bottom: 4vw;
+  }
+  h2 {
+    font-size: 4vw;
+  }
+  #problemDescription {
+    font-size: 3vw;
+    line-height: 3vw;
+    padding: 2vw;
+  }
+  .student-item h3 {
+    font-size: 3vw;
+  }
+  .attemptP {
+    font-size: 3vw;
+  }
+  .student-item {
+    padding: 2vw;
+  }
+  .problems {
+    padding: 1vw;
+  }
+  .problems div p {
+    font-size: 3vw;
+    margin: 0px;
+  }
+  .evalBtn {
+    font-size: 3vw;
+    padding: 1vw;
+  }
+  .student-list {
+    padding: 2vw;
+  }
+  .student-list,
+  #problemDescription {
+    margin-bottom: 0px;
+    height: 100vw !important;
+  }
+  .sec1,
+  .sec2 {
+    height: 110vw !important;
+  }
+  .sec {
+    margin-bottom: 8vw;
+  }
+  .problems {
+    margin-top: 0px;
+  }
+  .problem label {
+    font-size: 3vw;
+  }
+  .problem textarea {
+    font-size: 3vw;
+    padding-left: 3vw;
+  }
+  .line-numbers {
+    width: 3vw;
+    padding-right: 1vw;
+    font-size: 3vw;
+  }
+  .problem {
+    padding: 4vw;
+  }
+  .evaluation textarea {
+    margin-bottom: 1vw;
+    font-size: 3vw;
+  }
+  .evaluation label {
+    font-size: 3vw;
+  }
+  #evaluationStatus label,
+  #evaluationStatus input[type="radio"] {
+    font-size: 3vw;
+    height: 4vw;
+    margin: 0px;
+  }
+  #sendEvaluation {
+    font-size: 3vw;
+    padding: 1vw;
+  }
 }

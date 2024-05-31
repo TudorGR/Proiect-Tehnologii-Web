@@ -15,8 +15,7 @@ main {
 
 section {
   margin-bottom: 40px;
-  height: 300px;
-  overflow-y: scroll;
+
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -122,4 +121,76 @@ button {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+section {
+  height: 300px;
+  overflow-y: scroll;
+}
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+@media all and (max-width: 768px) {
+  h2 {
+    font-size: 16px;
+  }
+  td {
+    font-size: 12px;
+    padding: 4px;
+  }
+  th {
+    padding: 4px;
+    font-size: 14px;
+  }
+  main {
+    padding: 15px;
+  }
+  tr {
+    width: 50vw !important;
+  }
+  select {
+    font-size: 12px;
+    padding: 3px;
+  }
+  button {
+    font-size: 12px;
+    padding: 6px;
+    margin-right: 0px;
+  }
+  section {
+    height: 350px;
+    margin-bottom: 20px;
+  }
+}
+@media all and (max-width: 360px) {
+  h2 {
+    font-size: 3vw;
+  }
+  td {
+    font-size: 3vw;
+    padding: 1vw;
+  }
+  th {
+    padding: 1vw;
+    font-size: 3vw;
+  }
+  main {
+    padding: 3vw;
+  }
+  tr {
+    width: 50vw !important;
+  }
+  select {
+    font-size: 2vw;
+    padding: 0.5vw;
+  }
+  button {
+    font-size: 2vw;
+    padding: 1.5vw;
+  }
+  section {
+    height: 70vw;
+    margin-bottom: 5vw;
+  }
 }

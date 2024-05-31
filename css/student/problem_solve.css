@@ -31,6 +31,7 @@ main {
 
 h2 {
   margin-bottom: 10px;
+  margin-top: 0px;
   font-size: 26px;
   text-align: center;
 }
@@ -184,4 +185,156 @@ button:hover {
 
 .viewEvaluation {
   margin-left: 20px;
+}
+@media all and (max-width: 768px) {
+  main {
+    padding: 10px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  .problem p {
+    font-size: 14px;
+    margin: 7px 0px;
+  }
+  #solutionForm label {
+    font-size: 14px;
+  }
+  #solutionForm button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  .problem {
+    padding: 10px;
+  }
+  textarea {
+    font-size: 12px;
+    padding-left: 16px;
+  }
+  .line-numbers {
+    width: 16px;
+    padding-right: 5px;
+    font-size: 12px;
+    color: gray;
+  }
+  .addComm h2,
+  .viewComm h2 {
+    font-size: 18px;
+  }
+  .comment {
+    padding: 10px;
+  }
+  .comment h3 {
+    font-size: 14px;
+  }
+  .comment p {
+    font-size: 12px;
+  }
+  .description {
+    font-size: 10px;
+  }
+  #commentForm button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+  .comments {
+    height: 215px;
+  }
+  #attempts {
+    padding: 5px;
+  }
+  #attempt h3 {
+    font-size: 14px;
+  }
+  .viewEvaluation {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-left: 5px;
+  }
+  .viewBtn {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-left: 5px;
+  }
+  #attempts {
+    height: 200px;
+  }
+}
+@media all and (max-width: 360px) {
+  main {
+    padding: 2vw;
+  }
+  h2 {
+    font-size: 4vw;
+  }
+  .problem p {
+    font-size: 3vw;
+    margin: 1vw 0px;
+  }
+  #solutionForm label {
+    font-size: 3vw;
+  }
+  #solutionForm button {
+    padding: 1vw 2vw;
+    font-size: 3vw;
+  }
+  .problem {
+    padding: 2vw;
+  }
+  textarea {
+    font-size: 2vw;
+    padding-left: 3vw;
+    line-height: 2.5vw;
+  }
+  .line-numbers {
+    width: 3vw;
+    padding-right: 1vw;
+    font-size: 2vw;
+    color: gray;
+  }
+  .addComm h2,
+  .viewComm h2 {
+    font-size: 4vw;
+  }
+  .comment {
+    padding: 2vw;
+  }
+  .comment h3 {
+    font-size: 3vw;
+  }
+  .comment p {
+    font-size: 3vw;
+  }
+  .description {
+    font-size: 2vw;
+  }
+  #commentForm button {
+    font-size: 3vw;
+    padding: 1vw 2vw;
+  }
+  .comments {
+    height: 38vw;
+  }
+  #attempts {
+    padding: 1vw;
+  }
+  #attempt h3 {
+    font-size: 3vw;
+  }
+  .viewEvaluation {
+    font-size: 3vw;
+    padding: 1vw 2vw;
+    margin-left: 1vw;
+  }
+  .viewBtn {
+    font-size: 3vw;
+    padding: 1vw 2vw;
+    margin-left: 1vw;
+  }
+  #attempts {
+    height: 40vw;
+  }
+  #attempt {
+    margin-bottom: 2vw;
+  }
 }

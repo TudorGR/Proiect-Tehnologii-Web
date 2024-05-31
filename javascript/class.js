@@ -116,7 +116,7 @@ async function injectHomeworks(class_id) {
     return acc;
   }, {});
 
-  document.getElementById("homeworksCount").textContent = `Lista de teme: ${
+  document.getElementById("homeworksCount").textContent = `Teme: ${
     Object.keys(groupedByNume).length
   }`;
 
@@ -205,7 +205,7 @@ function displayProblems(problems) {
 
   document.getElementById(
     "problemsCount"
-  ).textContent = `Lista de probleme: ${problems.length}`;
+  ).textContent = `Probleme:${problems.length}`;
 
   problems.forEach((problem, index) => {
     const listItem = document.createElement("li");
@@ -215,7 +215,7 @@ function displayProblems(problems) {
     else if (problem.dificultate == "mediu") difColor = "mediu";
     else difColor = "greu";
     listItem.innerHTML = `
-        <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong> (Dificultate: ${problem.dificultate}) (Categorie: ${problem.categorie})
+        <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong>&nbsp;(${problem.categorie})&nbsp;
         <button id="exportCsvButton" onclick="{exportCsv(${problem.id})}">
         Export as CSV
       </button><button type="button" class="viewBtn" data-description="${problem.descriere}">View Problem</button>
@@ -274,16 +274,16 @@ function displayStudents(students) {
   studentsList.innerHTML = "";
   document.getElementById(
     "studentsCount"
-  ).textContent = `Lista de Studenti: ${students.length}`;
+  ).textContent = `Studenti: ${students.length}`;
 
   students.forEach((student) => {
     const liItem = document.createElement("li");
     const listItem = document.createElement("p");
     listItem.textContent = `ID:${student.id}`;
     const listItem2 = document.createElement("p");
-    listItem2.textContent = `Nume:${student.name}`;
+    listItem2.textContent = `Email:${student.email}`;
     const listItem3 = document.createElement("p");
-    listItem3.textContent = `Email:${student.email}`;
+    listItem3.textContent = `Nume:${student.name}`;
     liItem.appendChild(listItem);
     liItem.appendChild(listItem2);
     liItem.appendChild(listItem3);

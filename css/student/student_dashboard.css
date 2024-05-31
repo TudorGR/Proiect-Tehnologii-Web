@@ -38,6 +38,7 @@ main {
   margin-bottom: 5px;
   margin-top: 0px;
   align-items: center;
+  justify-content: space-around;
   transition: background-color 0.3s ease;
 }
 #problem:hover {
@@ -70,7 +71,7 @@ main {
 .navigation {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }
 .navigation button {
@@ -91,6 +92,7 @@ main {
   padding: 10px;
   margin-left: 10px;
   border-radius: 7px;
+  width: 60px;
 }
 #exportCsvButton {
   color: black;
@@ -143,7 +145,7 @@ main {
 }
 
 .homework-list {
-  margin: 20px 0;
+  margin: 0;
   height: 65vh;
   overflow-y: scroll;
   padding: 0px 20px;
@@ -232,4 +234,158 @@ main {
 .sec1,
 .problem-list {
   flex: 1;
+}
+@media all and (max-width: 768px) {
+  #problemsNumber {
+    font-size: 18px;
+  }
+  #correctProblemsNumber {
+    font-size: 18px;
+  }
+  .stats {
+    flex-direction: column;
+  }
+  #homeworksCount {
+    font-size: 18px;
+  }
+  #problemsCount {
+    font-size: 18px;
+  }
+  main {
+    padding: 15px;
+  }
+  .sec {
+    gap: 10px;
+  }
+  .navigation select {
+    font-size: 12px;
+  }
+  .homeworkName {
+    font-size: 12px;
+  }
+  .homeworkProblems li p {
+    font-size: 12px;
+  }
+  .viewBtn {
+    font-size: 12px;
+    margin: 0px;
+  }
+  .homework-list {
+    padding: 0px 10px;
+  }
+  .homeworkProblems {
+    padding: 10px;
+  }
+  .homework-list li {
+    padding: 5px;
+  }
+  #homeworkList div p {
+    margin: 0px;
+    text-wrap: nowrap;
+  }
+  .homework-list button {
+    padding: 6px 8px;
+  }
+  .homeworkProblems {
+    height: 100px;
+  }
+  #category {
+    padding: 5px;
+    width: 50px;
+  }
+  #problem {
+    font-size: 12px;
+    padding: 2px 5px;
+  }
+  #problem button {
+    font-size: 12px;
+    padding: 5px;
+    margin: 0px;
+  }
+}
+@media all and (max-width: 450px) {
+  #exportCsvButton {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  #exportCsvButton:after {
+    content: "Csv";
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+  }
+  #problemsNumber {
+    font-size: 4vw;
+  }
+  #correctProblemsNumber {
+    font-size: 4vw;
+  }
+  #problemsNumber {
+    font-size: 4vw;
+  }
+  #correctProblemsNumber {
+    font-size: 4vw;
+  }
+  .stats {
+    flex-direction: column;
+  }
+  #homeworksCount {
+    font-size: 4vw;
+  }
+  #problemsCount {
+    font-size: 4vw;
+  }
+  main {
+    padding: 3vw;
+  }
+  .sec {
+    gap: 1vw;
+  }
+  .navigation select {
+    font-size: 3vw;
+  }
+  .homeworkName {
+    font-size: 3vw;
+  }
+  .homeworkProblems li p {
+    font-size: 3vw;
+  }
+  .viewBtn {
+    font-size: 3vw;
+  }
+  .homework-list {
+    padding: 0px 2vw;
+  }
+  .homeworkProblems {
+    padding: 2vw;
+  }
+  .homework-list li {
+    padding: 1vw;
+  }
+  #homeworkList {
+    margin: 3vw 0px;
+  }
+  #homeworkList div p {
+    text-wrap: nowrap;
+    margin: 2vw 0px !important;
+  }
+  .homework-list button {
+    padding: 1vw 2vw;
+  }
+  .homeworkProblems {
+    height: 20vw;
+  }
+  #category {
+    padding: 1vw;
+    width: 15vw;
+  }
+  #problem {
+    font-size: 3vw;
+    padding: 0.5vw 1vw;
+  }
+  #problem button {
+    font-size: 3vw;
+    padding: 1vw;
+    margin: 0px;
+  }
 }

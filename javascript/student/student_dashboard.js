@@ -87,7 +87,7 @@ function displayProblems(problems) {
 
   document.getElementById(
     "problemsCount"
-  ).textContent = `Lista de probleme: ${problems.length}`;
+  ).textContent = `Probleme: ${problems.length}`;
 
   problems.forEach((problem, index) => {
     const listItem = document.createElement("li");
@@ -97,9 +97,9 @@ function displayProblems(problems) {
     else if (problem.dificultate == "mediu") difColor = "mediu";
     else difColor = "greu";
     listItem.innerHTML = `
-        <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong> (Dificultate: ${problem.dificultate}) (Categorie: ${problem.categorie})
+        <strong class="${difColor}">#${problem.id} ${problem.titlu}</strong>&nbsp;[${problem.categorie}]
         <button id="exportCsvButton" onclick="{exportCsv(${problem.id})}">
-        Export CSV
+        Export&nbsp;CSV
       </button><button type="button" class="viewBtn" problem_id="${problem.id}">Solve</button>
       `;
     problemList.appendChild(listItem);
@@ -172,7 +172,7 @@ async function injectHomeworks(student_id) {
     return acc;
   }, {});
 
-  document.getElementById("homeworksCount").textContent = `Lista de teme: ${
+  document.getElementById("homeworksCount").textContent = `Teme: ${
     Object.keys(groupedByNume).length
   }`;
 

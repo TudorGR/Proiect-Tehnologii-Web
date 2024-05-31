@@ -69,6 +69,10 @@ main {
   margin: 0px;
   flex: 1;
 }
+#studentsList {
+  overflow-y: scroll;
+  height: 340px;
+}
 
 .student-list h2 {
   font-size: 1.5em;
@@ -94,7 +98,7 @@ main {
   transition: background-color 0.3s ease;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .student-list p {
   margin: 10px 0px;
@@ -173,6 +177,9 @@ main {
 
 #homeworkList div p {
   display: inline-block;
+}
+#homeworkList {
+  margin-top: 0px;
 }
 
 .homework-list ul {
@@ -294,6 +301,7 @@ main {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   display: flex;
+  justify-content: space-between;
   padding: 5px 10px;
   margin-top: 5px;
   align-items: center;
@@ -311,6 +319,15 @@ main {
 .greu {
   color: red;
 }
+.student-list ul li {
+  padding: 0px 5px;
+}
+.navigation {
+  margin-bottom: 35px;
+}
+.createHomework h2 {
+  margin-top: 0px;
+}
 
 @media all and (max-width: 768px) {
   main {
@@ -319,38 +336,236 @@ main {
   .navigation h2 {
     font-size: 14px;
   }
+  .createHomework p {
+    margin: 0px;
+  }
   .problem-list ul li {
     font-size: 14px;
   }
+  #classInfo {
+    font-size: 22px;
+  }
+  #problemsCount,
+  .createHomework h2,
+  #homeworksCount,
+  .student-list h2 {
+    font-size: 18px;
+  }
+  #problemsCount {
+    margin: 0px;
+  }
+  #homeworkList div p {
+    font-size: 14px;
+  }
+  #homeworkProblems div li {
+    font-size: 14px;
+  }
+  .homeworkProblems {
+    padding: 10px;
+    height: 100px;
+  }
+  .homeworkProblems li {
+    padding: 5px;
+  }
+  #deleteHomeworkBtn,
+  .homework-list button {
+    padding: 5px 7px;
+    font-size: 12px;
+  }
+  .sec {
+    gap: 10px;
+  }
+  .homework-list {
+    padding: 0px 10px;
+  }
+  .student-list ul li {
+    padding: 0px 2px;
+  }
+  #studentsList li p {
+    font-size: 12px;
+    margin-right: 2px;
+  }
+  #studentsList li p:last-child {
+    display: none;
+  }
+  #problem button {
+    padding: 5px;
+    font-size: 12px;
+  }
+  #problem {
+    font-size: 12px;
+  }
+  #exportCsvButton {
+    margin-left: 2px;
+  }
+  .cat {
+    margin: 0px;
+  }
+  #exportCsvButton {
+    display: none;
+  }
+  .viewBtn {
+    margin-left: 0px;
+  }
+  #category {
+    font-size: 12px;
+    padding: 5px;
+    width: 20px;
+  }
+  #createHomeworkForm {
+    padding: 20px;
+  }
+  #createHomeworkForm label {
+    font-size: 14px;
+  }
+  #createHomeworkForm input[type="text"] {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  #createHomeworkForm button {
+    font-size: 14px;
+    padding: 5px 7px;
+  }
 }
 @media all and (max-width: 360px) {
-  .navigation {
-    flex-direction: column;
-  }
-  .navigation button {
-    font-size: 3vw;
+  main {
     padding: 3vw;
   }
-  .navigation input {
+  .navigation h2 {
     font-size: 3vw;
-    padding: 3vw;
-    width: 50vw;
-    height: 3vw;
-    margin-bottom: 2vw;
   }
-  .problem-list h2 {
-    font-size: 3vw;
-    margin: 5vw;
+  .createHomework p {
+    margin: 0px;
   }
   .problem-list ul li {
     font-size: 3vw;
+  }
+  #classInfo {
+    font-size: 4vw;
+  }
+  #problemsCount,
+  .createHomework h2,
+  #homeworksCount,
+  .student-list h2 {
+    font-size: 4vw;
+  }
+  #problemsCount {
+    margin: 0px;
+  }
+  #homeworkList div p {
+    font-size: 3vw;
+  }
+  #homeworkProblems div li {
+    font-size: 3vw;
+  }
+  .homeworkProblems {
     padding: 2vw;
-    margin-top: 6vw;
+    height: 20vw;
   }
-  header {
-    padding: 4vw 0;
+  .homeworkProblems li {
+    padding: 1vw;
   }
-  header h1 {
+  #deleteHomeworkBtn,
+  .homework-list button {
+    padding: 1vw 1vw;
+    font-size: 3vw;
+    margin: 0px;
+  }
+  .sec {
+    gap: 2vw;
+  }
+  .homework-list {
+    padding: 0px 2vw;
+  }
+  .student-list ul li {
+    padding: 0px 1vw;
+  }
+  #studentsList li p {
+    font-size: 3vw;
+    margin-right: 1vw;
+  }
+  #studentsList li p:last-child {
+    display: none;
+  }
+  #problem button {
+    padding: 1vw;
+    font-size: 3vw;
+  }
+  #problem {
+    font-size: 3vw;
+  }
+  #exportCsvButton {
+    margin-left: 1vw;
+  }
+  .cat {
+    margin: 0px;
+  }
+  #exportCsvButton {
+    display: none;
+  }
+  .viewBtn {
+    margin-left: 0px;
+  }
+  #category {
+    font-size: 3vw;
+    padding: 1vw;
+    width: 4vw;
+  }
+  #createHomeworkForm {
+    padding: 4vw;
+    height: 80vw;
+  }
+  #createHomeworkForm label {
+    font-size: 3vw;
+  }
+  #createHomeworkForm input[type="text"] {
+    font-size: 3vw;
+    margin-bottom: 1vw;
+    padding: 2vw;
+  }
+  #createHomeworkForm button {
+    font-size: 3vw;
+    padding: 1vw 1vw;
+  }
+  .homework-list {
+    height: 80vw;
+    margin: 5vw 0px;
+  }
+  #studentsList {
+    height: 80vw;
+  }
+  .homeworkProblems li p {
+    margin: 0px 2vw;
+  }
+  #homeworkList div p {
+    margin: 2vw 2vw;
+  }
+  .student-list h2 {
     margin-bottom: 4vw;
+  }
+  #studentsList li p {
+    margin: 2vw 0px;
+  }
+  #studentsList {
+    margin: 5vw 0px;
+  }
+  .problem-list ul {
+    margin: 0px;
+    height: 90vw;
+  }
+  .navigation {
+    margin-bottom: 5vw;
+  }
+  .sec2 {
+    gap: 4vw;
+  }
+  #problem {
+    padding: 1vw 1vw;
+  }
+  br {
+    height: 1vw;
+  }
+  #createHomeworkForm {
+    line-height: 5vw;
   }
 }

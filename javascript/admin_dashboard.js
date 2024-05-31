@@ -75,7 +75,7 @@ function fetchUnverifiedProblems() {
           <td>${problem.titlu}</td>
           <td>${problem.dificultate}</td>
           <td>${problem.categorie}</td>
-          <td>
+          <td class="actions">
             <button onclick="viewProblem('${problem.id}')">View</button>
             <button onclick="verifyProblem(${problem.id})">Verify</button>
             <button onclick="handleDeleteProblem(${problem.id})">Delete</button>

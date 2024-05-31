@@ -60,7 +60,7 @@ async function displayStudents(students) {
   studentsList.innerHTML = "";
   document.getElementById(
     "studentsCount"
-  ).textContent = `Lista de Studenti: ${students.length}`;
+  ).textContent = `Studenti: ${students.length}`;
 
   for (const student of students) {
     try {
@@ -82,27 +82,25 @@ async function displayStudents(students) {
         const divItem = document.createElement("div");
 
         const item = document.createElement("p");
-        item.textContent = `Timp: ${attempts[attemptKey].timp}${
-          attempts[attemptKey].evaluare != 0 ? " [Evaluat]" : ""
-        }`;
+        item.textContent = `Timp: ${attempts[attemptKey].timp}`;
 
         const btn = document.createElement("button");
         btn.classList.add("evalBtn");
+        btn.classList.add("codeBtn");
         btn.onclick = () => {
           attempt_id = attempts[attemptKey].id;
           handleViewAttempt(attempts[attemptKey]);
         };
-        btn.textContent = "Vezi codul";
+        btn.innerHTML = "Codul";
 
         const btn2 = document.createElement("button");
         btn2.classList.add("evalBtn");
         btn2.onclick = () => {
           alert(attempts[attemptKey].evaluare);
         };
-        btn2.textContent = "Vezi evaluare";
+        btn2.innerHTML = "Evaluare";
 
         divItem.appendChild(item);
-        divItem.appendChild(btn);
         if (attempts[attemptKey].evaluare != 0) {
           if (attempts[attemptKey].result == 1) {
             btn2.classList.add("greenBg");
@@ -111,6 +109,7 @@ async function displayStudents(students) {
           }
           divItem.appendChild(btn2);
         }
+        divItem.appendChild(btn);
         listItem4.appendChild(divItem);
       });
 
@@ -192,7 +191,7 @@ function autoResize() {
 
 function handleSendEvaluation() {
   if (attempt_id == null) {
-    alert("Selecteaza 'Vezi codul' la un elev.");
+    alert("Selecteaza 'Vezi codul'/'C' la un elev.");
     return;
   }
 
