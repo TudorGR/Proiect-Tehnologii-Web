@@ -3,6 +3,7 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
     //cont admin
+    var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
@@ -19,7 +20,7 @@ document
         .then((result) => {
           if (!result.exists) {
             const data = {
-              name: "nume",
+              name: name,
               email: email,
               password: password,
               role: "student",
